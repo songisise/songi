@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 송이 시세 | 전국 산지 공판가</title>
+<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 지역별로 매일 정리합니다. 지난 날짜 시세도 볼 수 있습니다.">
+<style>
+:root{
+  --board:#101c17; --panel:#16281f; --rule:#243d31; --text:#e9efe7;
+  --text2:#a8bfb0; --text3:#6f8b7b; --gold:#d6b24a; --moss:#6f9b74;
+  --up:#f0574a; --down:#54a4e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--board);color:var(--text);line-height:1.5;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;
+  background-image:linear-gradient(180deg,#16281f 0,#101c17 300px)}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+.top{padding:18px 16px 0}
+.brand{font-size:17px;font-weight:700}
+.brand small{display:block;font-size:12px;color:var(--text3);font-weight:400;margin-top:2px}
+.datebar{display:flex;align-items:center;justify-content:space-between;
+  margin-top:14px;border:1px solid var(--rule);border-radius:10px;padding:5px}
+.datebar select{background:none;border:none;color:var(--text);font-size:15px;
+  font-weight:600;text-align:center;flex:1}
+.datebar select option{background:var(--panel);color:var(--text)}
+.nav{width:38px;height:34px;border-radius:8px;color:var(--text2);font-size:17px}
+.nav:disabled{color:#3d5548;cursor:default}
+
+.hero{padding:24px 16px 18px;border-bottom:1px solid var(--rule)}
+.hero .cap{font-size:13px;color:var(--text2)}
+.hero .price{display:flex;align-items:flex-end;gap:7px;margin-top:2px}
+.hero .price b{font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--gold)}
+.hero .price span{font-size:15px;color:var(--text2);padding-bottom:4px}
+.delta{margin-top:7px;font-size:13.5px;font-weight:600}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--text3)}
+.delta em{font-style:normal;color:var(--text3);font-weight:400;margin-left:4px}
+.stats{display:flex;margin-top:16px;border-top:1px solid var(--rule);padding-top:13px}
+.stats div{flex:1}
+.stats div+div{border-left:1px solid var(--rule);padding-left:12px}
+.stats dt{font-size:12px;color:var(--text3)}
+.stats dd{font-size:16px;font-weight:700;margin-top:2px}
+
+.sec{padding:20px 16px;border-bottom:1px solid var(--rule)}
+.sec h2{font-size:14px;font-weight:700;color:var(--text2)}
+.sec .sub{font-size:12px;color:var(--text3);margin-top:2px}
+
+.grade{padding:11px 0;border-bottom:1px solid var(--rule)}
+.grade:last-child{border-bottom:none;padding-bottom:0}
+.grade .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.grade .nm{font-size:14.5px;font-weight:600}
+.grade .pr{font-size:16px;font-weight:700}
+.grade.top .pr{color:var(--gold)}
+.grade .r2{display:flex;align-items:center;gap:10px;margin-top:6px}
+.bar{flex:1;height:5px;background:#1e3529;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--moss)}
+.grade.top .bar i{background:var(--gold)}
+.kg{font-size:12px;color:var(--text3);min-width:76px;text-align:right}
+.chg{font-size:12px;font-weight:600;min-width:50px;text-align:right}
+
+.chart svg{display:block;width:100%;height:120px;margin-top:12px}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:6px}
+
+.site{border-bottom:1px solid var(--rule)}
+.site:last-of-type{border-bottom:none}
+.sitebtn{display:flex;width:100%;align-items:center;gap:12px;padding:13px 0;text-align:left}
+.sitebtn .nm{flex:1;font-size:14.5px;font-weight:600}
+.sitebtn .val{text-align:right}
+.sitebtn .val b{font-size:15px;display:block}
+.sitebtn .val small{font-size:11.5px;color:var(--text3)}
+.caret{color:var(--text3);font-size:11px}
+.detail{padding:0 0 12px 4px}
+.drow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--text2)}
+.drow b{color:var(--text)}
+.drow .k{color:var(--text3);font-size:12px;margin-left:8px}
+
+.empty{padding:54px 24px;text-align:center;color:var(--text2);font-size:14.5px}
+.foot{padding:20px 16px 44px;font-size:11.5px;color:var(--text3);line-height:1.8}
+.foot a{color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">오늘의 송이 시세<small>전국 산지 공판장 등급별 낙찰 단가</small></div>
+    <div class="datebar">
+      <button class="nav" id="prev" aria-label="이전 공판일">‹</button>
+      <select id="dateSel" class="num" aria-label="공판일자"></select>
+      <button class="nav" id="next" aria-label="다음 공판일">›</button>
+    </div>
+  </header>
+  <main id="main"><div class="empty">불러오는 중…</div></main>
+  <footer class="foot">
+    단가는 등급별 낙찰 평균 단가이며, 현지 판매가격이 아닙니다.<br>
+    자료 출처: 산림조합중앙회 송이 공판현황<br>
+    <a href="https://m.nfcf.or.kr/forest/user.tdf?a=user.songi.SongiApp&amp;c=1003&amp;mc=MOB_CST01" target="_blank" rel="noopener">원본 페이지 보기</a>
+  </footer>
+</div>
+
+<script>
+const GRADES = ["1등품","2등품","생장정지품","개산품","등외품","혼합품"];
+const won = n => Math.round(n).toLocaleString('ko-KR');
+let dates = [], cache = {}, opened = new Set();
+
+async function load(d){
+  if(cache[d]) return cache[d];
+  const res = await fetch(`data/${d}.json`);
+  if(!res.ok) throw new Error('없음');
+  cache[d] = await res.json();
+  return cache[d];
+}
+
+function sumRegion(r){
+  let kg = 0, amt = 0;
+  for(const g of GRADES){
+    const v = r.grades[g];
+    if(v){ kg += v.kg; amt += v.kg * v.price; }
+  }
+  return {kg, amt};
+}
+
+function deltaHTML(cur, prev, cls){
+  if(!prev || !cur) return `<span class="${cls} flat">전일 자료 없음</span>`;
+  const diff = cur - prev, pct = diff / prev * 100;
+  const dir = diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat';
+  const mark = diff > 0 ? '▲' : diff < 0 ? '▼' : '―';
+  return `<span class="${cls} ${dir}">${mark} ${won(Math.abs(diff))}<em>${pct>0?'+':''}${pct.toFixed(1)}%</em></span>`;
+}
+
+async function chart(cur){
+  const year = cur.slice(0,4);
+  const list = dates.filter(d => d.startsWith(year)).sort();
+  const pts = [];
+  for(const d of list){
+    try{
+      const x = await load(d);
+      const all = x.regions.find(r => r.name === '전체') || x.regions[0];
+      const p = all.grades['1등품'] && all.grades['1등품'].price;
+      if(p > 0) pts.push({d, v:p});
+    }catch(e){}
+  }
+  if(pts.length < 2) return;
+  const W = 440, H = 100;
+  const vs = pts.map(p => p.v), mn = Math.min(...vs), mx = Math.max(...vs);
+  const X = i => i/(pts.length-1)*W, Y = v => H - (v-mn)/((mx-mn)||1)*H;
+  const line = pts.map((p,i) => `${i?'L':'M'}${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
+  const idx = pts.findIndex(p => p.d === cur);
+  const el = document.getElementById('chartBox');
+  if(!el) return;
+  el.innerHTML = `<svg viewBox="-4 -8 ${W+8} ${H+16}" preserveAspectRatio="none">
+    <path d="${line} L${W},${H+8} L0,${H+8} Z" fill="rgba(214,178,74,.10)"/>
+    <path d="${line}" fill="none" stroke="#d6b24a" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    ${idx>=0?`<circle cx="${X(idx)}" cy="${Y(pts[idx].v)}" r="4.5" fill="#101c17" stroke="#d6b24a" stroke-width="2" vector-effect="non-scaling-stroke"/>`:''}
+  </svg>
+  <div class="axis num"><span>${pts[0].d.slice(5).replace('-','.')}</span>
+    <span>최저 ${won(mn)} · 최고 ${won(mx)}</span>
+    <span>${pts[pts.length-1].d.slice(5).replace('-','.')}</span></div>`;
+}
+
+async function render(d){
+  const main = document.getElementById('main');
+  main.innerHTML = '<div class="empty">불러오는 중…</div>';
+  document.getElementById('dateSel').value = d;
+  const i = dates.indexOf(d);
+  document.getElementById('prev').disabled = i >= dates.length-1;
+  document.getElementById('next').disabled = i <= 0;
+
+  let data;
+  try{ data = await load(d); }
+  catch(e){ main.innerHTML = '<div class="empty">이 날은 공판 자료가 없습니다.</div>'; return; }
+
+  const all = data.regions.find(r => r.name === '전체') || data.regions[0];
+  const regions = data.regions.filter(r => r !== all);
+  let prev = null;
+  if(i < dates.length-1){
+    try{
+      const p = await load(dates[i+1]);
+      prev = p.regions.find(r => r.name === '전체') || p.regions[0];
+    }catch(e){}
+  }
+
+  const t = sumRegion(all);
+  const g1 = all.grades['1등품'] || {price:0, kg:0};
+  const maxKg = Math.max(...GRADES.map(g => (all.grades[g]||{kg:0}).kg));
+
+  main.innerHTML = `
+  <section class="hero">
+    <div class="cap">전체 1등품 평균 낙찰단가</div>
+    <div class="price num"><b>${won(g1.price)}</b><span>원/kg</span></div>
+    <div class="delta">${deltaHTML(g1.price, prev && prev.grades['1등품'] && prev.grades['1등품'].price, '')}</div>
+    <dl class="stats num">
+      <div><dt>총 물량</dt><dd>${won(t.kg)} kg</dd></div>
+      <div><dt>총 금액</dt><dd>${won(t.amt/1e6)} 백만원</dd></div>
+      <div><dt>공판장</dt><dd>${regions.length} 곳</dd></div>
+    </dl>
+  </section>
+
+  <section class="sec">
+    <h2>등급별 낙찰단가</h2>
+    <div class="sub">막대는 물량 비중, 오른쪽은 직전 공판일 대비</div>
+    <div style="margin-top:10px">
+    ${GRADES.map((g,k) => {
+      const v = all.grades[g]; if(!v) return '';
+      const pv = prev && prev.grades[g] && prev.grades[g].price;
+      return `<div class="grade ${k===0?'top':''}">
+        <div class="r1"><span class="nm">${g}</span><span class="pr num">${won(v.price)}<span style="font-size:12px;color:var(--text3);font-weight:400"> 원</span></span></div>
+        <div class="r2">
+          <span class="bar"><i style="width:${maxKg?(v.kg/maxKg*100).toFixed(1):0}%"></i></span>
+          <span class="kg num">${v.kg.toFixed(1)} kg</span>
+          ${deltaHTML(v.price, pv, 'chg')}
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>올해 1등품 단가 추이</h2>
+    <div class="chart" id="chartBox"><div class="sub" style="margin-top:12px">그리는 중…</div></div>
+  </section>
+
+  <section class="sec">
+    <h2>공판장별 결과</h2>
+    <div style="margin-top:6px">
+    ${regions.sort((a,b)=>((b.grades['1등품']||{price:0}).price)-((a.grades['1등품']||{price:0}).price))
+      .map(r => {
+        const op = opened.has(r.name);
+        const rt = sumRegion(r);
+        const p1 = (r.grades['1등품']||{price:0}).price;
+        return `<div class="site">
+          <button class="sitebtn" data-site="${r.name}">
+            <span class="nm">${r.name}</span>
+            <span class="val num"><b>${p1?won(p1):'-'}</b><small>${rt.kg.toFixed(1)} kg</small></span>
+            <span class="caret">${op?'▴':'▾'}</span>
+          </button>
+          ${op?`<div class="detail">${GRADES.map(g=>{
+            const v=r.grades[g]; if(!v) return '';
+            return `<div class="drow"><span>${g}</span><span><b class="num">${won(v.price)}</b> 원<span class="k num">${v.kg.toFixed(1)} kg</span></span></div>`;
+          }).join('')}</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>
+  </section>`;
+
+  chart(d);
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('.sitebtn');
+  if(b){
+    const k = b.dataset.site;
+    opened.has(k) ? opened.delete(k) : opened.add(k);
+    render(document.getElementById('dateSel').value);
+  }
+});
+
+(async function(){
+  try{
+    const idx = await (await fetch('data/index.json')).json();
+    dates = idx.dates;
+  }catch(e){
+    document.getElementById('main').innerHTML = '<div class="empty">자료를 불러오지 못했습니다.</div>';
+    return;
+  }
+  const sel = document.getElementById('dateSel');
+  sel.innerHTML = dates.map(d => `<option value="${d}">${d.replace(/-/g,'. ')}</option>`).join('');
+  sel.onchange = () => { opened.clear(); render(sel.value); };
+  document.getElementById('prev').onclick = () => {
+    const i = dates.indexOf(sel.value);
+    if(i < dates.length-1){ opened.clear(); render(dates[i+1]); }
+  };
+  document.getElementById('next').onclick = () => {
+    const i = dates.indexOf(sel.value);
+    if(i > 0){ opened.clear(); render(dates[i-1]); }
+  };
+  render(dates[0]);
+})();
+</script>
+</body>
+</html>
