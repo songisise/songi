@@ -120,6 +120,35 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .srow.min .sb i{background:var(--down)}
 .srow.vmax .sb i{background:var(--gold)}
 .srow .sv{width:82px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
+
+/* ── PC 화면 (가로 900px 이상) ── */
+@media (min-width: 900px){
+  .wrap{max-width:1180px;padding:0 24px 40px}
+  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+    padding:30px 26px 24px;margin:0 -24px;background:linear-gradient(180deg,#1a3026 0,#0e1a15 100%)}
+  .brand{font-size:26px}
+  .brand small{font-size:13.5px;margin-top:5px}
+  .datebar{margin-top:0;width:330px;flex:none}
+  .notice{margin:20px 0 0;font-size:13.5px;padding:13px 16px}
+  .lead{padding:24px 2px 18px;font-size:17px}
+  .lead .big{font-size:21px}
+  .stats{margin:0;padding:18px 8px}
+  .stats dt{font-size:12.5px}
+  .stats dd{font-size:20px}
+  /* 두 단으로 나눈다 */
+  #cols{display:flex;gap:30px;align-items:flex-start;margin-top:8px}
+  #colA{flex:1 1 0;min-width:0}
+  #colB{flex:1 1 0;min-width:0}
+  .sec{padding:24px 0 20px}
+  .sec+.sec{border-top:1px solid var(--rule)}
+  .sec h2{font-size:18px}
+  .foot{padding:24px 0 40px;font-size:12.5px}
+  .yline{font-size:14px}
+  .srow{font-size:13.5px;padding:7px 0}
+  .srow .sl{width:70px}
+  .srow .sv{width:92px}
+  .chart svg{height:150px}
+}
 </style>
 </head>
 <body>
@@ -549,6 +578,27 @@ function render(d){
       return '<button class="gtab ' + (g === pickGrade ? 'on' : '') + '" data-grade="' + g + '">' + g + '</button>';
     }).join('');
 
+    var colA =
+      '<section class="sec"><h2>등급별 전국 낙찰단가</h2>' +
+      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
+      '<div style="margin-top:14px">' + gradeHtml + '</div></section>' +
+      '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
+      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다.<br>눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
+      '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
+      '<div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>' +
+      '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>';
+
+    var colB =
+      '<section class="sec"><h2>언제가 싸고 언제가 비쌀까</h2>' +
+      '<div class="sub">지난 시즌들을 모아 본 시기별 흐름입니다. 등급을 눌러 바꿔 보세요.</div>' +
+      '<div class="gtabs" id="gtabs">' + tabs + '</div>' +
+      '<div id="cheapBox"><div class="sub" style="margin-top:14px">집계 중…</div></div></section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
+      '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
+      '<div id="seasonBox"><div class="sub" style="margin-top:12px">집계 중…</div></div></section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 1등품 단가 추이</h2>' +
+      '<div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div></section>';
+
     main.innerHTML =
       '<p class="lead">' + md + ' 공판에서 전국 <b>' + regions.length + '곳</b>이 열렸습니다. ' +
       (bestName ? '가장 높은 등급은 <b>' + bestName + '</b>으로 <span class="big num">' +
@@ -557,23 +607,7 @@ function render(d){
       '<div><dt>총 물량</dt><dd>' + t.kg.toFixed(1) + ' kg</dd></div>' +
       '<div><dt>총 금액</dt><dd>' + won(t.amt / 10000) + ' 만원</dd></div>' +
       '<div><dt>공판장</dt><dd>' + regions.length + ' 곳</dd></div></dl>' +
-      '<section class="sec"><h2>등급별 전국 낙찰단가</h2>' +
-      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
-      '<div style="margin-top:14px">' + gradeHtml + '</div></section>' +
-      '<section class="sec"><h2>언제가 싸고 언제가 비쌀까</h2>' +
-      '<div class="sub">지난 시즌들을 모아 본 시기별 흐름입니다. 등급을 눌러 바꿔 보세요.</div>' +
-      '<div class="gtabs" id="gtabs">' + tabs + '</div>' +
-      '<div id="cheapBox"><div class="sub" style="margin-top:14px">집계 중…</div></div></section>' +
-      '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
-      '<div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>' +
-      '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>' +
-      '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
-      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다.<br>눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
-      '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
-      '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
-      '<div id="seasonBox"><div class="sub" style="margin-top:12px">집계 중…</div></div></section>' +
-      '<section class="sec"><h2>' + d.slice(0,4) + '년 1등품 단가 추이</h2>' +
-      '<div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div></section>';
+      '<div id="cols"><div id="colA">' + colA + '</div><div id="colB">' + colB + '</div></div>';
 
     renderCheap();
     compare(d);
