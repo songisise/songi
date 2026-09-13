@@ -153,7 +153,7 @@ var SPANS = [
   ["10월 초순", 10, 1, 10], ["10월 중순", 10, 11, 20], ["10월 하순", 10, 21, 31],
   ["11월 초순", 11, 1, 10], ["11월 중순", 11, 11, 30]
 ];
-var MINKG = 1;   // 최저 낙찰을 따질 때 이 물량 미만인 공판장은 뺀다
+var MINKG = 1;
 var dates = [], cache = {}, opened = {}, pickGrade = '전체 평균', allLoaded = null;
 
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
@@ -192,7 +192,6 @@ function valueOf(all, g){
   }
   return priceOf(all, g);
 }
-/* 그날 공판장 중 최고·최저 낙찰 (물량 포함) */
 function extremesOf(x, g){
   var all = allOf(x);
   var hi = null, lo = null;
@@ -297,7 +296,6 @@ function renderCheap(){
       return out;
     }).join('');
 
-    // 시기별 평균 단가와 평균 물량
     var bp = SPANS.map(function(){ return {s: 0, n: 0}; });
     var bv = SPANS.map(function(){ return {s: 0, n: 0}; });
     rows.forEach(function(r){
@@ -527,6 +525,7 @@ function render(d){
         var op = opened[r.name];
         var rt = sum(r);
         var top = topGrade(r);
+        var topKg = top ? (r.grades[top].kg || 0) : 0;
         var detail = '';
         if(op){
           detail = '<div class="detail">' + GRADES.map(function(g){
@@ -540,7 +539,8 @@ function render(d){
           '<button class="sitebtn" data-site="' + r.name + '">' +
           '<span class="nm">' + r.name + '</span>' +
           '<span class="val num"><b>' + (top ? won(priceOf(r, top)) : '-') + '</b>' +
-          '<small>' + (top || '') + ' · ' + rt.kg.toFixed(1) + ' kg</small></span>' +
+          '<small>' + (top ? top + ' ' + topKg.toFixed(1) + 'kg · 총 ' + rt.kg.toFixed(1) + 'kg'
+                           : '총 ' + rt.kg.toFixed(1) + 'kg') + '</small></span>' +
           '<span class="caret">' + (op ? '▲' : '▼') + '</span></button>' + detail + '</div>';
       }).join('');
     }).join('');
@@ -568,7 +568,7 @@ function render(d){
       '<div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>' +
       '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>' +
       '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
-      '<div class="sub">지역권으로 묶었습니다. 눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
+      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다.<br>눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
       '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
       '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
       '<div id="seasonBox"><div class="sub" style="margin-top:12px">집계 중…</div></div></section>' +
