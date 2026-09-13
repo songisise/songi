@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>오늘의 송이 시세 | 전국 산지 공판가</title>
-<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 정리합니다. 연도별 최고가와 최저가 시기, 시기별 평균까지 한눈에 볼 수 있습니다.">
+<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 정리합니다. 연도별 최고가와 최저가, 물량이 쏟아지는 시기까지 한눈에 볼 수 있습니다.">
 <style>
 :root{
   --board:#0e1a15; --card:#16281f; --rule:#22392e; --line:#2e4c3c;
@@ -99,16 +99,18 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .verdict b{color:var(--text);font-weight:700}
 .verdict .hi{color:var(--up);font-weight:700}
 .verdict .lo{color:var(--down);font-weight:700}
-.subhead{margin-top:20px;color:#a9c0b1;font-size:13px;font-weight:700}
-.ybox{border-bottom:1px solid var(--rule);padding:12px 0}
+.verdict .vol{color:var(--moss);font-weight:700}
+.subhead{margin-top:22px;color:#a9c0b1;font-size:13px;font-weight:700}
+.ybox{border-bottom:1px solid var(--rule);padding:13px 0}
 .ybox:last-child{border-bottom:none}
-.ybox .yy{font-weight:800;font-size:15.5px;margin-bottom:6px}
-.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:3px 0}
+.ybox .yy{font-weight:800;font-size:15.5px;margin-bottom:7px}
+.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:4px 0}
 .yline .lbl{color:var(--text3);flex:none}
 .yline .v{text-align:right}
 .yline .hi{color:var(--up);font-weight:700}
 .yline .lo{color:var(--down);font-weight:700}
 .yline .pk{color:var(--gold);font-weight:700}
+.yline .vl{color:var(--moss);font-weight:700}
 .yline .who{color:var(--text3);font-size:12px;display:block}
 .srow{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px}
 .srow .sl{width:62px;flex:none;color:var(--text2)}
@@ -116,7 +118,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .srow .sb i{display:block;height:100%;background:var(--moss);border-radius:4px}
 .srow.max .sb i{background:var(--up)}
 .srow.min .sb i{background:var(--down)}
-.srow .sv{width:78px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
+.srow.vmax .sb i{background:var(--gold)}
+.srow .sv{width:82px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
 </style>
 </head>
 <body>
@@ -150,6 +153,7 @@ var SPANS = [
   ["10월 초순", 10, 1, 10], ["10월 중순", 10, 11, 20], ["10월 하순", 10, 21, 31],
   ["11월 초순", 11, 1, 10], ["11월 중순", 11, 11, 30]
 ];
+var MINKG = 1;   // 최저 낙찰을 따질 때 이 물량 미만인 공판장은 뺀다
 var dates = [], cache = {}, opened = {}, pickGrade = '전체 평균', allLoaded = null;
 
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
@@ -173,6 +177,10 @@ function allOf(x){
   return x.regions[0];
 }
 function priceOf(r, g){ return (r.grades[g] && r.grades[g].price) || 0; }
+function kgOf(r, g){
+  if(g === '전체 평균') return sum(r).kg;
+  return (r.grades[g] && r.grades[g].kg) || 0;
+}
 function topGrade(r){
   for(var i=0;i<GRADES.length;i++) if(priceOf(r, GRADES[i]) > 0) return GRADES[i];
   return null;
@@ -184,16 +192,19 @@ function valueOf(all, g){
   }
   return priceOf(all, g);
 }
-/* 그날 공판장 중 가장 높은 낙찰가와 그 공판장 이름 */
-function peakOf(x, g){
-  var all = allOf(x), best = 0, who = '';
+/* 그날 공판장 중 최고·최저 낙찰 (물량 포함) */
+function extremesOf(x, g){
+  var all = allOf(x);
+  var hi = null, lo = null;
   for(var i=0;i<x.regions.length;i++){
     var r = x.regions[i];
     if(r === all) continue;
-    var v = valueOf(r, g);
-    if(v > best){ best = v; who = r.name; }
+    var v = valueOf(r, g), kg = kgOf(r, g);
+    if(!(v > 0) || !(kg > 0)) continue;
+    if(!hi || v > hi.v) hi = {v: v, kg: kg, who: r.name};
+    if(kg >= MINKG && (!lo || v < lo.v)) lo = {v: v, kg: kg, who: r.name};
   }
-  return {v: best, who: who};
+  return {hi: hi, lo: lo};
 }
 function delta(cur, prev, cls){
   if(!prev || !cur) return '<span class="' + cls + ' flat">—</span>';
@@ -245,7 +256,7 @@ function renderCheap(){
       if(!(v > 0)) return;
       var y = r.d.slice(0,4);
       if(!byYear[y]) byYear[y] = [];
-      byYear[y].push({d: r.d, v: v, x: r.x});
+      byYear[y].push({d: r.d, v: v, kg: kgOf(r.all, g), x: r.x});
     });
     var years = Object.keys(byYear).sort().reverse();
     if(!years.length){
@@ -255,65 +266,97 @@ function renderCheap(){
 
     var yearHtml = years.map(function(y){
       var arr = byYear[y];
-      var hi = arr[0], lo = arr[0], peak = {v: 0, who: '', d: ''};
+      var hi = arr[0], lo = arr[0], volDay = arr[0];
+      var pkHi = null, pkLo = null;
       arr.forEach(function(p){
         if(p.v > hi.v) hi = p;
         if(p.v < lo.v) lo = p;
-        var pk = peakOf(p.x, g);
-        if(pk.v > peak.v){ peak = {v: pk.v, who: pk.who, d: p.d}; }
+        if(p.kg > volDay.kg) volDay = p;
+        var ex = extremesOf(p.x, g);
+        if(ex.hi && (!pkHi || ex.hi.v > pkHi.v)) pkHi = {v: ex.hi.v, kg: ex.hi.kg, who: ex.hi.who, d: p.d};
+        if(ex.lo && (!pkLo || ex.lo.v < pkLo.v)) pkLo = {v: ex.lo.v, kg: ex.lo.kg, who: ex.lo.who, d: p.d};
       });
-      return '<div class="ybox"><div class="yy num">' + y + '년</div>' +
-        '<div class="yline"><span class="lbl">전국 평균 최고</span>' +
-        '<span class="v"><span class="hi num">' + won(hi.v) + '원</span>' +
-        '<span class="who">' + mdText(hi.d) + '</span></span></div>' +
-        '<div class="yline"><span class="lbl">전국 평균 최저</span>' +
-        '<span class="v"><span class="lo num">' + won(lo.v) + '원</span>' +
-        '<span class="who">' + mdText(lo.d) + '</span></span></div>' +
-        (peak.v > 0 ? '<div class="yline"><span class="lbl">최고 낙찰 공판장</span>' +
-        '<span class="v"><span class="pk num">' + won(peak.v) + '원</span>' +
-        '<span class="who">' + mdText(peak.d) + ' · ' + peak.who + '</span></span></div>' : '') +
-        '</div>';
+      var out = '<div class="ybox"><div class="yy num">' + y + '년</div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최고</span><span class="v">' +
+        '<span class="hi num">' + won(hi.v) + '원</span><span class="who">' + mdText(hi.d) + '</span></span></div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최저</span><span class="v">' +
+        '<span class="lo num">' + won(lo.v) + '원</span><span class="who">' + mdText(lo.d) + '</span></span></div>';
+      if(pkHi){
+        out += '<div class="yline"><span class="lbl">최고 낙찰 공판장</span><span class="v">' +
+          '<span class="pk num">' + won(pkHi.v) + '원</span><span class="who">' +
+          mdText(pkHi.d) + ' · ' + pkHi.who + ' · ' + pkHi.kg.toFixed(1) + 'kg</span></span></div>';
+      }
+      if(pkLo){
+        out += '<div class="yline"><span class="lbl">최저 낙찰 공판장</span><span class="v">' +
+          '<span class="lo num">' + won(pkLo.v) + '원</span><span class="who">' +
+          mdText(pkLo.d) + ' · ' + pkLo.who + ' · ' + pkLo.kg.toFixed(1) + 'kg</span></span></div>';
+      }
+      out += '<div class="yline"><span class="lbl">물량 최대일</span><span class="v">' +
+        '<span class="vl num">' + won(volDay.kg) + 'kg</span><span class="who">' +
+        mdText(volDay.d) + ' · ' + won(volDay.v) + '원</span></span></div></div>';
+      return out;
     }).join('');
 
-    var bucket = SPANS.map(function(){ return {s: 0, n: 0}; });
+    // 시기별 평균 단가와 평균 물량
+    var bp = SPANS.map(function(){ return {s: 0, n: 0}; });
+    var bv = SPANS.map(function(){ return {s: 0, n: 0}; });
     rows.forEach(function(r){
-      var v = valueOf(r.all, g);
-      if(!(v > 0)) return;
+      var v = valueOf(r.all, g), kg = kgOf(r.all, g);
       var m = Number(r.d.slice(5,7)), dd = Number(r.d.slice(8,10));
       for(var i=0;i<SPANS.length;i++){
         if(m === SPANS[i][1] && dd >= SPANS[i][2] && dd <= SPANS[i][3]){
-          bucket[i].s += v; bucket[i].n++; break;
+          if(v > 0){ bp[i].s += v; bp[i].n++; }
+          if(kg > 0){ bv[i].s += kg; bv[i].n++; }
+          break;
         }
       }
     });
-    var avgs = bucket.map(function(b){ return b.n ? b.s / b.n : 0; });
-    var live = avgs.filter(function(v){ return v > 0; });
-    if(!live.length){ box.innerHTML = yearHtml; return; }
-    var mx = Math.max.apply(null, live), mn = Math.min.apply(null, live);
-    var hiName = '', loName = '';
-    var spanHtml = SPANS.map(function(sp, i){
-      var v = avgs[i];
+    var pAvg = bp.map(function(b){ return b.n ? b.s / b.n : 0; });
+    var vAvg = bv.map(function(b){ return b.n ? b.s / b.n : 0; });
+    var pLive = pAvg.filter(function(v){ return v > 0; });
+    var vLive = vAvg.filter(function(v){ return v > 0; });
+    if(!pLive.length){ box.innerHTML = yearHtml; return; }
+
+    var pMax = Math.max.apply(null, pLive), pMin = Math.min.apply(null, pLive);
+    var vMax = vLive.length ? Math.max.apply(null, vLive) : 0;
+    var hiName = '', loName = '', volName = '';
+    var priceRows = SPANS.map(function(sp, i){
+      var v = pAvg[i];
       if(!(v > 0)) return '';
-      var cls = v === mx ? 'max' : (v === mn ? 'min' : '');
-      if(v === mx) hiName = sp[0];
-      if(v === mn) loName = sp[0];
+      var cls = v === pMax ? 'max' : (v === pMin ? 'min' : '');
+      if(v === pMax) hiName = sp[0];
+      if(v === pMin) loName = sp[0];
       return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
-        '<span class="sb"><i style="width:' + (v / mx * 100).toFixed(1) + '%"></i></span>' +
-        '<span class="sv num">' + won(v) + '</span></div>';
+        '<span class="sb"><i style="width:' + (v / pMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sv num">' + won(v) + '원</span></div>';
+    }).join('');
+    var volRows = SPANS.map(function(sp, i){
+      var v = vAvg[i];
+      if(!(v > 0) || !vMax) return '';
+      var cls = v === vMax ? 'vmax' : '';
+      if(v === vMax) volName = sp[0];
+      return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
+        '<span class="sb"><i style="width:' + (v / vMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sv num">' + won(v) + 'kg</span></div>';
     }).join('');
 
-    var pct = mn > 0 ? Math.round((mx - mn) / mn * 100) : 0;
+    var pct = pMin > 0 ? Math.round((pMax - pMin) / pMin * 100) : 0;
     var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ' +
       '<span class="hi">' + hiName + '</span>이 가장 비싸고 <span class="lo">' + loName + '</span>이 가장 쌌습니다.' +
-      (pct ? ' 두 시기의 차이는 <b>' + pct + '%</b>입니다.' : '') + '</div>';
+      (pct ? ' 두 시기의 차이는 <b>' + pct + '%</b>입니다.' : '') +
+      (volName ? ' 물량은 <span class="vol">' + volName + '</span>에 가장 많이 쏟아졌습니다.' : '') + '</div>';
 
     box.innerHTML = verdict +
       '<div class="subhead">연도별 기록</div>' + yearHtml +
-      '<div class="sub" style="margin-top:8px">전국 평균은 그날 전국에서 거래된 금액을 물량으로 나눈 값입니다. ' +
-      '최고 낙찰 공판장은 그해 한 공판장에서 나온 가장 높은 단가입니다.</div>' +
-      '<div class="subhead">시기별 평균 (' + years.length + '개 시즌)</div>' +
-      '<div style="margin-top:8px">' + spanHtml + '</div>' +
-      '<div class="sub" style="margin-top:10px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다.</div>';
+      '<div class="sub" style="margin-top:8px">전국 평균은 그날 전국 거래금액을 물량으로 나눈 값입니다. ' +
+      '최고·최저 낙찰은 한 공판장에서 나온 값이며, 최저는 ' + MINKG + 'kg 이상 거래된 곳만 셉니다.</div>' +
+      '<div class="subhead">시기별 평균 단가 (' + years.length + '개 시즌)</div>' +
+      '<div style="margin-top:8px">' + priceRows + '</div>' +
+      '<div class="sub" style="margin-top:9px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다.</div>' +
+      (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
+        '<div style="margin-top:8px">' + volRows + '</div>' +
+        '<div class="sub" style="margin-top:9px">금색 막대가 물량이 가장 많이 나오는 시기입니다. ' +
+        '물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
   });
 }
 
