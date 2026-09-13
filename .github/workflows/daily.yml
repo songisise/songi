@@ -1,0 +1,35 @@
+name: 송이 시세 수집
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 매일 한국시간 저녁 7시
+  workflow_dispatch:        # 버튼으로 직접 실행할 때 사용
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 내려받기
+        uses: actions/checkout@v4
+
+      - name: 파이썬 준비
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 필요한 도구 설치
+        run: pip install requests beautifulsoup4
+
+      - name: 시세 수집 실행
+        run: python scrape.py
+
+      - name: 결과 저장하기
+        run: |
+          git config user.name "songi-bot"
+          git config user.email "songi-bot@users.noreply.github.com"
+          git add docs/data
+          git diff --staged --quiet || git commit -m "시세 갱신 $(date +%Y-%m-%d)"
+          git push
