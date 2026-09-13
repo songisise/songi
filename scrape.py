@@ -7,14 +7,14 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE = "https://m.nfcf.or.kr/forest/user.tdf"
-HEADERS = {"User-Agent": "Mozilla/5.0 (songi-price-viewer; contact via github.com/songisise/songi)"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (songi-price-viewer; github.com/songisise/songi)"}
 OUT_DIR = "docs/data"
+EMPTY_FILE = os.path.join(OUT_DIR, "_empty.json")
 
 GRADES = ["1등품", "2등품", "생장정지품", "개산품", "등외품", "혼합품"]
 
 
 def to_num(text):
-    """'1,234.56kg' 또는 '543,783원' 에서 숫자만 뽑아낸다."""
     if not text:
         return 0.0
     cleaned = re.sub(r"[^0-9.]", "", text)
@@ -26,8 +26,16 @@ def to_num(text):
         return 0.0
 
 
+def has_data(payload):
+    """등급 어딘가에 0보다 큰 값이 있으면 공판이 열린 날로 본다."""
+    for region in payload.get("regions", []):
+        for v in region.get("grades", {}).values():
+            if v.get("kg", 0) > 0 or v.get("price", 0) > 0:
+                return True
+    return False
+
+
 def fetch_day(day):
-    """하루치 페이지를 받아서 지역별 등급 자료로 정리한다."""
     params = {
         "a": "user.songi.SongiApp",
         "c": "1003",
@@ -45,7 +53,6 @@ def fetch_day(day):
         if not rows:
             continue
 
-        # 표 바로 위에 있는 지역 이름을 찾는다 (전체 / 강원 홍천 / 경북 울진 ...)
         name = ""
         node = table.find_previous(string=re.compile(r"\S"))
         hops = 0
@@ -57,24 +64,20 @@ def fetch_day(day):
             node = node.find_previous(string=re.compile(r"\S"))
             hops += 1
 
-        grades, total_kg, total_amt = {}, 0.0, 0.0
+        grades = {}
         for row in rows:
             cells = [c.get_text(" ", strip=True) for c in row.find_all(["td", "th"])]
-            if len(cells) < 2:
-                continue
-            label = cells[0]
-            if label in GRADES and len(cells) >= 3:
-                grades[label] = {"kg": to_num(cells[1]), "price": to_num(cells[2])}
-            elif "kg" in cells[1] and "원" in (cells[2] if len(cells) > 2 else ""):
-                total_kg = to_num(cells[1])
-                total_amt = to_num(cells[2])
+            if len(cells) >= 3 and cells[0] in GRADES:
+                grades[cells[0]] = {"kg": to_num(cells[1]), "price": to_num(cells[2])}
 
         if grades:
+            total_kg = sum(v["kg"] for v in grades.values())
+            total_amt = sum(v["kg"] * v["price"] for v in grades.values())
             regions.append({
                 "name": name or "전체",
                 "grades": grades,
-                "total_kg": total_kg,
-                "total_amt": total_amt,
+                "total_kg": round(total_kg, 2),
+                "total_amt": round(total_amt),
             })
 
     if not regions:
@@ -85,47 +88,73 @@ def fetch_day(day):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    # 올해 9월 1일부터 오늘까지, 그리고 지난 5년의 가을을 훑는다
+    # 공판이 없던 날 목록 (다시 훑지 않기 위해 기억해둔다)
+    try:
+        with open(EMPTY_FILE, encoding="utf-8") as fp:
+            empty = set(json.load(fp))
+    except Exception:
+        empty = set()
+
     today = date.today()
     targets = []
     for year in range(today.year - 5, today.year + 1):
-        start = date(year, 9, 1)
+        day = date(year, 9, 1)
         end = min(date(year, 11, 30), today)
-        day = start
         while day <= end:
             targets.append(day)
             day += timedelta(days=1)
 
     index = []
     for day in targets:
-        path = os.path.join(OUT_DIR, f"{day.isoformat()}.json")
+        key = day.isoformat()
+        path = os.path.join(OUT_DIR, f"{key}.json")
         recent = (today - day).days <= 10
 
-        # 이미 받아둔 날은 건너뛴다. 단 최근 열흘은 수정될 수 있어 다시 받는다.
+        # 이미 받아둔 날은 검사만 하고 넘어간다
         if os.path.exists(path) and not recent:
-            index.append(day.isoformat())
+            try:
+                with open(path, encoding="utf-8") as fp:
+                    old = json.load(fp)
+                if has_data(old):
+                    index.append(key)
+                    continue
+            except Exception:
+                pass
+            os.remove(path)      # 내용이 비었으면 지운다
+            empty.add(key)
+            continue
+
+        # 공판이 없던 날로 확인된 과거 날짜는 건너뛴다
+        if key in empty and not recent:
             continue
 
         try:
             data = fetch_day(day)
         except Exception as err:
-            print(f"{day} 실패: {err}")
+            print(f"{key} 실패: {err}")
             continue
 
-        if data:
+        if data and has_data(data):
             with open(path, "w", encoding="utf-8") as fp:
                 json.dump(data, fp, ensure_ascii=False, indent=1)
-            index.append(day.isoformat())
-            print(f"{day} 저장 완료 ({len(data['regions'])}개 지역)")
+            index.append(key)
+            empty.discard(key)
+            print(f"{key} 저장 ({len(data['regions'])}곳)")
         else:
-            print(f"{day} 공판 없음")
+            if os.path.exists(path):
+                os.remove(path)
+            empty.add(key)
+            print(f"{key} 공판 없음")
 
-        time.sleep(0.6)  # 원본 사이트에 부담 주지 않도록 천천히
+        time.sleep(0.6)
 
     index = sorted(set(index), reverse=True)
     with open(os.path.join(OUT_DIR, "index.json"), "w", encoding="utf-8") as fp:
         json.dump({"dates": index, "updated": today.isoformat()}, fp, ensure_ascii=False, indent=1)
-    print(f"\n총 {len(index)}일치 보관 중")
+    with open(EMPTY_FILE, "w", encoding="utf-8") as fp:
+        json.dump(sorted(empty), fp, ensure_ascii=False)
+
+    print(f"\n공판일 {len(index)}일치 보관 중")
 
 
 if __name__ == "__main__":
