@@ -4,12 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>오늘의 송이 시세 | 전국 산지 공판가</title>
-<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 지역별로 매일 정리합니다. 지난 날짜 시세도 볼 수 있습니다.">
+<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 매일 정리합니다. 지난 공판일 시세도 볼 수 있습니다.">
 <style>
 :root{
-  --board:#101c17; --panel:#16281f; --rule:#243d31; --text:#e9efe7;
-  --text2:#a8bfb0; --text3:#6f8b7b; --gold:#d6b24a; --moss:#6f9b74;
-  --up:#f0574a; --down:#54a4e0;
+  --board:#101c17; --rule:#243d31; --text:#e9efe7; --text2:#a8bfb0;
+  --text3:#6f8b7b; --gold:#d6b24a; --moss:#6f9b74; --up:#f0574a; --down:#54a4e0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--board);color:var(--text);line-height:1.5;
@@ -17,70 +16,65 @@ body{background:var(--board);color:var(--text);line-height:1.5;
   -webkit-font-smoothing:antialiased}
 .num{font-variant-numeric:tabular-nums}
 .wrap{max-width:480px;margin:0 auto;min-height:100vh;
-  background-image:linear-gradient(180deg,#16281f 0,#101c17 300px)}
+  background-image:linear-gradient(180deg,#16281f 0,#101c17 240px)}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 
-.top{padding:18px 16px 0}
+.top{padding:16px 16px 0}
 .brand{font-size:17px;font-weight:700}
 .brand small{display:block;font-size:12px;color:var(--text3);font-weight:400;margin-top:2px}
-.datebar{display:flex;align-items:center;justify-content:space-between;
-  margin-top:14px;border:1px solid var(--rule);border-radius:10px;padding:5px}
+.datebar{display:flex;align-items:center;margin-top:12px;
+  border:1px solid var(--rule);border-radius:10px;padding:4px}
 .datebar select{background:none;border:none;color:var(--text);font-size:15px;
-  font-weight:600;text-align:center;flex:1}
-.datebar select option{background:var(--panel);color:var(--text)}
-.nav{width:38px;height:34px;border-radius:8px;color:var(--text2);font-size:17px}
+  font-weight:700;text-align:center;flex:1;padding:4px 0}
+.datebar select option{background:#16281f;color:var(--text)}
+.nav{width:36px;height:32px;border-radius:8px;color:var(--text2);font-size:17px}
 .nav:disabled{color:#3d5548;cursor:default}
 
-.hero{padding:24px 16px 18px;border-bottom:1px solid var(--rule)}
-.hero .cap{font-size:13px;color:var(--text2)}
-.hero .price{display:flex;align-items:flex-end;gap:7px;margin-top:2px}
-.hero .price b{font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--gold)}
-.hero .price span{font-size:15px;color:var(--text2);padding-bottom:4px}
-.delta{margin-top:7px;font-size:13.5px;font-weight:600}
-.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--text3)}
-.delta em{font-style:normal;color:var(--text3);font-weight:400;margin-left:4px}
-.stats{display:flex;margin-top:16px;border-top:1px solid var(--rule);padding-top:13px}
+.stats{display:flex;padding:14px 16px 16px;border-bottom:1px solid var(--rule)}
 .stats div{flex:1}
 .stats div+div{border-left:1px solid var(--rule);padding-left:12px}
-.stats dt{font-size:12px;color:var(--text3)}
-.stats dd{font-size:16px;font-weight:700;margin-top:2px}
+.stats dt{font-size:11.5px;color:var(--text3)}
+.stats dd{font-size:17px;font-weight:700;margin-top:1px}
 
-.sec{padding:20px 16px;border-bottom:1px solid var(--rule)}
-.sec h2{font-size:14px;font-weight:700;color:var(--text2)}
-.sec .sub{font-size:12px;color:var(--text3);margin-top:2px}
+.sec{padding:18px 16px;border-bottom:1px solid var(--rule)}
+.sec h2{font-size:15px;font-weight:700}
+.sec .sub{font-size:11.5px;color:var(--text3);margin-top:3px;line-height:1.6}
 
-.grade{padding:11px 0;border-bottom:1px solid var(--rule)}
+.grade{padding:10px 0;border-bottom:1px solid var(--rule)}
 .grade:last-child{border-bottom:none;padding-bottom:0}
+.grade.zero{opacity:.32}
 .grade .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .grade .nm{font-size:14.5px;font-weight:600}
-.grade .pr{font-size:16px;font-weight:700}
-.grade.top .pr{color:var(--gold)}
+.grade .pr{font-size:17px;font-weight:700}
+.grade.best .pr{color:var(--gold)}
 .grade .r2{display:flex;align-items:center;gap:10px;margin-top:6px}
 .bar{flex:1;height:5px;background:#1e3529;border-radius:3px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--moss)}
-.grade.top .bar i{background:var(--gold)}
-.kg{font-size:12px;color:var(--text3);min-width:76px;text-align:right}
-.chg{font-size:12px;font-weight:600;min-width:50px;text-align:right}
+.grade.best .bar i{background:var(--gold)}
+.kg{font-size:12px;color:var(--text3);min-width:74px;text-align:right}
+.chg{font-size:12px;font-weight:600;min-width:48px;text-align:right}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--text3)}
+.chg em,.delta em{font-style:normal;color:var(--text3);font-weight:400;margin-left:3px}
 
-.chart svg{display:block;width:100%;height:120px;margin-top:12px}
-.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:6px}
+.chart svg{display:block;width:100%;height:110px;margin-top:10px}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:5px}
 
 .site{border-bottom:1px solid var(--rule)}
 .site:last-of-type{border-bottom:none}
-.sitebtn{display:flex;width:100%;align-items:center;gap:12px;padding:13px 0;text-align:left}
+.sitebtn{display:flex;width:100%;align-items:center;gap:10px;padding:12px 0;text-align:left}
 .sitebtn .nm{flex:1;font-size:14.5px;font-weight:600}
 .sitebtn .val{text-align:right}
 .sitebtn .val b{font-size:15px;display:block}
 .sitebtn .val small{font-size:11.5px;color:var(--text3)}
-.caret{color:var(--text3);font-size:11px}
-.detail{padding:0 0 12px 4px}
-.drow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--text2)}
+.caret{color:var(--text3);font-size:11px;width:12px}
+.detail{padding:0 0 12px 2px}
+.drow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--text2)}
 .drow b{color:var(--text)}
 .drow .k{color:var(--text3);font-size:12px;margin-left:8px}
 
-.empty{padding:54px 24px;text-align:center;color:var(--text2);font-size:14.5px}
-.foot{padding:20px 16px 44px;font-size:11.5px;color:var(--text3);line-height:1.8}
+.empty{padding:50px 24px;text-align:center;color:var(--text2);font-size:14.5px}
+.foot{padding:18px 16px 42px;font-size:11.5px;color:var(--text3);line-height:1.8}
 .foot a{color:var(--text2)}
 </style>
 </head>
@@ -115,7 +109,7 @@ async function load(d){
   return cache[d];
 }
 
-function sumRegion(r){
+function sum(r){
   let kg = 0, amt = 0;
   for(const g of GRADES){
     const v = r.grades[g];
@@ -124,8 +118,8 @@ function sumRegion(r){
   return {kg, amt};
 }
 
-function deltaHTML(cur, prev, cls){
-  if(!prev || !cur) return `<span class="${cls} flat">전일 자료 없음</span>`;
+function delta(cur, prev, cls){
+  if(!prev || !cur) return `<span class="${cls} flat">—</span>`;
   const diff = cur - prev, pct = diff / prev * 100;
   const dir = diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat';
   const mark = diff > 0 ? '▲' : diff < 0 ? '▼' : '―';
@@ -144,14 +138,14 @@ async function chart(cur){
       if(p > 0) pts.push({d, v:p});
     }catch(e){}
   }
-  if(pts.length < 2) return;
-  const W = 440, H = 100;
+  const el = document.getElementById('chartBox');
+  if(!el) return;
+  if(pts.length < 2){ el.innerHTML = '<div class="sub">그릴 자료가 부족합니다.</div>'; return; }
+  const W = 440, H = 96;
   const vs = pts.map(p => p.v), mn = Math.min(...vs), mx = Math.max(...vs);
   const X = i => i/(pts.length-1)*W, Y = v => H - (v-mn)/((mx-mn)||1)*H;
   const line = pts.map((p,i) => `${i?'L':'M'}${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
   const idx = pts.findIndex(p => p.d === cur);
-  const el = document.getElementById('chartBox');
-  if(!el) return;
   el.innerHTML = `<svg viewBox="-4 -8 ${W+8} ${H+16}" preserveAspectRatio="none">
     <path d="${line} L${W},${H+8} L0,${H+8} Z" fill="rgba(214,178,74,.10)"/>
     <path d="${line}" fill="none" stroke="#d6b24a" stroke-width="2" vector-effect="non-scaling-stroke"/>
@@ -175,7 +169,9 @@ async function render(d){
   catch(e){ main.innerHTML = '<div class="empty">이 날은 공판 자료가 없습니다.</div>'; return; }
 
   const all = data.regions.find(r => r.name === '전체') || data.regions[0];
-  const regions = data.regions.filter(r => r !== all);
+  // 실제로 거래가 있었던 공판장만 남긴다
+  const regions = data.regions.filter(r => r !== all && sum(r).kg > 0);
+
   let prev = null;
   if(i < dates.length-1){
     try{
@@ -184,35 +180,32 @@ async function render(d){
     }catch(e){}
   }
 
-  const t = sumRegion(all);
-  const g1 = all.grades['1등품'] || {price:0, kg:0};
-  const maxKg = Math.max(...GRADES.map(g => (all.grades[g]||{kg:0}).kg));
+  const t = sum(all);
+  const maxKg = Math.max(...GRADES.map(g => (all.grades[g]||{kg:0}).kg), 1);
+  const bestIdx = GRADES.findIndex(g => all.grades[g] && all.grades[g].price > 0);
 
   main.innerHTML = `
-  <section class="hero">
-    <div class="cap">전체 1등품 평균 낙찰단가</div>
-    <div class="price num"><b>${won(g1.price)}</b><span>원/kg</span></div>
-    <div class="delta">${deltaHTML(g1.price, prev && prev.grades['1등품'] && prev.grades['1등품'].price, '')}</div>
-    <dl class="stats num">
-      <div><dt>총 물량</dt><dd>${won(t.kg)} kg</dd></div>
-      <div><dt>총 금액</dt><dd>${won(t.amt/1e6)} 백만원</dd></div>
-      <div><dt>공판장</dt><dd>${regions.length} 곳</dd></div>
-    </dl>
-  </section>
+  <dl class="stats num">
+    <div><dt>총 물량</dt><dd>${t.kg.toFixed(1)} kg</dd></div>
+    <div><dt>총 금액</dt><dd>${won(t.amt/1e4)} 만원</dd></div>
+    <div><dt>공판장</dt><dd>${regions.length} 곳</dd></div>
+  </dl>
 
   <section class="sec">
-    <h2>등급별 낙찰단가</h2>
-    <div class="sub">막대는 물량 비중, 오른쪽은 직전 공판일 대비</div>
-    <div style="margin-top:10px">
+    <h2>등급별 전국 낙찰단가</h2>
+    <div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>
+    <div style="margin-top:12px">
     ${GRADES.map((g,k) => {
       const v = all.grades[g]; if(!v) return '';
       const pv = prev && prev.grades[g] && prev.grades[g].price;
-      return `<div class="grade ${k===0?'top':''}">
-        <div class="r1"><span class="nm">${g}</span><span class="pr num">${won(v.price)}<span style="font-size:12px;color:var(--text3);font-weight:400"> 원</span></span></div>
+      const zero = !(v.price > 0);
+      return `<div class="grade ${k===bestIdx?'best':''} ${zero?'zero':''}">
+        <div class="r1"><span class="nm">${g}</span>
+          <span class="pr num">${zero?'거래 없음':won(v.price)+'<span style="font-size:12px;color:var(--text3);font-weight:400"> 원</span>'}</span></div>
         <div class="r2">
-          <span class="bar"><i style="width:${maxKg?(v.kg/maxKg*100).toFixed(1):0}%"></i></span>
+          <span class="bar"><i style="width:${(v.kg/maxKg*100).toFixed(1)}%"></i></span>
           <span class="kg num">${v.kg.toFixed(1)} kg</span>
-          ${deltaHTML(v.price, pv, 'chg')}
+          ${zero?'<span class="chg flat"></span>':delta(v.price, pv, 'chg')}
         </div>
       </div>`;
     }).join('')}
@@ -220,31 +213,32 @@ async function render(d){
   </section>
 
   <section class="sec">
-    <h2>올해 1등품 단가 추이</h2>
-    <div class="chart" id="chartBox"><div class="sub" style="margin-top:12px">그리는 중…</div></div>
-  </section>
-
-  <section class="sec">
-    <h2>공판장별 결과</h2>
+    <h2>공판장별 낙찰단가</h2>
+    <div class="sub">1등품 단가가 높은 순입니다. 눌러서 등급별로 펼쳐 보세요.</div>
     <div style="margin-top:6px">
     ${regions.sort((a,b)=>((b.grades['1등품']||{price:0}).price)-((a.grades['1등품']||{price:0}).price))
       .map(r => {
         const op = opened.has(r.name);
-        const rt = sumRegion(r);
-        const p1 = (r.grades['1등품']||{price:0}).price;
+        const rt = sum(r);
+        const top = GRADES.find(g => r.grades[g] && r.grades[g].price > 0);
         return `<div class="site">
           <button class="sitebtn" data-site="${r.name}">
             <span class="nm">${r.name}</span>
-            <span class="val num"><b>${p1?won(p1):'-'}</b><small>${rt.kg.toFixed(1)} kg</small></span>
+            <span class="val num"><b>${top?won(r.grades[top].price):'-'}</b><small>${top||''} · ${rt.kg.toFixed(1)} kg</small></span>
             <span class="caret">${op?'▴':'▾'}</span>
           </button>
           ${op?`<div class="detail">${GRADES.map(g=>{
-            const v=r.grades[g]; if(!v) return '';
+            const v=r.grades[g]; if(!v || !(v.kg>0)) return '';
             return `<div class="drow"><span>${g}</span><span><b class="num">${won(v.price)}</b> 원<span class="k num">${v.kg.toFixed(1)} kg</span></span></div>`;
           }).join('')}</div>`:''}
         </div>`;
       }).join('')}
     </div>
+  </section>
+
+  <section class="sec">
+    <h2>올해 1등품 단가 추이</h2>
+    <div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div>
   </section>`;
 
   chart(d);
