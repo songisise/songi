@@ -99,14 +99,17 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .verdict b{color:var(--text);font-weight:700}
 .verdict .hi{color:var(--up);font-weight:700}
 .verdict .lo{color:var(--down);font-weight:700}
-.yrow{display:flex;align-items:center;gap:10px;padding:11px 0;
-  border-bottom:1px solid var(--rule);font-size:14px}
-.yrow:last-child{border-bottom:none}
-.yrow .yy{font-weight:700;font-size:15px;width:54px;flex:none}
-.yrow .half{flex:1;line-height:1.4}
-.yrow .lbl{font-size:11.5px;color:var(--text3);display:block}
-.yrow .hi{color:var(--up);font-weight:700}
-.yrow .lo{color:var(--down);font-weight:700}
+.subhead{margin-top:20px;color:#a9c0b1;font-size:13px;font-weight:700}
+.ybox{border-bottom:1px solid var(--rule);padding:12px 0}
+.ybox:last-child{border-bottom:none}
+.ybox .yy{font-weight:800;font-size:15.5px;margin-bottom:6px}
+.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:3px 0}
+.yline .lbl{color:var(--text3);flex:none}
+.yline .v{text-align:right}
+.yline .hi{color:var(--up);font-weight:700}
+.yline .lo{color:var(--down);font-weight:700}
+.yline .pk{color:var(--gold);font-weight:700}
+.yline .who{color:var(--text3);font-size:12px;display:block}
 .srow{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px}
 .srow .sl{width:62px;flex:none;color:var(--text2)}
 .srow .sb{flex:1;height:16px;background:#1c332a;border-radius:4px;overflow:hidden}
@@ -174,13 +177,23 @@ function topGrade(r){
   for(var i=0;i<GRADES.length;i++) if(priceOf(r, GRADES[i]) > 0) return GRADES[i];
   return null;
 }
-/* 고른 등급의 그날 단가. '전체 평균'이면 총금액÷총물량 */
 function valueOf(all, g){
   if(g === '전체 평균'){
     var t = sum(all);
     return t.kg > 0 ? t.amt / t.kg : 0;
   }
   return priceOf(all, g);
+}
+/* 그날 공판장 중 가장 높은 낙찰가와 그 공판장 이름 */
+function peakOf(x, g){
+  var all = allOf(x), best = 0, who = '';
+  for(var i=0;i<x.regions.length;i++){
+    var r = x.regions[i];
+    if(r === all) continue;
+    var v = valueOf(r, g);
+    if(v > best){ best = v; who = r.name; }
+  }
+  return {v: best, who: who};
 }
 function delta(cur, prev, cls){
   if(!prev || !cur) return '<span class="' + cls + ' flat">—</span>';
@@ -212,11 +225,10 @@ function nearestInYear(cur, year){
 }
 function mdText(s){ return Number(s.slice(5,7)) + '월 ' + Number(s.slice(8,10)) + '일'; }
 
-/* 모든 날짜를 한 번만 읽어 기억해둔다 */
 function loadAll(){
   if(allLoaded) return allLoaded;
   allLoaded = Promise.all(dates.map(function(d){
-    return load(d).then(function(x){ return {d: d, all: allOf(x)}; })
+    return load(d).then(function(x){ return {d: d, x: x, all: allOf(x)}; })
                   .catch(function(){ return null; });
   })).then(function(a){ return a.filter(function(r){ return r; }); });
   return allLoaded;
@@ -233,7 +245,7 @@ function renderCheap(){
       if(!(v > 0)) return;
       var y = r.d.slice(0,4);
       if(!byYear[y]) byYear[y] = [];
-      byYear[y].push({d: r.d, v: v});
+      byYear[y].push({d: r.d, v: v, x: r.x});
     });
     var years = Object.keys(byYear).sort().reverse();
     if(!years.length){
@@ -243,19 +255,26 @@ function renderCheap(){
 
     var yearHtml = years.map(function(y){
       var arr = byYear[y];
-      var hi = arr[0], lo = arr[0];
+      var hi = arr[0], lo = arr[0], peak = {v: 0, who: '', d: ''};
       arr.forEach(function(p){
         if(p.v > hi.v) hi = p;
         if(p.v < lo.v) lo = p;
+        var pk = peakOf(p.x, g);
+        if(pk.v > peak.v){ peak = {v: pk.v, who: pk.who, d: p.d}; }
       });
-      return '<div class="yrow"><span class="yy num">' + y + '</span>' +
-        '<span class="half"><span class="lbl">가장 비쌌던 날</span>' +
-        '<span class="hi num">' + mdText(hi.d) + ' · ' + won(hi.v) + '원</span></span>' +
-        '<span class="half"><span class="lbl">가장 쌌던 날</span>' +
-        '<span class="lo num">' + mdText(lo.d) + ' · ' + won(lo.v) + '원</span></span></div>';
+      return '<div class="ybox"><div class="yy num">' + y + '년</div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최고</span>' +
+        '<span class="v"><span class="hi num">' + won(hi.v) + '원</span>' +
+        '<span class="who">' + mdText(hi.d) + '</span></span></div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최저</span>' +
+        '<span class="v"><span class="lo num">' + won(lo.v) + '원</span>' +
+        '<span class="who">' + mdText(lo.d) + '</span></span></div>' +
+        (peak.v > 0 ? '<div class="yline"><span class="lbl">최고 낙찰 공판장</span>' +
+        '<span class="v"><span class="pk num">' + won(peak.v) + '원</span>' +
+        '<span class="who">' + mdText(peak.d) + ' · ' + peak.who + '</span></span></div>' : '') +
+        '</div>';
     }).join('');
 
-    // 시기(순)별 평균
     var bucket = SPANS.map(function(){ return {s: 0, n: 0}; });
     rows.forEach(function(r){
       var v = valueOf(r.all, g);
@@ -269,10 +288,7 @@ function renderCheap(){
     });
     var avgs = bucket.map(function(b){ return b.n ? b.s / b.n : 0; });
     var live = avgs.filter(function(v){ return v > 0; });
-    if(!live.length){
-      box.innerHTML = yearHtml;
-      return;
-    }
+    if(!live.length){ box.innerHTML = yearHtml; return; }
     var mx = Math.max.apply(null, live), mn = Math.min.apply(null, live);
     var hiName = '', loName = '';
     var spanHtml = SPANS.map(function(sp, i){
@@ -292,9 +308,10 @@ function renderCheap(){
       (pct ? ' 두 시기의 차이는 <b>' + pct + '%</b>입니다.' : '') + '</div>';
 
     box.innerHTML = verdict +
-      '<div class="sub" style="margin-top:18px;color:#a9c0b1;font-size:13px;font-weight:700">연도별 최고·최저</div>' +
-      yearHtml +
-      '<div class="sub" style="margin-top:18px;color:#a9c0b1;font-size:13px;font-weight:700">시기별 평균 (' + years.length + '개 시즌)</div>' +
+      '<div class="subhead">연도별 기록</div>' + yearHtml +
+      '<div class="sub" style="margin-top:8px">전국 평균은 그날 전국에서 거래된 금액을 물량으로 나눈 값입니다. ' +
+      '최고 낙찰 공판장은 그해 한 공판장에서 나온 가장 높은 단가입니다.</div>' +
+      '<div class="subhead">시기별 평균 (' + years.length + '개 시즌)</div>' +
       '<div style="margin-top:8px">' + spanHtml + '</div>' +
       '<div class="sub" style="margin-top:10px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다.</div>';
   });
