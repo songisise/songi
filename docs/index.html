@@ -19,7 +19,6 @@ body{background:var(--board);color:var(--text);line-height:1.55;
 .wrap{max-width:500px;margin:0 auto;min-height:100vh}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
-
 .top{padding:20px 18px 18px;background:linear-gradient(180deg,#1a3026 0,#0e1a15 100%)}
 .brand{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .brand small{display:block;font-size:12.5px;color:var(--text3);font-weight:400;margin-top:3px;letter-spacing:0}
@@ -30,27 +29,22 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .datebar select option{background:#16281f;color:var(--text)}
 .nav{width:40px;height:38px;border-radius:9px;color:var(--text2);font-size:19px}
 .nav:disabled{color:#3a5347;cursor:default}
-
 .notice{margin:14px 18px 0;padding:11px 13px;border-radius:10px;
   background:rgba(224,188,85,.10);border:1px solid rgba(224,188,85,.28);
   font-size:13px;color:#f0dda4;line-height:1.6}
-
 .lead{padding:18px;font-size:15.5px;color:var(--text2);line-height:1.7}
 .lead b{color:var(--text);font-weight:700}
 .lead .big{color:var(--gold);font-size:19px;font-weight:800}
-
 .stats{display:flex;margin:0 18px;background:var(--card);
   border:1px solid var(--rule);border-radius:12px;padding:14px 4px}
 .stats div{flex:1;text-align:center}
 .stats div+div{border-left:1px solid var(--rule)}
 .stats dt{font-size:11.5px;color:var(--text3)}
 .stats dd{font-size:17px;font-weight:700;margin-top:2px}
-
 .sec{padding:26px 18px 22px}
 .sec+.sec{border-top:1px solid var(--rule)}
 .sec h2{font-size:17px;font-weight:800;letter-spacing:-.01em}
 .sec .sub{font-size:12.5px;color:var(--text3);margin-top:4px;line-height:1.65}
-
 .grade{padding:13px 0;border-bottom:1px solid var(--rule)}
 .grade:last-child{border-bottom:none;padding-bottom:0}
 .grade.zero{opacity:.3}
@@ -65,27 +59,22 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .grade.best .bar i{background:var(--gold)}
 .kg{font-size:12.5px;color:var(--text3);min-width:76px;text-align:right}
 .chg{font-size:12.5px;font-weight:700;min-width:52px;text-align:right}
-.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--text3)}
+.up{color:var(--up)}
+.down{color:var(--down)}
+.flat{color:var(--text3)}
 .chg em,.cmprow em{font-style:normal;color:var(--text3);font-weight:400;margin-left:3px}
-
-.cmp{background:var(--card);border:1px solid var(--rule);border-radius:12px;
-  padding:15px;margin-top:12px}
-.cmprow{display:flex;justify-content:space-between;align-items:baseline;
-  padding:9px 0;font-size:14.5px;gap:10px}
+.cmp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:15px;margin-top:12px}
+.cmprow{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;font-size:14.5px;gap:10px}
 .cmprow+.cmprow{border-top:1px solid var(--rule)}
 .cmprow .y{color:var(--text3);font-size:13px}
 .cmprow b{font-size:16px;font-weight:700}
 .cmphead{font-size:13px;color:var(--text3);margin-bottom:4px}
-
 .chart svg{display:block;width:100%;height:120px;margin-top:14px}
 .axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text3);margin-top:7px}
-
 .zone{font-size:12.5px;color:var(--text3);font-weight:700;
   margin:18px 0 2px;padding-bottom:5px;border-bottom:1px solid var(--line)}
-.zone:first-of-type{margin-top:12px}
 .site{border-bottom:1px solid var(--rule)}
 .sitebtn{display:flex;width:100%;align-items:center;gap:12px;padding:14px 0;text-align:left}
-.sitebtn:hover{background:rgba(255,255,255,.02)}
 .sitebtn .nm{flex:1;font-size:15.5px;font-weight:600}
 .sitebtn .val{text-align:right;line-height:1.35}
 .sitebtn .val b{font-size:16.5px;font-weight:700;display:block}
@@ -98,10 +87,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .drow{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--text2)}
 .drow b{color:var(--text);font-weight:700}
 .drow .k{color:var(--text3);font-size:12.5px;margin-left:9px}
-
 .empty{padding:56px 24px;text-align:center;color:var(--text2);font-size:15px}
-.foot{padding:22px 18px 46px;font-size:12px;color:var(--text3);line-height:1.9;
-  border-top:1px solid var(--rule)}
+.foot{padding:22px 18px 46px;font-size:12px;color:var(--text3);line-height:1.9;border-top:1px solid var(--rule)}
 .foot a{color:var(--text2)}
 </style>
 </head>
@@ -110,9 +97,9 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
   <header class="top">
     <div class="brand">오늘의 송이 시세<small>전국 산지 공판장 등급별 낙찰 단가</small></div>
     <div class="datebar">
-      <button class="nav" id="prev" aria-label="이전 공판일">‹</button>
-      <select id="dateSel" class="num" aria-label="공판일자"></select>
-      <button class="nav" id="next" aria-label="다음 공판일">›</button>
+      <button class="nav" id="prev">&lsaquo;</button>
+      <select id="dateSel" class="num"></select>
+      <button class="nav" id="next">&rsaquo;</button>
     </div>
   </header>
   <div id="notice"></div>
@@ -123,219 +110,328 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
     <a href="https://m.nfcf.or.kr/forest/user.tdf?a=user.songi.SongiApp&amp;c=1003&amp;mc=MOB_CST01" target="_blank" rel="noopener">원본 페이지 보기</a>
   </footer>
 </div>
-
 <script>
-const GRADES = ["1등품","2등품","생장정지품","개산품","등외품","혼합품"];
-const ZONES = [
+var GRADES = ["1등품","2등품","생장정지품","개산품","등외품","혼합품"];
+var ZONES = [
   ["강원권", ["강원"]],
   ["경북권", ["경북","대구"]],
   ["경남·전라권", ["경남","전남","전북","광주","부산","울산"]],
-  ["충청·경기권", ["충북","충남","경기","세종","대전","인천"]],
+  ["충청·경기권", ["충북","충남","경기","세종","대전","인천"]]
 ];
-const won = n => Math.round(n).toLocaleString('ko-KR');
-let dates = [], cache = {}, opened = new Set();
+var dates = [], cache = {}, opened = {};
 
-async function load(d){
-  if(cache[d]) return cache[d];
-  const res = await fetch(`data/${d}.json`);
-  if(!res.ok) throw new Error('없음');
-  cache[d] = await res.json();
-  return cache[d];
+function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
+
+function load(d){
+  if(cache[d]) return Promise.resolve(cache[d]);
+  return fetch('data/' + d + '.json').then(function(res){
+    if(!res.ok) throw new Error('없음');
+    return res.json();
+  }).then(function(j){ cache[d] = j; return j; });
 }
+
 function sum(r){
-  let kg=0, amt=0;
-  for(const g of GRADES){ const v=r.grades[g]; if(v){ kg+=v.kg; amt+=v.kg*v.price; } }
-  return {kg, amt};
+  var kg = 0, amt = 0;
+  for(var i=0;i<GRADES.length;i++){
+    var v = r.grades[GRADES[i]];
+    if(v){ kg += v.kg; amt += v.kg * v.price; }
+  }
+  return {kg: kg, amt: amt};
 }
-function allOf(x){ return x.regions.find(r=>r.name==='전체') || x.regions[0]; }
+
+function allOf(x){
+  for(var i=0;i<x.regions.length;i++) if(x.regions[i].name === '전체') return x.regions[i];
+  return x.regions[0];
+}
+
 function priceOf(r, g){ return (r.grades[g] && r.grades[g].price) || 0; }
-function topGrade(r){ return GRADES.find(g => priceOf(r,g) > 0) || null; }
-function delta(cur, prev, cls){
-  if(!prev || !cur) return `<span class="${cls} flat">—</span>`;
-  const diff = cur-prev, pct = diff/prev*100;
-  const dir = diff>0?'up':diff<0?'down':'flat';
-  const mark = diff>0?'▲':diff<0?'▼':'―';
-  return `<span class="${cls} ${dir}">${mark} ${won(Math.abs(diff))}<em>${pct>0?'+':''}${pct.toFixed(1)}%</em></span>`;
+
+function topGrade(r){
+  for(var i=0;i<GRADES.length;i++) if(priceOf(r, GRADES[i]) > 0) return GRADES[i];
+  return null;
 }
+
+function delta(cur, prev, cls){
+  if(!prev || !cur) return '<span class="' + cls + ' flat">—</span>';
+  var diff = cur - prev, pct = diff / prev * 100;
+  var dir = diff > 0 ? 'up' : (diff < 0 ? 'down' : 'flat');
+  var mark = diff > 0 ? '▲' : (diff < 0 ? '▼' : '―');
+  return '<span class="' + cls + ' ' + dir + '">' + mark + ' ' + won(Math.abs(diff)) +
+    '<em>' + (pct > 0 ? '+' : '') + pct.toFixed(1) + '%</em></span>';
+}
+
 function zoneOf(name){
-  for(const [z, keys] of ZONES) if(keys.some(k => name.startsWith(k))) return z;
+  for(var i=0;i<ZONES.length;i++){
+    var keys = ZONES[i][1];
+    for(var k=0;k<keys.length;k++) if(name.indexOf(keys[k]) === 0) return ZONES[i][0];
+  }
   return '기타';
 }
+
 function nearestInYear(cur, year){
-  const [, m, d] = cur.split('-').map(Number);
-  const target = new Date(year, m-1, d);
-  let best = null, gap = Infinity;
-  for(const s of dates){
-    if(!s.startsWith(String(year))) continue;
-    const [yy, mm, dd] = s.split('-').map(Number);
-    const diff = Math.abs(new Date(yy, mm-1, dd) - target);
+  var p = cur.split('-');
+  var target = new Date(year, Number(p[1]) - 1, Number(p[2]));
+  var best = null, gap = Infinity;
+  for(var i=0;i<dates.length;i++){
+    var s = dates[i];
+    if(s.slice(0,4) !== String(year)) continue;
+    var q = s.split('-');
+    var diff = Math.abs(new Date(Number(q[0]), Number(q[1]) - 1, Number(q[2])) - target);
     if(diff < gap){ gap = diff; best = s; }
   }
-  return gap <= 7*86400000 ? best : null;
+  return gap <= 7 * 86400000 ? best : null;
 }
 
-/* 작년 비교 — 반드시 같은 등급끼리만 비교한다 */
-async function compare(cur){
-  const el = document.getElementById('cmpBox');
+function compare(cur){
+  var el = document.getElementById('cmpBox');
   if(!el) return;
-  const year = Number(cur.slice(0,4));
-  const years = [];
-  for(let y = year; y >= year-2; y--){
-    const s = nearestInYear(cur, y);
-    if(!s) continue;
-    try{ years.push({s, all: allOf(await load(s))}); }catch(e){}
+  var year = Number(cur.slice(0,4));
+  var want = [];
+  for(var y = year; y >= year - 2; y--){
+    var s = nearestInYear(cur, y);
+    if(s) want.push(s);
   }
-  if(years.length < 2){
-    el.innerHTML = '<div class="sub" style="margin-top:12px">비교할 지난 자료가 아직 없습니다.</div>';
-    return;
-  }
-
-  // 모든 해에 공통으로 거래된 등급 중 가장 높은 것을 고른다
-  const common = GRADES.find(g => years.every(y => priceOf(y.all, g) > 0));
-  const basis = common || topGrade(years[0].all);
-  const basePrice = common ? priceOf(years[0].all, basis) : 0;
-
-  el.innerHTML = `<div class="cmp">
-    <div class="cmphead">${cur.slice(5).replace('-','월 ')}일 무렵 · ${common?basis+' 기준':'등급이 달라 단순 비교 불가'}</div>
-    ${years.map((y,i) => {
-      const g = common || topGrade(y.all);
-      const p = g ? priceOf(y.all, g) : 0;
-      let tail = '';
+  Promise.all(want.map(function(s){
+    return load(s).then(function(x){ return {s: s, all: allOf(x)}; })
+                  .catch(function(){ return null; });
+  })).then(function(rows){
+    rows = rows.filter(function(r){ return r; });
+    if(rows.length < 2){
+      el.innerHTML = '<div class="sub" style="margin-top:12px">비교할 지난 자료가 아직 없습니다.</div>';
+      return;
+    }
+    var common = null;
+    for(var i=0;i<GRADES.length;i++){
+      var g = GRADES[i], ok = true;
+      for(var j=0;j<rows.length;j++) if(priceOf(rows[j].all, g) <= 0) ok = false;
+      if(ok){ common = g; break; }
+    }
+    var basePrice = common ? priceOf(rows[0].all, common) : 0;
+    var body = rows.map(function(r, i){
+      var g = common || topGrade(r.all);
+      var p = g ? priceOf(r.all, g) : 0;
+      var tail = '';
       if(common && i > 0 && p > 0){
-        const pct = Math.round((basePrice - p) / p * 100);
-        tail = `<em class="${pct>0?'up':pct<0?'down':'flat'}" style="font-weight:700">${pct>0?'+':''}${pct}%</em>`;
+        var pct = Math.round((basePrice - p) / p * 100);
+        var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
+        tail = '<em class="' + dir + '" style="font-weight:700">' + (pct > 0 ? '+' : '') + pct + '%</em>';
       }
-      return `<div class="cmprow">
-        <span><b class="num">${y.s.slice(0,4)}년</b> <span class="y num">${y.s.slice(5).replace('-','.')}</span> <span class="y">${g||'-'}</span></span>
-        <span><b class="num">${p?won(p):'-'}</b> 원 ${tail}</span>
-      </div>`;
-    }).join('')}
-  </div>
-  <div class="sub" style="margin-top:9px">${common
-    ? '세 해 모두 거래된 '+basis+' 단가로 맞춰 비교했습니다. 옆 숫자는 그해 대비 오르내린 폭입니다.'
-    : '해마다 거래된 등급이 달라 각 해의 최고 등급만 나란히 보여드립니다. 등급이 다르므로 증감률은 표시하지 않습니다.'}</div>`;
+      return '<div class="cmprow"><span><b class="num">' + r.s.slice(0,4) + '년</b> ' +
+        '<span class="y num">' + r.s.slice(5).replace('-','.') + '</span> ' +
+        '<span class="y">' + (g || '-') + '</span></span>' +
+        '<span><b class="num">' + (p ? won(p) : '-') + '</b> 원 ' + tail + '</span></div>';
+    }).join('');
+    el.innerHTML = '<div class="cmp"><div class="cmphead">' +
+      cur.slice(5).replace('-','월 ') + '일 무렵 · ' +
+      (common ? common + ' 기준' : '등급이 달라 단순 비교 불가') + '</div>' + body + '</div>' +
+      '<div class="sub" style="margin-top:9px">' + (common
+        ? '모든 해에 거래된 ' + common + ' 단가로 맞춰 비교했습니다. 옆 숫자는 그해 대비 오르내린 폭입니다.'
+        : '해마다 거래된 등급이 달라 각 해의 최고 등급만 나란히 보여드립니다. 등급이 다르므로 증감률은 표시하지 않습니다.') + '</div>';
+  });
 }
 
-async function chart(cur){
-  const year = cur.slice(0,4);
-  const list = dates.filter(d => d.startsWith(year)).sort();
-  const pts = [];
-  for(const d of list){
-    try{
-      const p = priceOf(allOf(await load(d)), '1등품');
-      if(p > 0) pts.push({d, v:p});
-    }catch(e){}
-  }
-  const el = document.getElementById('chartBox');
-  if(!el) return;
-  if(pts.length < 2){ el.innerHTML = '<div class="sub">그릴 자료가 아직 부족합니다.</div>'; return; }
-  const W=440, H=104, vs=pts.map(p=>p.v), mn=Math.min(...vs), mx=Math.max(...vs);
-  const X = i => i/(pts.length-1)*W, Y = v => H-(v-mn)/((mx-mn)||1)*H;
-  const line = pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(p.v).toFixed(1)}`).join(' ');
-  const idx = pts.findIndex(p=>p.d===cur);
-  el.innerHTML = `<svg viewBox="-4 -8 ${W+8} ${H+16}" preserveAspectRatio="none">
-    <path d="${line} L${W},${H+8} L0,${H+8} Z" fill="rgba(224,188,85,.10)"/>
-    <path d="${line}" fill="none" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>
-    ${idx>=0?`<circle cx="${X(idx)}" cy="${Y(pts[idx].v)}" r="5" fill="#0e1a15" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>`:''}
-  </svg>
-  <div class="axis num"><span>${pts[0].d.slice(5).replace('-','.')}</span>
-    <span>최저 ${won(mn)} · 최고 ${won(mx)}</span>
-    <span>${pts[pts.length-1].d.slice(5).replace('-','.')}</span></div>`;
+function chart(cur){
+  var year = cur.slice(0,4);
+  var list = dates.filter(function(d){ return d.slice(0,4) === year; }).sort();
+  Promise.all(list.map(function(d){
+    return load(d).then(function(x){ return {d: d, v: priceOf(allOf(x), '1등품')}; })
+                  .catch(function(){ return null; });
+  })).then(function(arr){
+    var pts = arr.filter(function(p){ return p && p.v > 0; });
+    var el = document.getElementById('chartBox');
+    if(!el) return;
+    if(pts.length < 2){ el.innerHTML = '<div class="sub">그릴 자료가 아직 부족합니다.</div>'; return; }
+    var W = 440, H = 104;
+    var vs = pts.map(function(p){ return p.v; });
+    var mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs);
+    var X = function(i){ return i / (pts.length - 1) * W; };
+    var Y = function(v){ return H - (v - mn) / ((mx - mn) || 1) * H; };
+    var line = pts.map(function(p, i){
+      return (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(p.v).toFixed(1);
+    }).join(' ');
+    var idx = -1;
+    for(var i=0;i<pts.length;i++) if(pts[i].d === cur) idx = i;
+    var dot = idx >= 0
+      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="5" fill="#0e1a15" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>'
+      : '';
+    el.innerHTML = '<svg viewBox="-4 -8 ' + (W+8) + ' ' + (H+16) + '" preserveAspectRatio="none">' +
+      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(224,188,85,.10)"/>' +
+      '<path d="' + line + '" fill="none" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>' +
+      dot + '</svg>' +
+      '<div class="axis num"><span>' + pts[0].d.slice(5).replace('-','.') + '</span>' +
+      '<span>최저 ' + won(mn) + ' · 최고 ' + won(mx) + '</span>' +
+      '<span>' + pts[pts.length-1].d.slice(5).replace('-','.') + '</span></div>';
+  });
 }
 
-async function season(cur){
-  const year = cur.slice(0,4);
-  const list = dates.filter(d => d.startsWith(year));
-  let best = 0, bestDay = '', totKg = 0, days = 0;
-  for(const d of list){
-    try{
-      const a = allOf(await load(d));
-      const t = sum(a);
-      if(t.kg > 0) days++;
-      totKg += t.kg;
-      const p = priceOf(a, '1등품');
-      if(p > best){ best = p; bestDay = d; }
-    }catch(e){}
-  }
-  const el = document.getElementById('seasonBox');
-  if(!el) return;
-  el.innerHTML = `<dl class="stats num" style="margin:12px 0 0">
-    <div><dt>1등품 최고가</dt><dd>${best?won(best):'-'}</dd></div>
-    <div><dt>누적 물량</dt><dd>${won(totKg)} kg</dd></div>
-    <div><dt>공판 일수</dt><dd>${days} 일</dd></div>
-  </dl>
-  ${best?`<div class="sub" style="margin-top:9px">${year}년 1등품 최고가는 ${bestDay.slice(5).replace('-','월 ')}일 ${won(best)}원이었습니다.</div>`:''}`;
+function season(cur){
+  var year = cur.slice(0,4);
+  var list = dates.filter(function(d){ return d.slice(0,4) === year; });
+  Promise.all(list.map(function(d){
+    return load(d).then(function(x){
+      var a = allOf(x);
+      return {d: d, kg: sum(a).kg, p: priceOf(a, '1등품')};
+    }).catch(function(){ return null; });
+  })).then(function(arr){
+    var best = 0, bestDay = '', totKg = 0, days = 0;
+    arr.forEach(function(r){
+      if(!r) return;
+      if(r.kg > 0) days++;
+      totKg += r.kg;
+      if(r.p > best){ best = r.p; bestDay = r.d; }
+    });
+    var el = document.getElementById('seasonBox');
+    if(!el) return;
+    el.innerHTML = '<dl class="stats num" style="margin:12px 0 0">' +
+      '<div><dt>1등품 최고가</dt><dd>' + (best ? won(best) : '-') + '</dd></div>' +
+      '<div><dt>누적 물량</dt><dd>' + won(totKg) + ' kg</dd></div>' +
+      '<div><dt>공판 일수</dt><dd>' + days + ' 일</dd></div></dl>' +
+      (best ? '<div class="sub" style="margin-top:9px">' + year + '년 1등품 최고가는 ' +
+        bestDay.slice(5).replace('-','월 ') + '일 ' + won(best) + '원이었습니다.</div>' : '');
+  });
 }
 
-async function render(d){
-  const main = document.getElementById('main');
+function render(d){
+  var main = document.getElementById('main');
   main.innerHTML = '<div class="empty">불러오는 중…</div>';
   document.getElementById('dateSel').value = d;
-  const i = dates.indexOf(d);
-  document.getElementById('prev').disabled = i >= dates.length-1;
+  var i = dates.indexOf(d);
+  document.getElementById('prev').disabled = i >= dates.length - 1;
   document.getElementById('next').disabled = i <= 0;
 
-  let data;
-  try{ data = await load(d); }
-  catch(e){ main.innerHTML = '<div class="empty">이 날은 공판 자료가 없습니다.</div>'; return; }
+  var prevPromise = (i < dates.length - 1)
+    ? load(dates[i+1]).then(function(x){ return allOf(x); }).catch(function(){ return null; })
+    : Promise.resolve(null);
 
-  const all = allOf(data);
-  const regions = data.regions.filter(r => r !== all && sum(r).kg > 0);
-  let prev = null;
-  if(i < dates.length-1){
-    try{ prev = allOf(await load(dates[i+1])); }catch(e){}
+  Promise.all([load(d), prevPromise]).then(function(res){
+    var data = res[0], prev = res[1];
+    var all = allOf(data);
+    var regions = data.regions.filter(function(r){ return r !== all && sum(r).kg > 0; });
+    var t = sum(all);
+    var kgs = GRADES.map(function(g){ return (all.grades[g] && all.grades[g].kg) || 0; });
+    var maxKg = Math.max.apply(null, kgs.concat([1]));
+    var bestName = topGrade(all);
+    var bestIdx = bestName ? GRADES.indexOf(bestName) : -1;
+    var bestPrice = bestName ? priceOf(all, bestName) : 0;
+    var md = d.slice(5).replace('-','월 ') + '일';
+
+    var grouped = {};
+    regions.forEach(function(r){
+      var z = zoneOf(r.name);
+      if(!grouped[z]) grouped[z] = [];
+      grouped[z].push(r);
+    });
+    var order = ZONES.map(function(z){ return z[0]; }).concat('기타')
+      .filter(function(z){ return grouped[z]; });
+
+    var gradeHtml = GRADES.map(function(g, k){
+      var v = all.grades[g];
+      if(!v) return '';
+      var pv = prev ? priceOf(prev, g) : 0;
+      var zero = !(v.price > 0);
+      return '<div class="grade ' + (k === bestIdx ? 'best' : '') + ' ' + (zero ? 'zero' : '') + '">' +
+        '<div class="r1"><span class="nm">' + g + '</span><span class="pr num">' +
+        (zero ? '<span style="font-size:14px;font-weight:400;color:#708c7c">거래 없음</span>'
+              : won(v.price) + '<span class="unit"> 원</span>') + '</span></div>' +
+        '<div class="r2"><span class="bar"><i style="width:' + (v.kg / maxKg * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="kg num">' + v.kg.toFixed(1) + ' kg</span>' +
+        (zero ? '<span class="chg flat"></span>' : delta(v.price, pv, 'chg')) + '</div></div>';
+    }).join('');
+
+    var siteHtml = order.map(function(z){
+      var arr = grouped[z].slice().sort(function(a, b){
+        var ga = topGrade(a), gb = topGrade(b);
+        var ia = ga ? GRADES.indexOf(ga) : 99, ib = gb ? GRADES.indexOf(gb) : 99;
+        if(ia !== ib) return ia - ib;
+        return (gb ? priceOf(b, gb) : 0) - (ga ? priceOf(a, ga) : 0);
+      });
+      return '<div class="zone">' + z + '</div>' + arr.map(function(r){
+        var op = opened[r.name];
+        var rt = sum(r);
+        var top = topGrade(r);
+        var detail = '';
+        if(op){
+          detail = '<div class="detail">' + GRADES.map(function(g){
+            var v = r.grades[g];
+            if(!v || !(v.kg > 0)) return '';
+            return '<div class="drow"><span>' + g + '</span><span><b class="num">' +
+              won(v.price) + '</b> 원<span class="k num">' + v.kg.toFixed(1) + ' kg</span></span></div>';
+          }).join('') + '</div>';
+        }
+        return '<div class="site ' + (op ? 'open' : '') + '">' +
+          '<button class="sitebtn" data-site="' + r.name + '">' +
+          '<span class="nm">' + r.name + '</span>' +
+          '<span class="val num"><b>' + (top ? won(priceOf(r, top)) : '-') + '</b>' +
+          '<small>' + (top || '') + ' · ' + rt.kg.toFixed(1) + ' kg</small></span>' +
+          '<span class="caret">' + (op ? '▲' : '▼') + '</span></button>' + detail + '</div>';
+      }).join('');
+    }).join('');
+
+    main.innerHTML =
+      '<p class="lead">' + md + ' 공판에서 전국 <b>' + regions.length + '곳</b>이 열렸습니다. ' +
+      (bestName ? '가장 높은 등급은 <b>' + bestName + '</b>으로 <span class="big num">' +
+        won(bestPrice) + '</span>원이었습니다.' : '거래된 물량이 없습니다.') + '</p>' +
+      '<dl class="stats num">' +
+      '<div><dt>총 물량</dt><dd>' + t.kg.toFixed(1) + ' kg</dd></div>' +
+      '<div><dt>총 금액</dt><dd>' + won(t.amt / 10000) + ' 만원</dd></div>' +
+      '<div><dt>공판장</dt><dd>' + regions.length + ' 곳</dd></div></dl>' +
+      '<section class="sec"><h2>등급별 전국 낙찰단가</h2>' +
+      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
+      '<div style="margin-top:14px">' + gradeHtml + '</div></section>' +
+      '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
+      '<div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>' +
+      '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>' +
+      '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
+      '<div class="sub">지역권으로 묶었습니다. 눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
+      '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
+      '<div id="seasonBox"><div class="sub" style="margin-top:12px">집계 중…</div></div></section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 1등품 단가 추이</h2>' +
+      '<div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div></section>';
+
+    compare(d);
+    season(d);
+    chart(d);
+  }).catch(function(){
+    main.innerHTML = '<div class="empty">이 날은 공판 자료가 없습니다.</div>';
+  });
+}
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('.sitebtn') : null;
+  if(b){
+    var k = b.getAttribute('data-site');
+    if(opened[k]) delete opened[k]; else opened[k] = true;
+    render(document.getElementById('dateSel').value);
   }
+});
 
-  const t = sum(all);
-  const maxKg = Math.max(...GRADES.map(g => (all.grades[g]||{kg:0}).kg), 1);
-  const bestName = topGrade(all);
-  const bestIdx = bestName ? GRADES.indexOf(bestName) : -1;
-  const bestPrice = bestName ? priceOf(all, bestName) : 0;
-  const md = d.slice(5).replace('-','월 ') + '일';
-
-  const grouped = {};
-  for(const r of regions){
-    const z = zoneOf(r.name);
-    (grouped[z] = grouped[z] || []).push(r);
+fetch('data/index.json').then(function(res){ return res.json(); }).then(function(idx){
+  dates = idx.dates;
+  var latest = dates[0];
+  var gap = Math.floor((Date.now() - new Date(latest)) / 86400000);
+  if(gap > 20){
+    document.getElementById('notice').innerHTML =
+      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 지금 보시는 자료는 가장 최근 공판일인 <b>' +
+      latest.replace(/-/g, '. ') + '</b> 기준입니다. 공판이 열리면 매일 저녁 자동으로 갱신됩니다.</div>';
   }
-  const order = ZONES.map(z => z[0]).concat('기타').filter(z => grouped[z]);
-
-  main.innerHTML = `
-  <p class="lead">${md} 공판에서 전국 <b>${regions.length}곳</b>이 열렸습니다.
-  ${bestName?`가장 높은 등급은 <b>${bestName}</b>으로 <span class="big num">${won(bestPrice)}</span>원이었습니다.`:'거래된 물량이 없습니다.'}</p>
-
-  <dl class="stats num">
-    <div><dt>총 물량</dt><dd>${t.kg.toFixed(1)} kg</dd></div>
-    <div><dt>총 금액</dt><dd>${won(t.amt/1e4)} 만원</dd></div>
-    <div><dt>공판장</dt><dd>${regions.length} 곳</dd></div>
-  </dl>
-
-  <section class="sec">
-    <h2>등급별 전국 낙찰단가</h2>
-    <div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>
-    <div style="margin-top:14px">
-    ${GRADES.map((g,k) => {
-      const v = all.grades[g]; if(!v) return '';
-      const pv = prev && priceOf(prev, g);
-      const zero = !(v.price > 0);
-      return `<div class="grade ${k===bestIdx?'best':''} ${zero?'zero':''}">
-        <div class="r1"><span class="nm">${g}</span>
-          <span class="pr num">${zero?'<span style="font-size:14px;font-weight:400;color:var(--text3)">거래 없음</span>':won(v.price)+'<span class="unit"> 원</span>'}</span></div>
-        <div class="r2">
-          <span class="bar"><i style="width:${(v.kg/maxKg*100).toFixed(1)}%"></i></span>
-          <span class="kg num">${v.kg.toFixed(1)} kg</span>
-          ${zero?'<span class="chg flat"></span>':delta(v.price, pv, 'chg')}
-        </div>
-      </div>`;
-    }).join('')}
-    </div>
-  </section>
-
-  <section class="sec">
-    <h2>작년 이맘때와 비교</h2>
-    <div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>
-    <div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div>
-  </section>
-
-  <section class="sec">
-    <h2>공판장별
+  var sel = document.getElementById('dateSel');
+  sel.innerHTML = dates.map(function(d){
+    return '<option value="' + d + '">' + d.replace(/-/g, '. ') + '</option>';
+  }).join('');
+  sel.onchange = function(){ opened = {}; render(sel.value); };
+  document.getElementById('prev').onclick = function(){
+    var i = dates.indexOf(sel.value);
+    if(i < dates.length - 1){ opened = {}; render(dates[i+1]); }
+  };
+  document.getElementById('next').onclick = function(){
+    var i = dates.indexOf(sel.value);
+    if(i > 0){ opened = {}; render(dates[i-1]); }
+  };
+  render(dates[0]);
+}).catch(function(){
+  document.getElementById('main').innerHTML = '<div class="empty">자료를 불러오지 못했습니다.</div>';
+});
+</script>
+</body>
+</html>
