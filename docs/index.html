@@ -5,156 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>오늘의 송이 시세 | 전국 산지 공판가</title>
 <meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 정리합니다. 연도별 최고가와 최저가, 물량이 쏟아지는 시기까지 한눈에 볼 수 있습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --board:#0e1a15; --card:#16281f; --rule:#22392e; --line:#2e4c3c;
-  --text:#eef3ec; --text2:#a9c0b1; --text3:#708c7c;
-  --gold:#e0bc55; --moss:#5f8f68; --up:#f2655a; --down:#5aa8e0;
+  --paper:#F7F3EB; --card:#FFFDF8; --rule:#E7DFD0; --line:#D9CEB9;
+  --ink:#3D2A1B; --ink2:#6B5947; --ink3:#9A8A76;
+  --brown:#7A4A28; --brown2:#A58154; --brown3:#C9B491;
+  --up:#A8442F; --down:#4A6F8A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--board);color:var(--text);line-height:1.55;
-  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;font-size:16px}
-.num{font-variant-numeric:tabular-nums}
-.wrap{max-width:500px;margin:0 auto;min-height:100vh}
+body{background:var(--paper);color:var(--ink);line-height:1.6;
+  font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-weight:400;-webkit-font-smoothing:antialiased;font-size:16px}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.wrap{max-width:520px;margin:0 auto;min-height:100vh}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
-.top{padding:20px 18px 18px;background:linear-gradient(180deg,#1a3026 0,#0e1a15 100%)}
-.brand{font-size:20px;font-weight:800;letter-spacing:-.02em}
-.brand small{display:block;font-size:12.5px;color:var(--text3);font-weight:400;margin-top:3px;letter-spacing:0}
-.datebar{display:flex;align-items:center;margin-top:16px;
-  background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:12px;padding:5px}
-.datebar select{background:none;border:none;color:var(--text);font-size:17px;
-  font-weight:700;text-align:center;flex:1;padding:6px 0}
-.datebar select option{background:#16281f;color:var(--text)}
-.nav{width:40px;height:38px;border-radius:9px;color:var(--text2);font-size:19px}
-.nav:disabled{color:#3a5347;cursor:default}
-.notice{margin:14px 18px 0;padding:11px 13px;border-radius:10px;
-  background:rgba(224,188,85,.10);border:1px solid rgba(224,188,85,.28);
-  font-size:13px;color:#f0dda4;line-height:1.6}
-.lead{padding:18px;font-size:15.5px;color:var(--text2);line-height:1.7}
-.lead b{color:var(--text);font-weight:700}
-.lead .big{color:var(--gold);font-size:19px;font-weight:800}
-.stats{display:flex;margin:0 18px;background:var(--card);
-  border:1px solid var(--rule);border-radius:12px;padding:14px 4px}
+button:focus-visible{outline:1.5px solid var(--brown);outline-offset:3px;border-radius:4px}
+
+.top{padding:34px 22px 26px}
+.brand{font-size:23px;font-weight:600;letter-spacing:-.035em;color:var(--ink)}
+.brand small{display:block;font-size:12.5px;color:var(--ink3);font-weight:400;
+  margin-top:6px;letter-spacing:.01em}
+.datebar{display:flex;align-items:center;margin-top:22px;
+  background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:4px}
+.datebar select{background:none;border:none;color:var(--ink);font-size:16px;
+  font-weight:500;text-align:center;flex:1;padding:8px 0;cursor:pointer}
+.nav{width:38px;height:36px;border-radius:7px;color:var(--ink3);font-size:18px}
+.nav:hover:not(:disabled){background:var(--paper);color:var(--brown)}
+.nav:disabled{color:#D2C7B4;cursor:default}
+
+.notice{margin:0 22px;padding:13px 15px;border-radius:8px;
+  background:#F2E9D8;border:1px solid #E0D1B4;
+  font-size:13px;color:#6E5326;line-height:1.65}
+
+.lead{padding:26px 22px 20px;font-size:16px;color:var(--ink2);line-height:1.8}
+.lead b{color:var(--ink);font-weight:600}
+.lead .big{color:var(--brown);font-size:20px;font-weight:600}
+
+.stats{display:flex;margin:0 22px;padding:20px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .stats div{flex:1;text-align:center}
-.stats div+div{border-left:1px solid var(--rule)}
-.stats dt{font-size:11.5px;color:var(--text3)}
-.stats dd{font-size:17px;font-weight:700;margin-top:2px}
-.sec{padding:26px 18px 22px}
-.sec+.sec{border-top:1px solid var(--rule)}
-.sec h2{font-size:17px;font-weight:800;letter-spacing:-.01em}
-.sec .sub{font-size:12.5px;color:var(--text3);margin-top:4px;line-height:1.65}
-.grade{padding:13px 0;border-bottom:1px solid var(--rule)}
-.grade:last-child{border-bottom:none;padding-bottom:0}
-.grade.zero{opacity:.3}
+.stats dt{font-size:11.5px;color:var(--ink3);letter-spacing:.02em}
+.stats dd{font-size:19px;font-weight:600;margin-top:4px;color:var(--ink)}
+
+.sec{padding:36px 22px 8px}
+.sec h2{font-size:17px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
+.sec .sub{font-size:12px;color:var(--ink3);margin-top:6px;line-height:1.7}
+
+.grade{padding:16px 0}
+.grade+.grade{border-top:1px solid var(--rule)}
 .grade .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.grade .nm{font-size:15.5px;font-weight:600}
-.grade .pr{font-size:19px;font-weight:800}
-.grade.best .pr{color:var(--gold)}
-.grade .unit{font-size:12.5px;color:var(--text3);font-weight:400}
-.grade .r2{display:flex;align-items:center;gap:11px;margin-top:8px}
-.bar{flex:1;height:6px;background:#1c332a;border-radius:4px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--moss);border-radius:4px}
-.grade.best .bar i{background:var(--gold)}
-.kg{font-size:12.5px;color:var(--text3);min-width:76px;text-align:right}
-.chg{font-size:12.5px;font-weight:700;min-width:52px;text-align:right}
+.grade .nm{font-size:15px;font-weight:500;color:var(--ink2)}
+.grade .pr{font-size:21px;font-weight:600;color:var(--ink)}
+.grade.best .pr{color:var(--brown)}
+.grade .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.grade .none{font-size:13.5px;font-weight:400;color:#B6A893}
+.grade .r2{display:flex;align-items:center;gap:12px;margin-top:10px}
+.bar{flex:1;height:4px;background:#EDE5D6;border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brown3);border-radius:2px}
+.grade.best .bar i{background:var(--brown2)}
+.kg{font-size:12px;color:var(--ink3);min-width:74px;text-align:right}
+.chg{font-size:12px;font-weight:500;min-width:52px;text-align:right}
 .up{color:var(--up)}
 .down{color:var(--down)}
-.flat{color:var(--text3)}
-.chg em{font-style:normal;color:var(--text3);font-weight:400;margin-left:3px}
-.cmp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 16px;margin-top:12px}
-.cmphead{font-size:13px;color:var(--text3);padding:10px 0 4px}
-.crow{padding:12px 0;border-top:1px solid var(--rule)}
-.crow.zero{opacity:.34}
+.flat{color:var(--ink3)}
+.chg em{font-style:normal;color:var(--ink3);font-weight:400;margin-left:3px}
+
+.cmp{margin-top:18px}
+.cmphead{font-size:12px;color:var(--ink3);padding-bottom:14px}
+.crow{padding:15px 0;border-top:1px solid var(--rule)}
 .crow .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.crow .nm{font-size:15px;font-weight:600}
-.crow .now{font-size:19px;font-weight:800}
-.crow .unit{font-size:12.5px;color:var(--text3);font-weight:400}
+.crow .nm{font-size:15px;font-weight:500;color:var(--ink2)}
+.crow .now{font-size:21px;font-weight:600;color:var(--ink)}
+.crow .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.crow .none{font-size:13.5px;font-weight:400;color:#B6A893}
 .crow .r2{display:flex;align-items:baseline;justify-content:space-between;
-  gap:10px;margin-top:5px;font-size:13.5px;color:var(--text3)}
-.crow .r2 b{color:var(--text2);font-weight:600}
-.crow .pct{font-size:14.5px;font-weight:800}
-.chart svg{display:block;width:100%;height:120px;margin-top:14px}
-.axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text3);margin-top:7px}
-.zone{font-size:12.5px;color:var(--text3);font-weight:700;
-  margin:18px 0 2px;padding-bottom:5px;border-bottom:1px solid var(--line)}
-.site{border-bottom:1px solid var(--rule)}
-.sitebtn{display:flex;width:100%;align-items:center;gap:12px;padding:14px 0;text-align:left}
-.sitebtn .nm{flex:1;font-size:15.5px;font-weight:600}
-.sitebtn .val{text-align:right;line-height:1.35}
-.sitebtn .val b{font-size:16.5px;font-weight:700;display:block}
-.sitebtn .val small{font-size:12px;color:var(--text3)}
-.caret{width:26px;height:26px;flex:none;border-radius:50%;
-  background:rgba(255,255,255,.06);border:1px solid var(--line);
-  color:var(--text2);font-size:11px;display:flex;align-items:center;justify-content:center}
-.site.open .caret{background:rgba(224,188,85,.16);border-color:rgba(224,188,85,.4);color:var(--gold)}
-.detail{padding:2px 0 14px}
-.drow{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--text2)}
-.drow b{color:var(--text);font-weight:700}
-.drow .k{color:var(--text3);font-size:12.5px;margin-left:9px}
-.empty{padding:56px 24px;text-align:center;color:var(--text2);font-size:15px}
-.foot{padding:22px 18px 46px;font-size:12px;color:var(--text3);line-height:1.9;border-top:1px solid var(--rule)}
-.foot a{color:var(--text2)}
-.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.gtab{font-size:12.5px;padding:7px 11px;border-radius:999px;
-  border:1px solid var(--rule);color:var(--text3)}
-.gtab.on{background:rgba(224,188,85,.14);border-color:rgba(224,188,85,.45);color:var(--gold);font-weight:700}
-.verdict{background:var(--card);border:1px solid var(--rule);border-radius:12px;
-  padding:15px;margin-top:14px;font-size:15px;line-height:1.8;color:var(--text2)}
-.verdict b{color:var(--text);font-weight:700}
-.verdict .hi{color:var(--up);font-weight:700}
-.verdict .lo{color:var(--down);font-weight:700}
-.verdict .vol{color:var(--moss);font-weight:700}
-.verdict .pick{color:var(--gold);font-weight:800}
-.verdict hr{border:none;border-top:1px solid var(--rule);margin:11px 0}
-.subhead{margin-top:22px;color:#a9c0b1;font-size:13px;font-weight:700}
-.ybox{border-bottom:1px solid var(--rule);padding:13px 0}
-.ybox:last-child{border-bottom:none}
-.ybox .yy{font-weight:800;font-size:15.5px;margin-bottom:7px}
-.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:4px 0}
-.yline .lbl{color:var(--text3);flex:none}
+  gap:10px;margin-top:6px;font-size:13px;color:var(--ink3)}
+.crow .r2 b{color:var(--ink2);font-weight:500}
+.crow .pct{font-size:14px;font-weight:600}
+
+.chart svg{display:block;width:100%;height:130px;margin-top:18px}
+.axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3);margin-top:10px}
+
+.zone{font-size:11.5px;color:var(--ink3);font-weight:500;letter-spacing:.06em;
+  margin:26px 0 4px}
+.site+.site{border-top:1px solid var(--rule)}
+.sitebtn{display:flex;width:100%;align-items:center;gap:14px;padding:16px 0;text-align:left}
+.sitebtn .nm{flex:1;font-size:15px;font-weight:500;color:var(--ink)}
+.sitebtn .val{text-align:right;line-height:1.45}
+.sitebtn .val b{font-size:17px;font-weight:600;display:block;color:var(--ink)}
+.sitebtn .val small{font-size:11.5px;color:var(--ink3)}
+.caret{width:24px;height:24px;flex:none;border-radius:50%;
+  border:1px solid var(--line);color:var(--ink3);font-size:10px;
+  display:flex;align-items:center;justify-content:center}
+.site.open .caret{background:var(--brown);border-color:var(--brown);color:#FFFDF8}
+.detail{padding:2px 0 16px}
+.drow{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;color:var(--ink2)}
+.drow b{color:var(--ink);font-weight:600}
+.drow .k{color:var(--ink3);font-size:12px;margin-left:10px}
+
+.empty{padding:60px 24px;text-align:center;color:var(--ink3);font-size:15px}
+.foot{margin:40px 22px 0;padding:24px 0 54px;font-size:11.5px;color:var(--ink3);
+  line-height:2;border-top:1px solid var(--rule)}
+.foot a{color:var(--brown2)}
+
+.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.gtab{font-size:12.5px;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--rule);color:var(--ink3);background:var(--card)}
+.gtab:hover{border-color:var(--line);color:var(--ink2)}
+.gtab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF8;font-weight:500}
+.verdict{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+  padding:20px;margin-top:18px;font-size:15px;line-height:1.9;color:var(--ink2)}
+.verdict b{color:var(--ink);font-weight:600}
+.verdict .hi{color:var(--up);font-weight:600}
+.verdict .lo{color:var(--down);font-weight:600}
+.verdict .vol{color:var(--brown2);font-weight:600}
+.verdict .pick{color:var(--brown);font-weight:600;
+  border-bottom:2px solid var(--brown3);padding-bottom:1px}
+.verdict hr{border:none;border-top:1px solid var(--rule);margin:15px 0}
+
+.subhead{margin-top:32px;margin-bottom:4px;color:var(--ink3);
+  font-size:11.5px;font-weight:500;letter-spacing:.06em}
+.ybox{padding:16px 0}
+.ybox+.ybox{border-top:1px solid var(--rule)}
+.ybox .yy{font-weight:600;font-size:15px;margin-bottom:10px;color:var(--ink)}
+.yline{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0}
+.yline .lbl{color:var(--ink3);flex:none}
 .yline .v{text-align:right}
-.yline .hi{color:var(--up);font-weight:700}
-.yline .lo{color:var(--down);font-weight:700}
-.yline .pk{color:var(--gold);font-weight:700}
-.yline .vl{color:var(--moss);font-weight:700}
-.yline .who{color:var(--text3);font-size:12px;display:block}
-.srow{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px}
-.srow .sl{width:62px;flex:none;color:var(--text2)}
-.srow .sb{flex:1;height:16px;background:#1c332a;border-radius:4px;overflow:hidden}
-.srow .sb i{display:block;height:100%;background:var(--moss);border-radius:4px}
-.srow.max .sb i{background:var(--up)}
-.srow.min .sb i{background:var(--down)}
-.srow.vmax .sb i{background:var(--gold)}
-.srow.pick .sl{color:var(--gold);font-weight:700}
-.srow .sv{width:82px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
+.yline .hi{color:var(--up);font-weight:600}
+.yline .lo{color:var(--down);font-weight:600}
+.yline .pk{color:var(--brown);font-weight:600}
+.yline .vl{color:var(--brown2);font-weight:600}
+.yline .who{color:var(--ink3);font-size:11.5px;display:block;margin-top:1px}
+
+.srow{display:flex;align-items:center;gap:11px;padding:7px 0;font-size:13px}
+.srow .sl{width:64px;flex:none;color:var(--ink2)}
+.srow .sb{flex:1;height:14px;background:#EDE5D6;border-radius:3px;overflow:hidden}
+.srow .sb i{display:block;height:100%;background:var(--brown3);border-radius:3px}
+.srow.max .sb i{background:var(--brown)}
+.srow.min .sb i{background:#E3D6BF}
+.srow.vmax .sb i{background:var(--brown2)}
+.srow.pick .sl{color:var(--brown);font-weight:600}
+.srow .sv{width:80px;flex:none;text-align:right;color:var(--ink3);font-size:12px}
 
 @media (min-width: 900px){
-  .wrap{max-width:1180px;padding:0 24px 40px}
-  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
-    padding:30px 26px 24px;margin:0 -24px;background:linear-gradient(180deg,#1a3026 0,#0e1a15 100%)}
-  .brand{font-size:26px}
-  .brand small{font-size:13.5px;margin-top:5px}
-  .datebar{margin-top:0;width:330px;flex:none}
-  .notice{margin:20px 0 0;font-size:13.5px;padding:13px 16px}
-  .lead{padding:24px 2px 18px;font-size:17px}
-  .lead .big{font-size:21px}
-  .stats{margin:0;padding:18px 8px}
-  .stats dt{font-size:12.5px}
-  .stats dd{font-size:20px}
-  #cols{display:flex;gap:30px;align-items:flex-start;margin-top:8px}
+  .wrap{max-width:1160px;padding:0 32px 40px}
+  .top{padding:44px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .brand{font-size:30px}
+  .brand small{font-size:13.5px;margin-top:8px}
+  .datebar{margin-top:0;width:320px;flex:none}
+  .notice{margin:0}
+  .lead{padding:30px 0 22px;font-size:18px}
+  .lead .big{font-size:22px}
+  .stats{margin:0;padding:24px 0}
+  .stats dd{font-size:22px}
+  #cols{display:flex;gap:56px;align-items:flex-start;margin-top:6px}
   #colA{flex:1 1 0;min-width:0}
   #colB{flex:1 1 0;min-width:0}
-  .sec{padding:24px 0 20px}
-  .sec+.sec{border-top:1px solid var(--rule)}
-  .sec h2{font-size:18px}
-  .foot{padding:24px 0 40px;font-size:12.5px}
-  .yline{font-size:14px}
-  .srow{font-size:13.5px;padding:7px 0}
+  .sec{padding:36px 0 8px}
+  .sec h2{font-size:19px}
+  .foot{margin:48px 0 0;padding:26px 0 48px}
+  .yline{font-size:13.5px}
+  .srow{font-size:13.5px;padding:8px 0}
   .srow .sl{width:70px}
   .srow .sv{width:92px}
-  .chart svg{height:150px}
+  .chart svg{height:160px}
 }
 </style>
 </head>
@@ -295,7 +312,7 @@ function renderCheap(){
     });
     var years = Object.keys(byYear).sort().reverse();
     if(!years.length){
-      box.innerHTML = '<div class="sub" style="margin-top:14px">이 등급은 자료가 부족합니다.</div>';
+      box.innerHTML = '<div class="sub" style="margin-top:16px">이 등급은 자료가 부족합니다.</div>';
       return;
     }
 
@@ -360,7 +377,6 @@ function renderCheap(){
       if(vMax && vAvg[i] === vMax) volIdx = i;
     }
 
-    /* 사기 좋은 때 고르기: 값이 중간값 이하이면서 물량이 넉넉한 시기를 이어붙인다 */
     var sortedP = pLive.slice().sort(function(a,b){ return a - b; });
     var midP = sortedP[Math.floor(sortedP.length / 2)];
     var volCut = vMax * 0.3;
@@ -368,7 +384,6 @@ function renderCheap(){
     for(var i=0;i<SPANS.length;i++){
       if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP) picks.push(i);
     }
-    // 이어지는 구간 중 가장 긴 것만 남긴다
     var runs = [], cur = [];
     for(var i=0;i<SPANS.length;i++){
       if(picks.indexOf(i) >= 0){ cur.push(i); }
@@ -420,16 +435,15 @@ function renderCheap(){
 
     box.innerHTML = verdict +
       '<div class="subhead">연도별 기록</div>' + yearHtml +
-      '<div class="sub" style="margin-top:8px">전국 평균은 그날 전국 거래금액을 물량으로 나눈 값입니다. ' +
+      '<div class="sub" style="margin-top:10px">전국 평균은 그날 전국 거래금액을 물량으로 나눈 값입니다. ' +
       '최고·최저 낙찰은 한 공판장에서 나온 값이며, 최저는 ' + MINKG + 'kg 이상 거래된 곳만 셉니다.</div>' +
-      '<div class="subhead">시기별 평균 단가 (' + years.length + '개 시즌)</div>' +
-      '<div style="margin-top:8px">' + priceRows + '</div>' +
-      '<div class="sub" style="margin-top:9px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다. ' +
-      '금색 글씨로 표시된 시기가 사기 좋은 때입니다.</div>' +
+      '<div class="subhead">시기별 평균 단가 · ' + years.length + '개 시즌</div>' +
+      '<div style="margin-top:10px">' + priceRows + '</div>' +
+      '<div class="sub" style="margin-top:12px">막대가 진할수록 비싼 시기입니다. ' +
+      '밑줄 친 시기가 사기 좋은 때입니다.</div>' +
       (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
-        '<div style="margin-top:8px">' + volRows + '</div>' +
-        '<div class="sub" style="margin-top:9px">금색 막대가 물량이 가장 많이 나오는 시기입니다. ' +
-        '물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
+        '<div style="margin-top:10px">' + volRows + '</div>' +
+        '<div class="sub" style="margin-top:12px">물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
   });
 }
 
@@ -439,7 +453,7 @@ function compare(cur){
   var year = Number(cur.slice(0,4));
   var last = nearestInYear(cur, year - 1);
   if(!last){
-    el.innerHTML = '<div class="sub" style="margin-top:12px">작년 같은 시기 자료가 아직 없습니다.</div>';
+    el.innerHTML = '<div class="sub" style="margin-top:14px">작년 같은 시기 자료가 아직 없습니다.</div>';
     return;
   }
   Promise.all([load(cur), load(last)]).then(function(res){
@@ -447,8 +461,8 @@ function compare(cur){
     var rows = GRADES.map(function(g){
       var a = priceOf(now, g), b = priceOf(old, g);
       if(!(a > 0) && !(b > 0)){
-        return '<div class="crow zero"><div class="r1"><span class="nm">' + g + '</span>' +
-          '<span class="now" style="font-size:14px;font-weight:400;color:#708c7c">양쪽 다 거래 없음</span></div></div>';
+        return '<div class="crow"><div class="r1"><span class="nm" style="color:#B6A893">' + g + '</span>' +
+          '<span class="none">양쪽 다 거래 없음</span></div></div>';
       }
       var pctHtml = '';
       if(a > 0 && b > 0){
@@ -456,21 +470,20 @@ function compare(cur){
         var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
         pctHtml = '<span class="pct ' + dir + '">' + (pct > 0 ? '+' : '') + pct + '%</span>';
       } else {
-        pctHtml = '<span class="pct flat" style="font-size:12.5px;font-weight:400">비교 불가</span>';
+        pctHtml = '<span class="pct flat" style="font-size:12px;font-weight:400">비교 불가</span>';
       }
       return '<div class="crow"><div class="r1"><span class="nm">' + g + '</span>' +
         '<span class="now num">' + (a > 0 ? won(a) + '<span class="unit"> 원</span>'
-          : '<span style="font-size:14px;font-weight:400;color:#708c7c">거래 없음</span>') + '</span></div>' +
+          : '<span class="none">거래 없음</span>') + '</span></div>' +
         '<div class="r2"><span>작년 ' + (b > 0 ? '<b class="num">' + won(b) + '원</b>' : '거래 없음') + '</span>' +
         pctHtml + '</div></div>';
     }).join('');
 
     el.innerHTML = '<div class="cmp"><div class="cmphead">' +
       mdText(cur) + ' · 작년 같은 시기는 ' + mdText(last) + ' 공판</div>' + rows + '</div>' +
-      '<div class="sub" style="margin-top:9px">큰 숫자가 이 날, 아래가 작년 같은 무렵입니다. ' +
-      '오른쪽 비율은 작년 대비 오르내린 폭입니다.</div>';
+      '<div class="sub" style="margin-top:12px">큰 숫자가 이 날, 아래가 작년 같은 무렵입니다.</div>';
   }).catch(function(){
-    el.innerHTML = '<div class="sub" style="margin-top:12px">비교 자료를 불러오지 못했습니다.</div>';
+    el.innerHTML = '<div class="sub" style="margin-top:14px">비교 자료를 불러오지 못했습니다.</div>';
   });
 }
 
@@ -485,7 +498,7 @@ function chart(cur){
     var el = document.getElementById('chartBox');
     if(!el) return;
     if(pts.length < 2){ el.innerHTML = '<div class="sub">그릴 자료가 아직 부족합니다.</div>'; return; }
-    var W = 440, H = 104;
+    var W = 440, H = 110;
     var vs = pts.map(function(p){ return p.v; });
     var mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs);
     var X = function(i){ return i / (pts.length - 1) * W; };
@@ -496,11 +509,11 @@ function chart(cur){
     var idx = -1;
     for(var i=0;i<pts.length;i++) if(pts[i].d === cur) idx = i;
     var dot = idx >= 0
-      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="5" fill="#0e1a15" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>'
+      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="4.5" fill="#F7F3EB" stroke="#7A4A28" stroke-width="2" vector-effect="non-scaling-stroke"/>'
       : '';
     el.innerHTML = '<svg viewBox="-4 -8 ' + (W+8) + ' ' + (H+16) + '" preserveAspectRatio="none">' +
-      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(224,188,85,.10)"/>' +
-      '<path d="' + line + '" fill="none" stroke="#e0bc55" stroke-width="2.2" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(165,129,84,.11)"/>' +
+      '<path d="' + line + '" fill="none" stroke="#7A4A28" stroke-width="1.8" vector-effect="non-scaling-stroke"/>' +
       dot + '</svg>' +
       '<div class="axis num"><span>' + pts[0].d.slice(5).replace('-','.') + '</span>' +
       '<span>최저 ' + won(mn) + ' · 최고 ' + won(mx) + '</span>' +
@@ -526,11 +539,11 @@ function season(cur){
     });
     var el = document.getElementById('seasonBox');
     if(!el) return;
-    el.innerHTML = '<dl class="stats num" style="margin:12px 0 0">' +
+    el.innerHTML = '<dl class="stats num" style="margin:16px 0 0">' +
       '<div><dt>1등품 최고가</dt><dd>' + (best ? won(best) : '-') + '</dd></div>' +
       '<div><dt>누적 물량</dt><dd>' + won(totKg) + ' kg</dd></div>' +
       '<div><dt>공판 일수</dt><dd>' + days + ' 일</dd></div></dl>' +
-      (best ? '<div class="sub" style="margin-top:9px">' + year + '년 1등품 최고가는 ' +
+      (best ? '<div class="sub" style="margin-top:12px">' + year + '년 1등품 최고가는 ' +
         bestDay.slice(5).replace('-','월 ') + '일 ' + won(best) + '원이었습니다.</div>' : '');
   });
 }
@@ -573,10 +586,11 @@ function render(d){
       if(!v) return '';
       var pv = prev ? priceOf(prev, g) : 0;
       var zero = !(v.price > 0);
-      return '<div class="grade ' + (k === bestIdx ? 'best' : '') + ' ' + (zero ? 'zero' : '') + '">' +
-        '<div class="r1"><span class="nm">' + g + '</span><span class="pr num">' +
-        (zero ? '<span style="font-size:14px;font-weight:400;color:#708c7c">거래 없음</span>'
-              : won(v.price) + '<span class="unit"> 원</span>') + '</span></div>' +
+      return '<div class="grade ' + (k === bestIdx ? 'best' : '') + '">' +
+        '<div class="r1"><span class="nm"' + (zero ? ' style="color:#B6A893"' : '') + '>' + g + '</span>' +
+        '<span class="pr num">' +
+        (zero ? '<span class="none">거래 없음</span>' : won(v.price) + '<span class="unit"> 원</span>') +
+        '</span></div>' +
         '<div class="r2"><span class="bar"><i style="width:' + (v.kg / maxKg * 100).toFixed(1) + '%"></i></span>' +
         '<span class="kg num">' + v.kg.toFixed(1) + ' kg</span>' +
         (zero ? '<span class="chg flat"></span>' : delta(v.price, pv, 'chg')) + '</div></div>';
@@ -619,22 +633,22 @@ function render(d){
 
     var colA =
       '<section class="sec"><h2>등급별 전국 낙찰단가</h2>' +
-      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다.<br>막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
-      '<div style="margin-top:14px">' + gradeHtml + '</div></section>' +
+      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다. 막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
+      '<div style="margin-top:18px">' + gradeHtml + '</div></section>' +
       '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
-      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다.<br>눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
+      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다. 눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
       '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
       '<div class="sub">등급별로 작년 같은 무렵과 나란히 놓았습니다.</div>' +
-      '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>';
+      '<div id="cmpBox"><div class="sub" style="margin-top:14px">불러오는 중…</div></div></section>';
 
     var colB =
       '<section class="sec"><h2>언제가 싸고 언제가 비쌀까</h2>' +
       '<div class="sub">지난 시즌들을 모아 본 시기별 흐름입니다. 등급을 눌러 바꿔 보세요.</div>' +
       '<div class="gtabs" id="gtabs">' + tabs + '</div>' +
-      '<div id="cheapBox"><div class="sub" style="margin-top:14px">집계 중…</div></div></section>' +
+      '<div id="cheapBox"><div class="sub" style="margin-top:16px">집계 중…</div></div></section>' +
       '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
       '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
-      '<div id="seasonBox"><div class="sub" style="margin-top:12px">집계 중…</div></div></section>' +
+      '<div id="seasonBox"><div class="sub" style="margin-top:14px">집계 중…</div></div></section>' +
       '<section class="sec"><h2>' + d.slice(0,4) + '년 1등품 단가 추이</h2>' +
       '<div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div></section>';
 
@@ -667,7 +681,7 @@ document.addEventListener('click', function(e){
       if(tabs[i].getAttribute('data-grade') === pickGrade) tabs[i].className = 'gtab on';
       else tabs[i].className = 'gtab';
     }
-    document.getElementById('cheapBox').innerHTML = '<div class="sub" style="margin-top:14px">집계 중…</div>';
+    document.getElementById('cheapBox').innerHTML = '<div class="sub" style="margin-top:16px">집계 중…</div>';
     renderCheap();
     return;
   }
