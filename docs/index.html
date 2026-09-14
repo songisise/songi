@@ -101,11 +101,13 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
   border:1px solid var(--rule);color:var(--text3)}
 .gtab.on{background:rgba(224,188,85,.14);border-color:rgba(224,188,85,.45);color:var(--gold);font-weight:700}
 .verdict{background:var(--card);border:1px solid var(--rule);border-radius:12px;
-  padding:15px;margin-top:14px;font-size:15px;line-height:1.75;color:var(--text2)}
+  padding:15px;margin-top:14px;font-size:15px;line-height:1.8;color:var(--text2)}
 .verdict b{color:var(--text);font-weight:700}
 .verdict .hi{color:var(--up);font-weight:700}
 .verdict .lo{color:var(--down);font-weight:700}
 .verdict .vol{color:var(--moss);font-weight:700}
+.verdict .pick{color:var(--gold);font-weight:800}
+.verdict hr{border:none;border-top:1px solid var(--rule);margin:11px 0}
 .subhead{margin-top:22px;color:#a9c0b1;font-size:13px;font-weight:700}
 .ybox{border-bottom:1px solid var(--rule);padding:13px 0}
 .ybox:last-child{border-bottom:none}
@@ -125,6 +127,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .srow.max .sb i{background:var(--up)}
 .srow.min .sb i{background:var(--down)}
 .srow.vmax .sb i{background:var(--gold)}
+.srow.pick .sl{color:var(--gold);font-weight:700}
 .srow .sv{width:82px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
 
 @media (min-width: 900px){
@@ -350,13 +353,36 @@ function renderCheap(){
 
     var pMax = Math.max.apply(null, pLive), pMin = Math.min.apply(null, pLive);
     var vMax = vLive.length ? Math.max.apply(null, vLive) : 0;
-    var hiName = '', loName = '', volName = '';
+    var hiIdx = -1, loIdx = -1, volIdx = -1;
+    for(var i=0;i<SPANS.length;i++){
+      if(pAvg[i] === pMax) hiIdx = i;
+      if(pAvg[i] === pMin) loIdx = i;
+      if(vMax && vAvg[i] === vMax) volIdx = i;
+    }
+
+    /* 사기 좋은 때 고르기: 값이 중간값 이하이면서 물량이 넉넉한 시기를 이어붙인다 */
+    var sortedP = pLive.slice().sort(function(a,b){ return a - b; });
+    var midP = sortedP[Math.floor(sortedP.length / 2)];
+    var volCut = vMax * 0.3;
+    var picks = [];
+    for(var i=0;i<SPANS.length;i++){
+      if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP) picks.push(i);
+    }
+    // 이어지는 구간 중 가장 긴 것만 남긴다
+    var runs = [], cur = [];
+    for(var i=0;i<SPANS.length;i++){
+      if(picks.indexOf(i) >= 0){ cur.push(i); }
+      else { if(cur.length) runs.push(cur); cur = []; }
+    }
+    if(cur.length) runs.push(cur);
+    var bestRun = null;
+    runs.forEach(function(rn){ if(!bestRun || rn.length > bestRun.length) bestRun = rn; });
+
     var priceRows = SPANS.map(function(sp, i){
       var v = pAvg[i];
       if(!(v > 0)) return '';
-      var cls = v === pMax ? 'max' : (v === pMin ? 'min' : '');
-      if(v === pMax) hiName = sp[0];
-      if(v === pMin) loName = sp[0];
+      var cls = (i === hiIdx ? 'max' : (i === loIdx ? 'min' : ''));
+      if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
       return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
         '<span class="sb"><i style="width:' + (v / pMax * 100).toFixed(1) + '%"></i></span>' +
         '<span class="sv num">' + won(v) + '원</span></div>';
@@ -364,18 +390,33 @@ function renderCheap(){
     var volRows = SPANS.map(function(sp, i){
       var v = vAvg[i];
       if(!(v > 0) || !vMax) return '';
-      var cls = v === vMax ? 'vmax' : '';
-      if(v === vMax) volName = sp[0];
+      var cls = (i === volIdx ? 'vmax' : '');
+      if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
       return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
         '<span class="sb"><i style="width:' + (v / vMax * 100).toFixed(1) + '%"></i></span>' +
         '<span class="sv num">' + won(v) + 'kg</span></div>';
     }).join('');
 
-    var pct = pMin > 0 ? Math.round((pMax - pMin) / pMin * 100) : 0;
     var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ' +
-      '<span class="hi">' + hiName + '</span>이 가장 비싸고 <span class="lo">' + loName + '</span>이 가장 쌌습니다.' +
-      (pct ? ' 두 시기의 차이는 <b>' + pct + '%</b>입니다.' : '') +
-      (volName ? ' 물량은 <span class="vol">' + volName + '</span>에 가장 많이 쏟아졌습니다.' : '') + '</div>';
+      '<span class="hi">' + SPANS[hiIdx][0] + '</span>이 가장 비쌌습니다(' + won(pMax) + '원).';
+    if(loIdx >= 0){
+      var loThin = vAvg[loIdx] < volCut;
+      verdict += ' 가장 싼 시기는 <span class="lo">' + SPANS[loIdx][0] + '</span>(' + won(pMin) + '원)';
+      verdict += loThin
+        ? '이지만, 이때는 물량이 평균 ' + won(vAvg[loIdx]) + 'kg뿐이라 실제로 구하기는 어렵습니다.'
+        : '입니다.';
+    }
+    if(volIdx >= 0){
+      verdict += ' 물량은 <span class="vol">' + SPANS[volIdx][0] + '</span>에 가장 많이 쏟아집니다(' +
+        won(vMax) + 'kg).';
+    }
+    if(bestRun && bestRun.length){
+      var a = SPANS[bestRun[0]][0], b = SPANS[bestRun[bestRun.length-1]][0];
+      var label = (a === b) ? a : (a + '~' + b);
+      verdict += '<hr>값과 물량을 함께 보면 <span class="pick">' + label +
+        '</span>이 가장 사기 좋은 때입니다.';
+    }
+    verdict += '</div>';
 
     box.innerHTML = verdict +
       '<div class="subhead">연도별 기록</div>' + yearHtml +
@@ -383,7 +424,8 @@ function renderCheap(){
       '최고·최저 낙찰은 한 공판장에서 나온 값이며, 최저는 ' + MINKG + 'kg 이상 거래된 곳만 셉니다.</div>' +
       '<div class="subhead">시기별 평균 단가 (' + years.length + '개 시즌)</div>' +
       '<div style="margin-top:8px">' + priceRows + '</div>' +
-      '<div class="sub" style="margin-top:9px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다.</div>' +
+      '<div class="sub" style="margin-top:9px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다. ' +
+      '금색 글씨로 표시된 시기가 사기 좋은 때입니다.</div>' +
       (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
         '<div style="margin-top:8px">' + volRows + '</div>' +
         '<div class="sub" style="margin-top:9px">금색 막대가 물량이 가장 많이 나오는 시기입니다. ' +
@@ -391,7 +433,6 @@ function renderCheap(){
   });
 }
 
-/* 작년 이맘때와 비교 — 등급 전체를 올해·작년 두 해로 */
 function compare(cur){
   var el = document.getElementById('cmpBox');
   if(!el) return;
