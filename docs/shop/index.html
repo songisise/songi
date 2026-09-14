@@ -72,7 +72,6 @@ a{color:var(--brown);font-weight:600}
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
   color:var(--ink2);line-height:1.85;font-weight:500}
 .basis b{color:var(--ink);font-weight:700}
-.note{margin-top:13px;font-size:13px;color:var(--ink3);line-height:1.85}
 .pic{margin-top:18px;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
 .pic img{display:block;width:100%;height:auto}
 .pic.small{max-width:440px;margin-left:auto;margin-right:auto}
@@ -131,7 +130,7 @@ a{color:var(--brown);font-weight:600}
   <p>농업회사법인(주)강원오대산농산 · 산지 직송</p>
 </div>
 <div class="heroimg"><img src="songi.jpg1.jpg" alt="강원도 자연산 송이"></div>
-<a class="golink" href="../">
+<a class="golink" href="https://songisise.github.io/songi/">
   <b>오늘 공판 시세 보기</b>
   <span>전국 공판장 등급별 낙찰가를 매일 공개합니다 →</span>
 </a>
@@ -151,7 +150,6 @@ a{color:var(--brown);font-weight:600}
         <div class="basis" id="basis"></div>
       </div>
     </div>
-    <div class="note">1kg으로 주문하실 때 100g당 값이 가장 낮습니다.</div>
   </section>
 
   <section class="sec">
@@ -225,7 +223,7 @@ a{color:var(--brown);font-weight:600}
   <div class="foot">
     농업회사법인(주)강원오대산농산<br>
     공판 시세는 산림조합중앙회 자료를 기준으로 합니다.<br>
-    <a href="../">오늘의 송이 시세 보기</a>
+    <a href="https://songisise.github.io/songi/">오늘의 송이 시세 보기</a>
   </div>
 </div>
 
@@ -239,6 +237,7 @@ a{color:var(--brown);font-weight:600}
 <script>
 var FEE_RATE = 0.015, PACK = 10000, SHIP = 5000;
 var MARGIN = {300:40000, 500:55000, 1000:70000};
+var SITEURL = 'https://songisise.github.io/songi/';
 var GRADES = [
   {key:'g1', name:'1등품',      desc:'길이 8cm 이상, 갓이 전혀 펴지지 않은 최상품입니다.'},
   {key:'g2', name:'2등품',      desc:'길이 6~8cm, 갓이 3분의 1 이내로 펴진 것입니다.'},
@@ -283,12 +282,12 @@ function drawBasis(){
   var G = GRADES[gi], rec = info[G.name], b = document.getElementById('basis');
   if(rec){
     b.innerHTML = '<b>'+dayText(rec.date)+' '+MYSITE+' 공판 '+G.name+' '+won(rec.price)+'원</b> 기준입니다.<br>' +
-      '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
+      '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="'+SITEURL+'">오늘의 공판 시세 직접 확인하기</a>';
   } else if(state === 'ok'){
     b.innerHTML = '<b>'+MYSITE+' 공판에서 '+G.name+' 자료를 찾지 못했습니다.</b><br>' +
-      '다른 등급을 확인해 주세요.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
+      '다른 등급을 확인해 주세요.<br><a href="'+SITEURL+'">오늘의 공판 시세 직접 확인하기</a>';
   } else {
-    b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
+    b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="'+SITEURL+'">오늘의 공판 시세 직접 확인하기</a>';
   }
 }
 function draw(){ drawRows(); drawShot(); drawBasis(); }
