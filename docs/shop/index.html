@@ -17,9 +17,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);line-height:1.6;
   font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:86px}
+  -webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:82px}
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.wrap{max-width:600px;margin:0 auto}
+.wrap{max-width:620px;margin:0 auto}
 a{color:var(--brown);font-weight:600}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
@@ -34,7 +34,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .golink b{font-size:15px;font-weight:700;color:var(--brown)}
 .golink span{display:block;font-size:12.5px;color:var(--brown2);margin-top:4px;font-weight:500}
 
-.sec{padding:38px 22px 12px}
+.sec{padding:36px 22px 12px}
 .sec h2{font-size:20px;font-weight:700;letter-spacing:-.035em}
 .sec .sub{font-size:13.5px;color:var(--ink3);margin-top:8px;line-height:1.75}
 
@@ -43,34 +43,41 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
 .notice b{font-weight:700}
 
-.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.tab{font-size:13px;padding:9px 14px;border-radius:999px;font-weight:500;
-  border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
-.tab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
-.tabs.w .tab{flex:1;text-align:center}
+#pcrow{margin-top:16px}
 
-.gcard{margin-top:16px;background:var(--card);border:1.5px solid var(--rule);
-  border-radius:14px;overflow:hidden}
-.gimg{width:100%;background:#EDE5D6;position:relative;min-height:200px}
-.gimg img{width:100%;height:auto;display:block}
-.gimg .none{position:absolute;inset:0;display:flex;align-items:center;
+/* 가격표 */
+.ptable{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
+.phead{display:flex;background:#F0E8D8;border-bottom:1.5px solid var(--rule)}
+.phead div{padding:12px 6px;font-size:12px;color:var(--ink3);font-weight:600;text-align:right}
+.phead div:first-child{flex:1.5;text-align:left;padding-left:15px}
+.phead div:last-child{padding-right:15px;color:var(--brown);font-weight:700}
+.phead div:not(:first-child){flex:1}
+.prow{display:flex;border-bottom:1px solid #EDE5D6}
+.prow:last-child{border-bottom:none}
+.prow .gn{flex:1.5;padding:15px;font-size:14.5px;font-weight:600;color:var(--ink)}
+.cell{flex:1;padding:15px 6px;text-align:right;cursor:pointer;font-size:14px;color:var(--ink2)}
+.cell:last-child{padding-right:15px;font-size:14.5px;font-weight:700;color:var(--brown)}
+.cell:hover{background:#F4EDE0}
+.cell.on{background:var(--brown);color:#FFFDF9;font-weight:700}
+
+.shot{margin-top:16px;background:var(--card);border:1.5px solid var(--rule);
+  border-radius:12px;overflow:hidden}
+.shot .im{height:200px;background:#EDE5D6;position:relative}
+.shot .im img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .im .none{position:absolute;inset:0;display:flex;align-items:center;
   justify-content:center;color:var(--ink3);font-size:13px;font-weight:500}
-.gbody{padding:20px}
-.gname{font-size:20px;font-weight:700}
-.gname em{font-style:normal;color:var(--brown);margin-left:6px}
-.gdesc{font-size:13.5px;color:var(--ink3);margin-top:6px;line-height:1.7}
-.bigp{margin-top:16px;padding-top:16px;border-top:1.5px solid var(--rule)}
-.bigp .v{font-size:31px;font-weight:700;letter-spacing:-.03em}
-.bigp .per{font-size:12.5px;color:var(--ink3);font-weight:500;margin-top:3px}
-.other{margin-top:14px;font-size:13px;color:var(--ink3);line-height:1.9}
-.other b{color:var(--ink2);font-weight:600}
+.shot .tx{padding:17px 19px}
+.shot .t1{font-size:17px;font-weight:700}
+.shot .t1 em{font-style:normal;color:var(--brown);margin-left:7px}
+.shot .t1 b{float:right;font-weight:700}
+.shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7;clear:both}
 
-.basis{margin-top:18px;padding:17px 18px;background:var(--card);
+.basis{margin-top:16px;padding:17px 18px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
   color:var(--ink2);line-height:1.85;font-weight:500}
 .basis b{color:var(--ink);font-weight:700}
 .basis a{border-bottom:1.5px solid var(--brown3)}
-.note{margin-top:14px;font-size:13.5px;color:var(--ink3);line-height:1.85}
+.note{margin-top:13px;font-size:13px;color:var(--ink3);line-height:1.85}
 
 .pic{margin-top:18px;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
 .pic img{display:block;width:100%;height:auto}
@@ -92,11 +99,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .box .val a{font-size:18px}
 
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
-  border-top:1.5px solid var(--line);padding:12px 16px;z-index:20}
-.barin{max-width:600px;margin:0 auto;display:flex;gap:12px;align-items:center}
-.barin .msg{flex:1;font-size:13px;color:var(--ink3);line-height:1.5;font-weight:500}
-.cta{padding:15px 24px;background:var(--brown);color:#FFFDF9;border-radius:9px;
-  font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap}
+  border-top:1.5px solid var(--line);padding:11px 16px;z-index:20}
+.barin{max-width:620px;margin:0 auto;display:flex;gap:9px}
+.btel{flex:1;padding:15px 10px;border:2px solid var(--brown);color:var(--brown);
+  border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
+.bord{flex:1.3;padding:15px 10px;background:var(--brown);color:#FFFDF9;
+  border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
 
 .info{margin:0 22px;padding:24px 0 8px;border-top:1.5px solid var(--rule)}
 .info h3{font-size:14px;font-weight:700;margin-bottom:12px}
@@ -114,15 +122,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-size:12.5px;color:var(--ink3);line-height:1.95}
 
 @media (min-width: 900px){
-  .wrap{max-width:840px}
-  .head{padding-top:34px}
+  .wrap{max-width:1000px}
+  .head{padding-top:36px}
   .head h1{font-size:34px}
-  .heroimg img{height:380px}
-  .gcard{display:flex}
-  .gimg{width:48%;flex:none;min-height:300px}
-  .gimg img{height:100%;object-fit:cover}
-  .gbody{flex:1;padding:26px}
-  .barin{max-width:840px}
+  .heroimg img{height:400px}
+  .sec{padding:44px 28px 12px}
+  #pcrow{display:flex;gap:26px;align-items:flex-start}
+  #pcleft{flex:1.3;min-width:0}
+  #pcright{flex:1;min-width:0}
+  .shot{margin-top:0}
+  .shot .im{height:280px}
+  .barin{max-width:1000px}
+  .btel{flex:.8}
 }
 </style>
 </head>
@@ -143,14 +154,24 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
   <section class="sec">
     <h2>오늘 판매가</h2>
+    <div class="sub">값을 누르시면 그 상품 사진이 나옵니다. 포장비와 배송비가 모두 포함된 값입니다.</div>
     <div id="noticeBox"></div>
 
-    <div class="tabs" id="gtabs"></div>
-    <div class="tabs w" id="wtabs" style="margin-top:8px"></div>
+    <div id="pcrow">
+      <div id="pcleft">
+        <div class="ptable">
+          <div class="phead">
+            <div>등급</div><div>300g</div><div>500g</div><div>1kg</div>
+          </div>
+          <div id="prows"></div>
+        </div>
+        <div class="basis" id="basis"></div>
+      </div>
+      <div id="pcright">
+        <div class="shot" id="shot"></div>
+      </div>
+    </div>
 
-    <div class="gcard" id="gcard"></div>
-
-    <div class="basis" id="basis"></div>
     <div class="note">1kg으로 주문하실 때 100g당 값이 가장 낮습니다.</div>
   </section>
 
@@ -164,14 +185,19 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   </section>
 
   <section class="sec">
+    <h2>왜 당일 발송인가</h2>
+    <div class="sub">송이는 수분이 90% 가까이 됩니다. 시간이 지나면 수분이 빠지면서 향이 줄고, 갈색으로 변하고, 식감이 질겨집니다. 그래서 채취일이 짧을수록 좋습니다. 저희는 공판장에서 받은 다음 날 오후 5시 이전에 보내드립니다.</div>
+  </section>
+
+  <section class="sec">
     <h2>주문하는 방법</h2>
-    <div class="sub">주문서를 남기셔도 바로 결제되지 않습니다. 문자로 안내드린 뒤에 입금하시면 됩니다.</div>
+    <div class="sub">전화로 주문하셔도 되고, 주문서를 남기셔도 됩니다. 어느 쪽이든 바로 결제되지 않습니다.</div>
 
     <div style="margin-top:16px">
       <div class="step"><span class="no">1</span><span class="tx">
-        <b>주문서 남기기</b>이름, 연락처, 주소, 등급, 수량만 적어주세요. 결제는 하지 않습니다.</span></div>
+        <b>주문 남기기</b>전화 1600-1591로 말씀하시거나, 주문서에 이름·연락처·주소·등급·수량을 적어주세요.</span></div>
       <div class="step"><span class="no">2</span><span class="tx">
-        <b>확인 문자</b>그날 물건 상태와 최종 금액을 문자로 알려드립니다. 이때 취소하셔도 됩니다.</span></div>
+        <b>확인 연락</b>그날 물건 상태와 최종 금액을 알려드립니다. 이때 취소하셔도 됩니다.</span></div>
       <div class="step"><span class="no">3</span><span class="tx">
         <b>입금</b>금액을 보시고 결정하신 뒤 입금해 주시면 됩니다.</span></div>
       <div class="step"><span class="no">4</span><span class="tx">
@@ -180,27 +206,22 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <b>당일 발송</b>오후 5시 이전 확정된 주문은 그날 발송됩니다.</span></div>
     </div>
 
-    <div class="pic">
-      <img src="proof.jpg.png" alt="발송 전 보내드린 사진들">
-      <div class="cap">실제로 손님께 보내드린 사진들입니다. 주문하신 등급과 중량을 적어 함께 보내드립니다.</div>
-    </div>
-
     <div class="box">
       <div class="lbl">입금 계좌</div>
-      <div class="val">농협351-1198-3253-13</div>
+      <div class="val">농협 351-1198-3253-13</div>
       <div class="lbl" style="margin-top:14px">예금주</div>
       <div class="val">농업회사법인(주)강원오대산농산</div>
     </div>
 
     <div class="box" style="margin-top:14px">
-      <div class="lbl">전화 문의</div>
+      <div class="lbl">전화 문의·주문</div>
       <div class="val"><a href="tel:16001591">1600-1591</a></div>
     </div>
   </section>
 
   <section class="sec">
     <h2>받아보신 분들</h2>
-    <div class="sub">2020년 스마트스토어에 남겨주신 구매 후기입니다.</div>
+    <div class="sub">자연산 송이를 판매해온 지 6년째입니다. 지난 판매에서 남겨주신 후기입니다.</div>
     <div class="pic">
       <img src="review.jpg.png" alt="구매 후기">
     </div>
@@ -235,8 +256,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <div class="bar">
   <div class="barin">
-    <div class="msg">결제 없이 주문서만 남기시면 됩니다.<br>금액은 문자로 안내드립니다.</div>
-    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 남기기</a>
+    <a class="btel" href="tel:16001591">전화 주문</a>
+    <a class="bord" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 남기기</a>
   </div>
 </div>
 
@@ -254,11 +275,8 @@ var GRADES = [
   {key:'g4', name:'개산품',     desc:'갓이 3분의 1 이상 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
   {key:'g5', name:'등외품',     desc:'모양이 고르지 않거나 파손된 것입니다. 향과 맛은 같습니다.'}
 ];
-var WEIGHTS = [
-  {g:300,  label:'300g'},
-  {g:500,  label:'500g'},
-  {g:1000, label:'1kg'}
-];
+var WEIGHTS = [300, 500, 1000];
+var WLABEL = ['300g', '500g', '1kg'];
 
 var gi = 0, wi = 2, prices = {}, baseDate = '', state = 'load';
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
@@ -267,26 +285,35 @@ function calc(unit, g){
   return s + s * FEE_RATE + PACK + SHIP + MARGIN[g];
 }
 
-function draw(){
-  var G = GRADES[gi], W = WEIGHTS[wi];
+function drawRows(){
+  document.getElementById('prows').innerHTML = GRADES.map(function(G, i){
+    var unit = prices[G.name] || 0;
+    return '<div class="prow"><span class="gn">' + G.name + '</span>' +
+      WEIGHTS.map(function(w, j){
+        var p = unit > 0 ? calc(unit, w) : 0;
+        var on = (i === gi && j === wi) ? ' on' : '';
+        return '<span class="cell num' + on + '" data-g="' + i + '" data-w="' + j + '">' +
+          (p > 0 ? won(p) : '준비 중') + '</span>';
+      }).join('') + '</div>';
+  }).join('');
+}
+
+function drawShot(){
+  var G = GRADES[gi];
   var unit = prices[G.name] || 0;
-  var p = unit > 0 ? calc(unit, W.g) : 0;
-  var img = G.key + '-' + W.g + '.jpg';
+  var p = unit > 0 ? calc(unit, WEIGHTS[wi]) : 0;
+  var img = G.key + '-' + WEIGHTS[wi] + '.jpg';
+  document.getElementById('shot').innerHTML =
+    '<div class="im"><span class="none">' + G.name + ' ' + WLABEL[wi] + ' 사진 준비 중</span>' +
+    '<img src="' + img + '" alt="' + G.name + ' ' + WLABEL[wi] + '" onerror="this.style.display=\'none\'"></div>' +
+    '<div class="tx"><div class="t1">' + G.name + '<em>' + WLABEL[wi] + '</em>' +
+    '<b class="num">' + (p > 0 ? won(p) + '원' : '준비 중') + '</b></div>' +
+    '<div class="t2">' + G.desc + '</div></div>';
+}
 
-  document.getElementById('gcard').innerHTML =
-    '<div class="gimg"><span class="none">' + G.name + ' ' + W.label + ' 사진 준비 중</span>' +
-    '<img src="' + img + '" alt="' + G.name + ' ' + W.label + '" onerror="this.style.display=\'none\'"></div>' +
-    '<div class="gbody">' +
-    '<div class="gname">' + G.name + '<em>' + W.label + '</em></div>' +
-    '<div class="gdesc">' + G.desc + '</div>' +
-    '<div class="bigp"><div class="v num">' + (p > 0 ? won(p) + '원' : '준비 중') + '</div>' +
-    (p > 0 ? '<div class="per num">100g당 ' + won(p / (W.g / 100)) + '원</div>' : '') + '</div>' +
-    '<div class="other">' + WEIGHTS.map(function(w, i){
-      if(i === wi) return '';
-      var q = unit > 0 ? calc(unit, w.g) : 0;
-      return w.label + ' <b class="num">' + (q > 0 ? won(q) + '원' : '준비 중') + '</b>';
-    }).filter(function(s){ return s; }).join('<br>') + '</div></div>';
-
+function drawBasis(){
+  var G = GRADES[gi];
+  var unit = prices[G.name] || 0;
   var b = document.getElementById('basis');
   if(state === 'ok' && unit > 0){
     b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판 ' + G.name + ' ' + won(unit) + '원</b> 기준입니다.<br>' +
@@ -299,26 +326,13 @@ function draw(){
   }
 }
 
-document.getElementById('gtabs').innerHTML = GRADES.map(function(G, i){
-  return '<button class="tab ' + (i === gi ? 'on' : '') + '" data-g="' + i + '">' + G.name + '</button>';
-}).join('');
-document.getElementById('wtabs').innerHTML = WEIGHTS.map(function(W, i){
-  return '<button class="tab ' + (i === wi ? 'on' : '') + '" data-w="' + i + '">' + W.label + '</button>';
-}).join('');
+function draw(){ drawRows(); drawShot(); drawBasis(); }
 
 document.addEventListener('click', function(e){
-  if(!e.target.closest) return;
-  var t = e.target.closest('.tab');
-  if(!t) return;
-  if(t.hasAttribute('data-g')){
-    gi = Number(t.getAttribute('data-g'));
-    var a = document.querySelectorAll('#gtabs .tab');
-    for(var i = 0; i < a.length; i++) a[i].className = (i === gi) ? 'tab on' : 'tab';
-  } else {
-    wi = Number(t.getAttribute('data-w'));
-    var b = document.querySelectorAll('#wtabs .tab');
-    for(var j = 0; j < b.length; j++) b[j].className = (j === wi) ? 'tab on' : 'tab';
-  }
+  var c = e.target.closest ? e.target.closest('.cell') : null;
+  if(!c) return;
+  gi = Number(c.getAttribute('data-g'));
+  wi = Number(c.getAttribute('data-w'));
   draw();
 });
 
