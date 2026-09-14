@@ -484,7 +484,7 @@ function compare(cur){
     }).join('');
 
     el.innerHTML = '<div class="cmp"><div class="cmphead">' +
-      mdText(cur) + ' · 작년 같은 시기는 ' + mdText(last) + ' 공판</div>' + rows + '</div>' +
+     cur.slice(0,4) + '년 ' + mdText(cur) + ' · ' + last.slice(0,4) + '년 같은 시기는 ' + mdText(last) + ' 공판</div>' + rows + '</div>' +
       '<div class="sub" style="margin-top:12px">큰 숫자가 이 날, 아래가 작년 같은 무렵입니다.</div>';
   }).catch(function(){
     el.innerHTML = '<div class="sub" style="margin-top:14px">비교 자료를 불러오지 못했습니다.</div>';
