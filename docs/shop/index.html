@@ -23,14 +23,12 @@ body{background:var(--paper);color:var(--ink);line-height:1.6;
 a{color:var(--brown);font-weight:600}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
-/* 머리 */
 .head{background:#2A1A0E;padding:26px 22px 0;text-align:center}
 .head h1{font-size:27px;font-weight:700;letter-spacing:-.04em;color:#FFFDF9}
 .head p{font-size:13.5px;margin-top:8px;color:#C9B396;font-weight:500;padding-bottom:22px}
-.heroimg{background:#2A1A0E;padding:0 0 4px}
-.heroimg img{display:block;width:100%;height:auto}
+.heroimg{background:#2A1A0E}
+.heroimg img{display:block;width:100%;height:300px;object-fit:cover;object-position:center 60%}
 
-/* 믿음 세 칸 */
 .trust{display:flex;background:var(--card);border-bottom:1.5px solid var(--rule)}
 .trust>*{flex:1;padding:20px 10px;text-align:center;text-decoration:none;color:inherit;display:block}
 .trust>*+*{border-left:1px solid var(--rule)}
@@ -49,14 +47,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
 .notice b{font-weight:700}
 
-/* 고르기 */
 .tabs{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .tab{font-size:13px;padding:9px 14px;border-radius:999px;font-weight:500;
   border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
 .tab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
 .tabs.w .tab{flex:1;text-align:center}
 
-/* 상품 카드 */
 .gcard{margin-top:16px;background:var(--card);border:1.5px solid var(--rule);
   border-radius:14px;overflow:hidden}
 .gimg{width:100%;background:#EDE5D6;position:relative;min-height:200px}
@@ -127,6 +123,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   .wrap{max-width:840px}
   .head{padding-top:34px}
   .head h1{font-size:34px}
+  .heroimg img{height:380px}
   .gcard{display:flex}
   .gimg{width:48%;flex:none;min-height:300px}
   .gimg img{height:100%;object-fit:cover}
@@ -168,7 +165,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <h2>등급은 이렇게 나뉩니다</h2>
     <div class="sub">산림조합 공판장에서 쓰는 기준 그대로입니다.</div>
     <div class="pic">
-      <img src="grade-guide.jpg" alt="송이 등급 기준">
+      <img src="grade-guide.jpg.png" alt="송이 등급 기준">
       <div class="cap">길이와 갓이 펴진 정도로 등급이 나뉩니다. 등급이 낮아도 향과 맛은 같습니다.</div>
     </div>
   </section>
@@ -191,13 +188,13 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     </div>
 
     <div class="pic">
-      <img src="proof.jpg" alt="발송 전 보내드린 사진들">
+      <img src="proof.jpg.png" alt="발송 전 보내드린 사진들">
       <div class="cap">실제로 손님께 보내드린 사진들입니다. 주문하신 등급과 중량을 적어 함께 보내드립니다.</div>
     </div>
 
     <div class="box">
       <div class="lbl">입금 계좌</div>
-      <div class="val">여기에 은행과 계좌번호를 적으세요</div>
+      <div class="val">농협 351-1198-3253-13</div>
       <div class="lbl" style="margin-top:14px">예금주</div>
       <div class="val">농업회사법인(주)강원오대산농산</div>
     </div>
@@ -212,7 +209,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <h2>받아보신 분들</h2>
     <div class="sub">2020년 스마트스토어에 남겨주신 구매 후기입니다.</div>
     <div class="pic">
-      <img src="review.jpg" alt="구매 후기">
+      <img src="review.jpg.png" alt="구매 후기">
     </div>
   </section>
 
@@ -251,7 +248,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 </div>
 
 <script>
-/* ── 고치실 수 있는 값 ── */
 var MYSITE = '강원 양양';
 var FEE_RATE = 0.015;
 var PACK = 10000;
@@ -339,7 +335,6 @@ document.addEventListener('click', function(e){
 
 draw();
 
-/* 공판 자료 가져오기 — 내 공판장이 열린 가장 최근 날을 찾는다 */
 fetch('../data/index.json').then(function(r){ return r.json(); }).then(function(idx){
   var list = idx.dates.slice(0, 40);
   var step = 0;
@@ -358,7 +353,7 @@ fetch('../data/index.json').then(function(r){ return r.json(); }).then(function(
         }
       }
       if(any){
-        baseDate = Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
+        baseDate = d.slice(0,4) + '년 ' + Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
         var gap = Math.floor((Date.now() - new Date(d)) / 86400000);
         if(gap > 20){
           document.getElementById('noticeBox').innerHTML =
