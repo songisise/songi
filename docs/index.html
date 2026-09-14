@@ -62,13 +62,19 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .up{color:var(--up)}
 .down{color:var(--down)}
 .flat{color:var(--text3)}
-.chg em,.cmprow em{font-style:normal;color:var(--text3);font-weight:400;margin-left:3px}
-.cmp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:15px;margin-top:12px}
-.cmprow{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;font-size:14.5px;gap:10px}
-.cmprow+.cmprow{border-top:1px solid var(--rule)}
-.cmprow .y{color:var(--text3);font-size:13px}
-.cmprow b{font-size:16px;font-weight:700}
-.cmphead{font-size:13px;color:var(--text3);margin-bottom:4px}
+.chg em{font-style:normal;color:var(--text3);font-weight:400;margin-left:3px}
+.cmp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 16px;margin-top:12px}
+.cmphead{font-size:13px;color:var(--text3);padding:10px 0 4px}
+.crow{padding:12px 0;border-top:1px solid var(--rule)}
+.crow.zero{opacity:.34}
+.crow .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.crow .nm{font-size:15px;font-weight:600}
+.crow .now{font-size:19px;font-weight:800}
+.crow .unit{font-size:12.5px;color:var(--text3);font-weight:400}
+.crow .r2{display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;margin-top:5px;font-size:13.5px;color:var(--text3)}
+.crow .r2 b{color:var(--text2);font-weight:600}
+.crow .pct{font-size:14.5px;font-weight:800}
 .chart svg{display:block;width:100%;height:120px;margin-top:14px}
 .axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text3);margin-top:7px}
 .zone{font-size:12.5px;color:var(--text3);font-weight:700;
@@ -121,7 +127,6 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
 .srow.vmax .sb i{background:var(--gold)}
 .srow .sv{width:82px;flex:none;text-align:right;color:var(--text3);font-size:12.5px}
 
-/* ── PC 화면 (가로 900px 이상) ── */
 @media (min-width: 900px){
   .wrap{max-width:1180px;padding:0 24px 40px}
   .top{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
@@ -135,7 +140,6 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-rad
   .stats{margin:0;padding:18px 8px}
   .stats dt{font-size:12.5px}
   .stats dd{font-size:20px}
-  /* 두 단으로 나눈다 */
   #cols{display:flex;gap:30px;align-items:flex-start;margin-top:8px}
   #colA{flex:1 1 0;min-width:0}
   #colB{flex:1 1 0;min-width:0}
@@ -387,51 +391,45 @@ function renderCheap(){
   });
 }
 
+/* 작년 이맘때와 비교 — 등급 전체를 올해·작년 두 해로 */
 function compare(cur){
   var el = document.getElementById('cmpBox');
   if(!el) return;
   var year = Number(cur.slice(0,4));
-  var want = [];
-  for(var y = year; y >= year - 2; y--){
-    var s = nearestInYear(cur, y);
-    if(s) want.push(s);
+  var last = nearestInYear(cur, year - 1);
+  if(!last){
+    el.innerHTML = '<div class="sub" style="margin-top:12px">작년 같은 시기 자료가 아직 없습니다.</div>';
+    return;
   }
-  Promise.all(want.map(function(s){
-    return load(s).then(function(x){ return {s: s, all: allOf(x)}; })
-                  .catch(function(){ return null; });
-  })).then(function(rows){
-    rows = rows.filter(function(r){ return r; });
-    if(rows.length < 2){
-      el.innerHTML = '<div class="sub" style="margin-top:12px">비교할 지난 자료가 아직 없습니다.</div>';
-      return;
-    }
-    var common = null;
-    for(var i=0;i<GRADES.length;i++){
-      var g = GRADES[i], ok = true;
-      for(var j=0;j<rows.length;j++) if(priceOf(rows[j].all, g) <= 0) ok = false;
-      if(ok){ common = g; break; }
-    }
-    var basePrice = common ? priceOf(rows[0].all, common) : 0;
-    var body = rows.map(function(r, i){
-      var g = common || topGrade(r.all);
-      var p = g ? priceOf(r.all, g) : 0;
-      var tail = '';
-      if(common && i > 0 && p > 0){
-        var pct = Math.round((basePrice - p) / p * 100);
-        var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
-        tail = '<em class="' + dir + '" style="font-weight:700">' + (pct > 0 ? '+' : '') + pct + '%</em>';
+  Promise.all([load(cur), load(last)]).then(function(res){
+    var now = allOf(res[0]), old = allOf(res[1]);
+    var rows = GRADES.map(function(g){
+      var a = priceOf(now, g), b = priceOf(old, g);
+      if(!(a > 0) && !(b > 0)){
+        return '<div class="crow zero"><div class="r1"><span class="nm">' + g + '</span>' +
+          '<span class="now" style="font-size:14px;font-weight:400;color:#708c7c">양쪽 다 거래 없음</span></div></div>';
       }
-      return '<div class="cmprow"><span><b class="num">' + r.s.slice(0,4) + '년</b> ' +
-        '<span class="y num">' + r.s.slice(5).replace('-','.') + '</span> ' +
-        '<span class="y">' + (g || '-') + '</span></span>' +
-        '<span><b class="num">' + (p ? won(p) : '-') + '</b> 원 ' + tail + '</span></div>';
+      var pctHtml = '';
+      if(a > 0 && b > 0){
+        var pct = Math.round((a - b) / b * 100);
+        var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
+        pctHtml = '<span class="pct ' + dir + '">' + (pct > 0 ? '+' : '') + pct + '%</span>';
+      } else {
+        pctHtml = '<span class="pct flat" style="font-size:12.5px;font-weight:400">비교 불가</span>';
+      }
+      return '<div class="crow"><div class="r1"><span class="nm">' + g + '</span>' +
+        '<span class="now num">' + (a > 0 ? won(a) + '<span class="unit"> 원</span>'
+          : '<span style="font-size:14px;font-weight:400;color:#708c7c">거래 없음</span>') + '</span></div>' +
+        '<div class="r2"><span>작년 ' + (b > 0 ? '<b class="num">' + won(b) + '원</b>' : '거래 없음') + '</span>' +
+        pctHtml + '</div></div>';
     }).join('');
+
     el.innerHTML = '<div class="cmp"><div class="cmphead">' +
-      cur.slice(5).replace('-','월 ') + '일 무렵 · ' +
-      (common ? common + ' 기준' : '등급이 달라 단순 비교 불가') + '</div>' + body + '</div>' +
-      '<div class="sub" style="margin-top:9px">' + (common
-        ? '모든 해에 거래된 ' + common + ' 단가로 맞춰 비교했습니다. 옆 숫자는 그해 대비 오르내린 폭입니다.'
-        : '해마다 거래된 등급이 달라 각 해의 최고 등급만 나란히 보여드립니다. 등급이 다르므로 증감률은 표시하지 않습니다.') + '</div>';
+      mdText(cur) + ' · 작년 같은 시기는 ' + mdText(last) + ' 공판</div>' + rows + '</div>' +
+      '<div class="sub" style="margin-top:9px">큰 숫자가 이 날, 아래가 작년 같은 무렵입니다. ' +
+      '오른쪽 비율은 작년 대비 오르내린 폭입니다.</div>';
+  }).catch(function(){
+    el.innerHTML = '<div class="sub" style="margin-top:12px">비교 자료를 불러오지 못했습니다.</div>';
   });
 }
 
@@ -585,7 +583,7 @@ function render(d){
       '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
       '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다.<br>눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
       '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
-      '<div class="sub">같은 시기 공판일을 나란히 놓았습니다.</div>' +
+      '<div class="sub">등급별로 작년 같은 무렵과 나란히 놓았습니다.</div>' +
       '<div id="cmpBox"><div class="sub" style="margin-top:12px">불러오는 중…</div></div></section>';
 
     var colB =
