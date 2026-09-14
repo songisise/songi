@@ -13,7 +13,6 @@
   --paper:#F7F3EB; --card:#FFFDF9; --rule:#DDD2BF; --line:#C9BBA2;
   --ink:#241710; --ink2:#4A382A; --ink3:#6E5C4A;
   --brown:#6B3C1B; --brown2:#8C6236; --brown3:#B39668;
-  --up:#A8361F;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);line-height:1.6;
@@ -36,8 +35,7 @@ a{color:var(--brown);font-weight:600}
 .sec .sub{font-size:13.5px;color:var(--ink3);margin-top:8px;line-height:1.75}
 
 .price{margin-top:18px}
-.prow{display:flex;align-items:baseline;justify-content:space-between;
-  gap:12px;padding:16px 0}
+.prow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 0}
 .prow+.prow{border-top:1px solid var(--rule)}
 .prow .g{font-size:17px;font-weight:600}
 .prow .g small{display:block;font-size:12px;color:var(--ink3);font-weight:500;margin-top:2px}
@@ -86,9 +84,7 @@ a{color:var(--brown);font-weight:600}
 .foot{margin:0 22px;padding:22px 0 50px;border-top:1.5px solid var(--rule);
   font-size:12.5px;color:var(--ink3);line-height:1.95}
 
-@media (min-width: 900px){
-  .wrap{max-width:720px}
-}
+@media (min-width: 900px){ .wrap{max-width:720px} }
 </style>
 </head>
 <body>
@@ -136,13 +132,13 @@ a{color:var(--brown);font-weight:600}
 
   <section class="sec">
     <h2>주문하는 방법</h2>
-    <div class="sub">계좌이체로 받고 있습니다. 결제 전에 꼭 전화로 확인해 드립니다.</div>
+    <div class="sub">계좌이체로 받고 있습니다. 입금은 확인 문자를 받으신 뒤에 하시면 됩니다.</div>
 
     <div style="margin-top:16px">
       <div class="step"><span class="no">1</span><span class="tx">
-        <b>주문서 작성</b>아래 주문하기를 눌러 이름, 연락처, 주소, 수량을 남겨주세요.</span></div>
+        <b>주문서 작성</b>아래 주문서를 눌러 이름, 연락처, 주소, 등급, 수량을 남겨주세요.</span></div>
       <div class="step"><span class="no">2</span><span class="tx">
-        <b>확인 전화</b>그날 물건 상태와 최종 금액을 전화로 안내드립니다.</span></div>
+        <b>확인 문자</b>그날 물건 상태와 최종 금액을 문자로 안내드립니다.</span></div>
       <div class="step"><span class="no">3</span><span class="tx">
         <b>입금</b>안내드린 계좌로 입금해 주시면 됩니다.</span></div>
       <div class="step"><span class="no">4</span><span class="tx">
@@ -151,14 +147,14 @@ a{color:var(--brown);font-weight:600}
         <b>당일 발송</b>오후 5시 이전 확정된 주문은 그날 발송됩니다.</span></div>
     </div>
 
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 작성하기</a>
+
     <div class="box">
       <div class="lbl">입금 계좌</div>
-      <div class="val">[은행명] [계좌번호]</div>
+      <div class="val">농협 315-1198-3253-13</div>
       <div class="lbl" style="margin-top:12px">예금주</div>
       <div class="val">농업회사법인(주)강원오대산농산</div>
     </div>
-
-    <a class="cta" href="#">주문하기</a>
 
     <div class="box" style="margin-top:14px">
       <div class="lbl">전화 문의</div>
