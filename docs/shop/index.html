@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>강원도 자연산 송이 | 농업회사법인(주)강원오대산농산</title>
 <meta name="description" content="강원도 자연산 송이를 산지에서 바로 보내드립니다. 그날 공판 시세를 함께 공개합니다.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:title" content="강원도 자연산 송이 | 강원오대산농산">
+<meta property="og:description" content="공판장 낙찰가를 그대로 공개합니다. 산지에서 당일 발송.">
+<meta property="og:image" content="https://songisise.github.io/songi/shop/songi.jpg1.jpg">
+<meta property="og:url" content="https://songisise.github.io/songi/shop/">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -21,39 +25,25 @@ body{background:var(--paper);color:var(--ink);line-height:1.6;
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .wrap{max-width:620px;margin:0 auto}
 a{color:var(--brown);font-weight:600}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-
 .head{background:#2A1A0E;padding:26px 22px 0;text-align:center}
 .head h1{font-size:27px;font-weight:700;letter-spacing:-.04em;color:#FFFDF9}
 .head p{font-size:13.5px;margin-top:8px;color:#C9B396;font-weight:500;padding-bottom:22px}
 .heroimg{background:#2A1A0E}
 .heroimg img{display:block;width:100%;height:300px;object-fit:cover;object-position:center 60%}
-
 .golink{display:block;background:#F2E8D6;border-bottom:1.5px solid var(--rule);
   padding:17px 22px;text-decoration:none;text-align:center}
 .golink b{font-size:15px;font-weight:700;color:var(--brown)}
 .golink span{display:block;font-size:12.5px;color:var(--brown2);margin-top:4px;font-weight:500}
-
 .sec{padding:36px 22px 12px}
 .sec h2{font-size:20px;font-weight:700;letter-spacing:-.035em}
 .sec .sub{font-size:13.5px;color:var(--ink3);margin-top:8px;line-height:1.75}
-
 .notice{margin:16px 0 0;padding:15px 17px;border-radius:10px;
   background:#F0E4CC;border:1.5px solid #D8C39C;
   font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
 .notice b{font-weight:700}
-
-.admin{margin:16px 0 0;padding:15px 17px;border-radius:10px;
-  background:#EDE7DC;border:1.5px dashed var(--line)}
-.admin .t{font-size:12px;color:var(--ink3);font-weight:600;margin-bottom:9px}
-.admin .bs{display:flex;flex-wrap:wrap;gap:6px}
-.admin button{font-size:12.5px;padding:7px 12px;border-radius:999px;
-  border:1.5px solid var(--rule);background:var(--card);color:var(--ink2);font-weight:500}
-.admin button.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
-.admin .m{font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.7}
-
 #pcrow{margin-top:16px}
-
+#pcphoto{min-width:0}
+#pctable{min-width:0}
 .ptable{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
 .phead{display:flex;background:#F0E8D8;border-bottom:1.5px solid var(--rule)}
 .phead div{padding:12px 6px;font-size:12px;color:var(--ink3);font-weight:600;text-align:right}
@@ -65,11 +55,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .prow .gn{flex:1.5;padding:15px;font-size:14.5px;font-weight:600;color:var(--ink)}
 .cell{flex:1;padding:15px 6px;text-align:right;cursor:pointer;font-size:14px;color:var(--ink2)}
 .cell:last-child{padding-right:15px;font-size:14.5px;font-weight:700;color:var(--brown)}
-.cell:hover{background:#F4EDE0}
 .cell.on{background:var(--brown);color:#FFFDF9;font-weight:700}
-
-.shot{margin-top:16px;background:var(--card);border:1.5px solid var(--rule);
-  border-radius:12px;overflow:hidden}
+.shot{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
 .shot .im{height:200px;background:#EDE5D6;position:relative}
 .shot .im img{width:100%;height:100%;object-fit:cover;display:block}
 .shot .im .none{position:absolute;inset:0;display:flex;align-items:center;
@@ -79,108 +66,88 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .shot .t1 em{font-style:normal;color:var(--brown);margin-left:7px}
 .shot .t1 b{float:right;font-weight:700}
 .shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7}
-
 .basis{margin-top:16px;padding:17px 18px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
   color:var(--ink2);line-height:1.85;font-weight:500}
 .basis b{color:var(--ink);font-weight:700}
-.basis a{border-bottom:1.5px solid var(--brown3)}
 .note{margin-top:13px;font-size:13px;color:var(--ink3);line-height:1.85}
-
 .pic{margin-top:18px;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
 .pic img{display:block;width:100%;height:auto}
+.pic.small{max-width:440px;margin-left:auto;margin-right:auto}
 .pic .cap{padding:13px 16px;font-size:12.5px;color:var(--ink3);
   border-top:1.5px solid var(--rule);line-height:1.7;font-weight:500}
-
-.step{padding:16px 0;display:flex;gap:15px}
+.step{padding:17px 0;display:flex;gap:15px}
 .step+.step{border-top:1px solid var(--rule)}
-.step .no{width:27px;height:27px;flex:none;border-radius:50%;
-  background:var(--brown);color:#FFFDF9;font-size:13px;font-weight:700;
+.step .no{width:28px;height:28px;flex:none;border-radius:50%;
+  background:var(--brown);color:#FFFDF9;font-size:13.5px;font-weight:700;
   display:flex;align-items:center;justify-content:center}
 .step .tx{flex:1;font-size:14.5px;color:var(--ink2);line-height:1.75;font-weight:500}
-.step .tx b{color:var(--ink);font-weight:700;display:block;margin-bottom:3px;font-size:15.5px}
-
+.step .tx b{color:var(--ink);font-weight:700;display:block;margin-bottom:4px;font-size:16px}
+.form{margin-top:11px;padding:15px 17px;background:#F2EDE2;
+  border-radius:9px;font-size:14px;line-height:2;color:var(--ink);font-weight:500}
 .box{margin-top:18px;padding:19px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px}
 .box .lbl{font-size:12.5px;color:var(--ink3);font-weight:600}
 .box .val{font-size:18px;font-weight:700;margin-top:4px}
 .box .val a{font-size:18px}
-
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
   border-top:1.5px solid var(--line);padding:11px 16px;z-index:20}
 .barin{max-width:620px;margin:0 auto;display:flex;gap:9px}
 .btel{flex:1;padding:15px 10px;border:2px solid var(--brown);color:var(--brown);
   border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
-.bord{flex:1.3;padding:15px 10px;background:var(--brown);color:#FFFDF9;
+.bord{flex:1.2;padding:15px 10px;background:var(--brown);color:#FFFDF9;
   border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
-
 .info{margin:0 22px;padding:24px 0 8px;border-top:1.5px solid var(--rule)}
 .info h3{font-size:14px;font-weight:700;margin-bottom:12px}
 .irow{display:flex;gap:12px;font-size:13px;padding:5px 0;color:var(--ink2)}
 .irow .k{width:104px;flex:none;color:var(--ink3);font-weight:500}
 .irow .v{flex:1;font-weight:500}
-
 .rule{margin:0 22px;padding:24px 0;border-top:1.5px solid var(--rule);
   font-size:13px;color:var(--ink2);line-height:1.9}
 .rule h3{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink)}
 .rule p{margin-bottom:12px}
 .rule b{color:var(--ink);font-weight:600}
-
 .foot{margin:0 22px;padding:24px 0 40px;border-top:1.5px solid var(--rule);
   font-size:12.5px;color:var(--ink3);line-height:1.95}
-
 @media (min-width: 900px){
   .wrap{max-width:1000px}
-  .head{padding-top:36px}
   .head h1{font-size:34px}
   .heroimg img{height:400px}
   .sec{padding:44px 28px 12px}
   #pcrow{display:flex;gap:26px;align-items:flex-start}
-  #pcleft{flex:1.3;min-width:0}
-  #pcright{flex:1;min-width:0}
-  .shot{margin-top:0}
-  .shot .im{height:280px}
+  #pcphoto{flex:1}
+  #pctable{flex:1.15}
+  .shot .im{height:300px}
   .barin{max-width:1000px}
-  .btel{flex:.8}
 }
+@media (max-width: 899px){ .shot{margin-bottom:16px} }
 </style>
 </head>
 <body>
-
 <div class="head">
   <h1>강원도 자연산 송이</h1>
   <p>농업회사법인(주)강원오대산농산 · 산지 직송</p>
 </div>
 <div class="heroimg"><img src="songi.jpg1.jpg" alt="강원도 자연산 송이"></div>
-
 <a class="golink" href="../">
   <b>오늘 공판 시세 보기</b>
   <span>전국 공판장 등급별 낙찰가를 매일 공개합니다 →</span>
 </a>
-
 <div class="wrap">
-
   <section class="sec">
     <h2>오늘 판매가</h2>
     <div class="sub">값을 누르시면 그 상품 사진이 나옵니다. 포장비와 배송비가 모두 포함된 값입니다.</div>
-    <div id="adminBox"></div>
     <div id="noticeBox"></div>
-
     <div id="pcrow">
-      <div id="pcleft">
+      <div id="pcphoto"><div class="shot" id="shot"></div></div>
+      <div id="pctable">
         <div class="ptable">
-          <div class="phead">
-            <div>등급</div><div>300g</div><div>500g</div><div>1kg</div>
-          </div>
+          <div class="phead"><div>등급</div><div>300g</div><div>500g</div><div>1kg</div></div>
           <div id="prows"></div>
         </div>
         <div class="basis" id="basis"></div>
       </div>
-      <div id="pcright">
-        <div class="shot" id="shot"></div>
-      </div>
     </div>
-
     <div class="note">1kg으로 주문하실 때 100g당 값이 가장 낮습니다.</div>
   </section>
 
@@ -194,25 +161,22 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   </section>
 
   <section class="sec">
-    <h2>왜 당일 발송인가</h2>
-    <div class="sub">송이는 수분이 90% 가까이 됩니다. 시간이 지나면 수분이 빠지면서 향이 줄고, 갈색으로 변하고, 식감이 질겨집니다. 그래서 채취일이 짧을수록 좋습니다. 저희는 공판장에서 받은 다음 날 오후 5시 이전에 보내드립니다.</div>
-  </section>
-
-  <section class="sec">
     <h2>주문하는 방법</h2>
-    <div class="sub">전화로 주문하셔도 되고, 주문서를 남기셔도 됩니다. 어느 쪽이든 바로 결제되지 않습니다.</div>
-
-    <div style="margin-top:16px">
+    <div class="sub">주문서를 작성하시거나, 문자로 보내주셔도 됩니다.</div>
+    <div style="margin-top:14px">
       <div class="step"><span class="no">1</span><span class="tx">
-        <b>주문 남기기</b>전화 1600-1591로 말씀하시거나, 주문서에 이름·연락처·주소·등급·수량을 적어주세요.</span></div>
+        <b>주문</b>아래 주문서를 작성해 주세요. 문자가 편하시면 이대로 적어 010-7486-0526으로 보내주셔도 됩니다.
+        <div class="form">
+          주문하시는 분 성함 / 연락처<br>
+          받으시는 분 성함 / 연락처<br>
+          받으실 주소<br>
+          등급 / 수량
+        </div>
+      </span></div>
       <div class="step"><span class="no">2</span><span class="tx">
-        <b>확인 연락</b>그날 물건 상태와 최종 금액을 알려드립니다. 이때 취소하셔도 됩니다.</span></div>
+        <b>입금</b>위 판매가를 확인하시고 아래 계좌로 입금해 주세요.</span></div>
       <div class="step"><span class="no">3</span><span class="tx">
-        <b>입금</b>금액을 보시고 결정하신 뒤 입금해 주시면 됩니다.</span></div>
-      <div class="step"><span class="no">4</span><span class="tx">
-        <b>발송 전 사진</b>보내드릴 송이를 사진으로 먼저 보여드립니다. 마음에 안 드시면 그때도 취소 가능합니다.</span></div>
-      <div class="step"><span class="no">5</span><span class="tx">
-        <b>당일 발송</b>오후 5시 이전 확정된 주문은 그날 발송됩니다.</span></div>
+        <b>당일 발송</b>오후 2시 이전 입금분은 그날 발송됩니다.</span></div>
     </div>
 
     <div class="box">
@@ -225,15 +189,15 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="box" style="margin-top:14px">
       <div class="lbl">전화 문의·주문</div>
       <div class="val"><a href="tel:16001591">1600-1591</a></div>
+      <div class="lbl" style="margin-top:14px">문자 주문</div>
+      <div class="val"><a href="sms:01074860526">010-7486-0526</a></div>
     </div>
   </section>
 
   <section class="sec">
     <h2>받아보신 분들</h2>
-    <div class="sub">자연산 송이를 판매해온 지 6년째입니다. 지난 판매에서 남겨주신 후기입니다.</div>
-    <div class="pic">
-      <img src="review.jpg.png" alt="구매 후기">
-    </div>
+    <div class="sub">지난 판매에서 남겨주신 후기입니다.</div>
+    <div class="pic small"><img src="review.jpg.png" alt="구매 후기"></div>
   </section>
 
   <div class="info">
@@ -249,10 +213,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
   <div class="rule">
     <h3>교환 및 환불 안내</h3>
-    <p><b>발송 전</b>에는 언제든 취소하실 수 있습니다. 보내드린 사진을 보시고 마음에 들지 않으시면 전액 환불해 드립니다.</p>
+    <p><b>발송 전</b>에는 언제든 취소하실 수 있습니다. 연락 주시면 입금하신 금액을 전액 환불해 드립니다.</p>
     <p><b>발송 후</b>에는 자연산 송이가 신선식품이라 단순 변심에 의한 교환·반품이 어렵습니다. 전자상거래법 제17조 2항에 따라 시간이 지나 다시 판매하기 어려운 상품에 해당합니다.</p>
     <p>다만 <b>상품에 문제가 있는 경우</b>에는 전액 환불 또는 교환해 드립니다. 상한 것, 주문과 다른 등급이나 중량이 온 경우입니다. 수령 당일 사진과 함께 연락 주시면 확인 후 처리해 드립니다.</p>
-    <p>자연산 송이는 자란 환경에 따라 모양과 크기가 제각각입니다. 같은 등급이라도 생김새가 다를 수 있으며, 이는 상품 하자가 아닙니다. 발송 전 사진을 보내드리는 이유가 여기에 있습니다.</p>
+    <p>자연산 송이는 자란 환경에 따라 모양과 크기가 제각각입니다. 같은 등급이라도 생김새가 다를 수 있으며, 이는 상품 하자가 아닙니다.</p>
   </div>
 
   <div class="foot">
@@ -260,23 +224,18 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     공판 시세는 산림조합중앙회 자료를 기준으로 합니다.<br>
     <a href="../">오늘의 송이 시세 보기</a>
   </div>
-
 </div>
 
 <div class="bar">
   <div class="barin">
-    <a class="btel" href="tel:16001591">전화 주문</a>
+    <a class="btel" id="smsBtn" href="sms:01074860526">문자 주문</a>
     <a class="bord" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 남기기</a>
   </div>
 </div>
 
 <script>
-var FEE_RATE = 0.015;
-var PACK = 10000;
-var SHIP = 5000;
+var FEE_RATE = 0.015, PACK = 10000, SHIP = 5000;
 var MARGIN = {300:40000, 500:55000, 1000:70000};
-var SITES = ['강원 강릉','강원 양양','강원 인제','강원 홍천','강원 고성','강원 삼척','강원 양구'];
-
 var GRADES = [
   {key:'g1', name:'1등품',      desc:'길이 8cm 이상, 갓이 전혀 펴지지 않은 최상품입니다.'},
   {key:'g2', name:'2등품',      desc:'길이 6~8cm, 갓이 3분의 1 이내로 펴진 것입니다.'},
@@ -284,159 +243,107 @@ var GRADES = [
   {key:'g4', name:'개산품',     desc:'갓이 3분의 1 이상 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
   {key:'g5', name:'등외품',     desc:'모양이 고르지 않거나 파손된 것입니다. 향과 맛은 같습니다.'}
 ];
-var WEIGHTS = [300, 500, 1000];
-var WLABEL = ['300g', '500g', '1kg'];
+var WEIGHTS = [300, 500, 1000], WLABEL = ['300g','500g','1kg'];
+var MYSITE = '강원 강릉', gi = 0, wi = 2, info = {}, state = 'load';
 
-var MYSITE = '강원 강릉';
-var gi = 0, wi = 2, info = {}, state = 'load', dates = [], cacheDay = {};
-var isAdmin = location.search.indexOf('admin') >= 0;
+var SMSBODY = '주문하시는 분 성함 / 연락처 :\n받으시는 분 성함 / 연락처 :\n받으실 주소 :\n등급 / 수량 :';
+document.getElementById('smsBtn').href =
+  (navigator.userAgent.match(/iPhone|iPad|Mac/) ? 'sms:01074860526&body=' : 'sms:01074860526?body=')
+  + encodeURIComponent(SMSBODY);
 
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
-function calc(unit, g){
-  var s = unit * (g / 1000);
-  return s + s * FEE_RATE + PACK + SHIP + MARGIN[g];
-}
-function dayText(d){
-  return d.slice(0,4) + '년 ' + Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
-}
+function calc(u, g){ var s = u * (g/1000); return s + s*FEE_RATE + PACK + SHIP + MARGIN[g]; }
+function dayText(d){ return d.slice(0,4)+'년 '+Number(d.slice(5,7))+'월 '+Number(d.slice(8,10))+'일'; }
 
 function drawRows(){
   document.getElementById('prows').innerHTML = GRADES.map(function(G, i){
-    var rec = info[G.name];
-    var unit = rec ? rec.price : 0;
-    return '<div class="prow"><span class="gn">' + G.name + '</span>' +
+    var rec = info[G.name], u = rec ? rec.price : 0;
+    return '<div class="prow"><span class="gn">'+G.name+'</span>' +
       WEIGHTS.map(function(w, j){
-        var p = unit > 0 ? calc(unit, w) : 0;
-        var on = (i === gi && j === wi) ? ' on' : '';
-        return '<span class="cell num' + on + '" data-g="' + i + '" data-w="' + j + '">' +
-          (p > 0 ? won(p) : '준비 중') + '</span>';
+        var p = u > 0 ? calc(u, w) : 0;
+        return '<span class="cell num'+((i===gi&&j===wi)?' on':'')+'" data-g="'+i+'" data-w="'+j+'">' +
+          (p > 0 ? won(p) : (state === 'load' ? '…' : '준비 중')) + '</span>';
       }).join('') + '</div>';
   }).join('');
 }
-
 function drawShot(){
-  var G = GRADES[gi];
-  var rec = info[G.name];
-  var unit = rec ? rec.price : 0;
-  var p = unit > 0 ? calc(unit, WEIGHTS[wi]) : 0;
-  var img = G.key + '-' + WEIGHTS[wi] + '.jpg';
+  var G = GRADES[gi], rec = info[G.name], u = rec ? rec.price : 0;
+  var p = u > 0 ? calc(u, WEIGHTS[wi]) : 0;
   document.getElementById('shot').innerHTML =
-    '<div class="im"><span class="none">' + G.name + ' ' + WLABEL[wi] + ' 사진 준비 중</span>' +
-    '<img src="' + img + '" alt="' + G.name + ' ' + WLABEL[wi] + '" onerror="this.style.display=\'none\'"></div>' +
-    '<div class="tx"><div class="t1">' + G.name + '<em>' + WLABEL[wi] + '</em>' +
-    '<b class="num">' + (p > 0 ? won(p) + '원' : '준비 중') + '</b></div>' +
-    '<div class="t2">' + G.desc + '</div></div>';
+    '<div class="im"><span class="none">'+G.name+' '+WLABEL[wi]+' 사진 준비 중</span>' +
+    '<img src="'+G.key+'-'+WEIGHTS[wi]+'.jpg" alt="'+G.name+'" onerror="this.style.display=\'none\'"></div>' +
+    '<div class="tx"><div class="t1">'+G.name+'<em>'+WLABEL[wi]+'</em>' +
+    '<b class="num">'+(p>0?won(p)+'원':'준비 중')+'</b></div>' +
+    '<div class="t2">'+G.desc+'</div></div>';
 }
-
 function drawBasis(){
-  var G = GRADES[gi];
-  var rec = info[G.name];
-  var b = document.getElementById('basis');
-  if(state === 'ok' && rec){
-    b.innerHTML = '<b>' + dayText(rec.date) + ' ' + MYSITE + ' 공판 ' + G.name +
-      ' ' + won(rec.price) + '원</b> 기준입니다.<br>' +
+  var G = GRADES[gi], rec = info[G.name], b = document.getElementById('basis');
+  if(rec){
+    b.innerHTML = '<b>'+dayText(rec.date)+' '+MYSITE+' 공판 '+G.name+' '+won(rec.price)+'원</b> 기준입니다.<br>' +
       '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   } else if(state === 'ok'){
-    b.innerHTML = '<b>' + MYSITE + ' 공판에서 ' + G.name + ' 최근 자료를 찾지 못했습니다.</b><br>' +
+    b.innerHTML = '<b>'+MYSITE+' 공판에서 '+G.name+' 자료를 찾지 못했습니다.</b><br>' +
       '다른 등급을 확인해 주세요.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   } else {
     b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   }
 }
-
 function draw(){ drawRows(); drawShot(); drawBasis(); }
 
-function drawAdmin(){
-  if(!isAdmin) return;
-  document.getElementById('adminBox').innerHTML =
-    '<div class="admin"><div class="t">공판장 미리보기 (손님에게는 보이지 않습니다)</div>' +
-    '<div class="bs">' + SITES.map(function(s){
-      return '<button data-site="' + s + '"' + (s === MYSITE ? ' class="on"' : '') + '>' +
-        s.replace('강원 ', '') + '</button>';
-    }).join('') + '</div>' +
-    '<div class="m">손님 화면까지 바꾸시려면 site.txt 파일의 공판장 이름을 고치세요.</div></div>';
-}
-
 document.addEventListener('click', function(e){
-  if(!e.target.closest) return;
-  var a = e.target.closest('.admin button');
-  if(a){
-    MYSITE = a.getAttribute('data-site');
-    drawAdmin();
-    loadPrices();
-    return;
-  }
-  var c = e.target.closest('.cell');
-  if(c){
-    gi = Number(c.getAttribute('data-g'));
-    wi = Number(c.getAttribute('data-w'));
-    draw();
-  }
-});
-
-/* 등급마다 각각 가장 최근 값을 찾는다 */
-function loadPrices(){
-  info = {};
-  state = 'load';
+  var c = e.target.closest ? e.target.closest('.cell') : null;
+  if(!c) return;
+  gi = Number(c.getAttribute('data-g'));
+  wi = Number(c.getAttribute('data-w'));
   draw();
-  var need = GRADES.length;
-  var step = 0;
+});
+draw();
 
-  function tryNext(){
-    if(step >= dates.length || Object.keys(info).length >= need){
-      state = 'ok';
-      showNotice();
-      draw();
-      return;
+function scan(dates){
+  var pos = 0, CHUNK = 20;
+  function step(){
+    if(pos >= dates.length || Object.keys(info).length >= GRADES.length){
+      state = 'ok'; showNotice(); draw(); return;
     }
-    var d = dates[step++];
-    var go = function(x){
-      var hit = null;
-      for(var i = 0; i < x.regions.length; i++){
-        if(x.regions[i].name === MYSITE) hit = x.regions[i];
-      }
-      if(hit){
-        for(var k = 0; k < GRADES.length; k++){
-          var nm = GRADES[k].name;
-          if(info[nm]) continue;
-          var v = hit.grades[nm];
-          if(v && v.price > 0) info[nm] = {price: v.price, date: d};
+    var part = dates.slice(pos, pos + CHUNK);
+    pos += CHUNK;
+    Promise.all(part.map(function(d){
+      return fetch('../data/'+d+'.json').then(function(r){ return r.json(); })
+        .then(function(x){ return {d:d, x:x}; }).catch(function(){ return null; });
+    })).then(function(list){
+      list.forEach(function(it){
+        if(!it) return;
+        var hit = null;
+        for(var i = 0; i < it.x.regions.length; i++){
+          if(it.x.regions[i].name === MYSITE) hit = it.x.regions[i];
         }
-      }
-      tryNext();
-    };
-    if(cacheDay[d]) { go(cacheDay[d]); return; }
-    fetch('../data/' + d + '.json').then(function(r){ return r.json(); })
-      .then(function(x){ cacheDay[d] = x; go(x); })
-      .catch(tryNext);
+        if(!hit) return;
+        for(var k = 0; k < GRADES.length; k++){
+          var nm = GRADES[k].name, v = hit.grades[nm];
+          if(!v || !(v.price > 0)) continue;
+          if(!info[nm] || it.d > info[nm].date) info[nm] = {price:v.price, date:it.d};
+        }
+      });
+      draw(); step();
+    });
   }
-  tryNext();
+  step();
 }
-
 function showNotice(){
   var newest = '';
   for(var k in info){ if(!newest || info[k].date > newest) newest = info[k].date; }
   if(!newest) return;
-  var gap = Math.floor((Date.now() - new Date(newest)) / 86400000);
-  if(gap > 20){
+  if(Math.floor((Date.now() - new Date(newest)) / 86400000) > 20){
     document.getElementById('noticeBox').innerHTML =
-      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>' + dayText(newest) +
+      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>'+dayText(newest)+
       '</b> 무렵 공판 기준 참고가입니다. 공판이 열리면 그날 낙찰가에 맞춰 자동으로 바뀝니다.</div>';
   }
 }
-
-draw();
-
 fetch('site.txt').then(function(r){ return r.text(); }).then(function(t){
-  var s = t.trim();
-  if(s) MYSITE = s;
+  var s = t.trim(); if(s) MYSITE = s;
 }).catch(function(){}).then(function(){
-  drawAdmin();
   return fetch('../data/index.json').then(function(r){ return r.json(); });
-}).then(function(idx){
-  dates = idx.dates.slice(0, 60);
-  loadPrices();
-}).catch(function(){ state = 'ok'; draw(); });
+}).then(function(idx){ scan(idx.dates); }).catch(function(){ state='ok'; draw(); });
 </script>
 </body>
 </html>
