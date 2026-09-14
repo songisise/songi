@@ -7,13 +7,13 @@
 <meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 정리합니다. 연도별 최고가와 최저가, 물량이 쏟아지는 시기까지 한눈에 볼 수 있습니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F7F3EB; --card:#FFFDF8; --rule:#E7DFD0; --line:#D9CEB9;
-  --ink:#3D2A1B; --ink2:#6B5947; --ink3:#9A8A76;
-  --brown:#7A4A28; --brown2:#A58154; --brown3:#C9B491;
-  --up:#A8442F; --down:#4A6F8A;
+  --paper:#F7F3EB; --card:#FFFDF9; --rule:#DDD2BF; --line:#C9BBA2;
+  --ink:#241710; --ink2:#4A382A; --ink3:#6E5C4A;
+  --brown:#6B3C1B; --brown2:#8C6236; --brown3:#B39668;
+  --up:#A8361F; --down:#2F5A78;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);line-height:1.6;
@@ -22,153 +22,156 @@ body{background:var(--paper);color:var(--ink);line-height:1.6;
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .wrap{max-width:520px;margin:0 auto;min-height:100vh}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-button:focus-visible{outline:1.5px solid var(--brown);outline-offset:3px;border-radius:4px}
+button:focus-visible{outline:2px solid var(--brown);outline-offset:3px;border-radius:4px}
 
-.top{padding:34px 22px 26px}
-.brand{font-size:23px;font-weight:600;letter-spacing:-.035em;color:var(--ink)}
-.brand small{display:block;font-size:12.5px;color:var(--ink3);font-weight:400;
-  margin-top:6px;letter-spacing:.01em}
-.datebar{display:flex;align-items:center;margin-top:22px;
-  background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:4px}
-.datebar select{background:none;border:none;color:var(--ink);font-size:16px;
-  font-weight:500;text-align:center;flex:1;padding:8px 0;cursor:pointer}
-.nav{width:38px;height:36px;border-radius:7px;color:var(--ink3);font-size:18px}
-.nav:hover:not(:disabled){background:var(--paper);color:var(--brown)}
-.nav:disabled{color:#D2C7B4;cursor:default}
+.top{padding:32px 22px 24px}
+.brand{font-size:24px;font-weight:700;letter-spacing:-.035em;color:var(--ink)}
+.brand small{display:block;font-size:13px;color:var(--ink3);font-weight:500;
+  margin-top:6px;letter-spacing:0}
+.datebar{display:flex;align-items:center;margin-top:20px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:4px}
+.datebar select{background:none;border:none;color:var(--ink);font-size:17px;
+  font-weight:700;text-align:center;flex:1;padding:8px 0;cursor:pointer}
+.nav{width:38px;height:36px;border-radius:7px;color:var(--ink2);font-size:19px;font-weight:600}
+.nav:hover:not(:disabled){background:#EFE7D8;color:var(--brown)}
+.nav:disabled{color:#BCAE9A;cursor:default}
 
 .notice{margin:0 22px;padding:13px 15px;border-radius:8px;
-  background:#F2E9D8;border:1px solid #E0D1B4;
-  font-size:13px;color:#6E5326;line-height:1.65}
+  background:#F0E4CC;border:1.5px solid #D8C39C;
+  font-size:13.5px;color:#5A4218;line-height:1.65;font-weight:500}
 
-.lead{padding:26px 22px 20px;font-size:16px;color:var(--ink2);line-height:1.8}
-.lead b{color:var(--ink);font-weight:600}
-.lead .big{color:var(--brown);font-size:20px;font-weight:600}
+.lead{padding:24px 22px 18px;font-size:16.5px;color:var(--ink2);line-height:1.8;font-weight:500}
+.lead b{color:var(--ink);font-weight:700}
+.lead .big{color:var(--brown);font-size:21px;font-weight:700}
 
 .stats{display:flex;margin:0 22px;padding:20px 0;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}
 .stats div{flex:1;text-align:center}
-.stats dt{font-size:11.5px;color:var(--ink3);letter-spacing:.02em}
-.stats dd{font-size:19px;font-weight:600;margin-top:4px;color:var(--ink)}
+.stats dt{font-size:12.5px;color:var(--ink3);font-weight:500}
+.stats dd{font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)}
 
-.sec{padding:36px 22px 8px}
-.sec h2{font-size:17px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
-.sec .sub{font-size:12px;color:var(--ink3);margin-top:6px;line-height:1.7}
+.sec{padding:34px 22px 8px}
+.sec h2{font-size:18px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.sec .sub{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7;font-weight:400}
 
-.grade{padding:16px 0}
+.grade{padding:15px 0}
 .grade+.grade{border-top:1px solid var(--rule)}
 .grade .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.grade .nm{font-size:15px;font-weight:500;color:var(--ink2)}
-.grade .pr{font-size:21px;font-weight:600;color:var(--ink)}
+.grade .nm{font-size:15.5px;font-weight:600;color:var(--ink)}
+.grade .pr{font-size:22px;font-weight:700;color:var(--ink)}
 .grade.best .pr{color:var(--brown)}
-.grade .unit{font-size:12px;color:var(--ink3);font-weight:400}
-.grade .none{font-size:13.5px;font-weight:400;color:#B6A893}
-.grade .r2{display:flex;align-items:center;gap:12px;margin-top:10px}
-.bar{flex:1;height:4px;background:#EDE5D6;border-radius:2px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--brown3);border-radius:2px}
-.grade.best .bar i{background:var(--brown2)}
-.kg{font-size:12px;color:var(--ink3);min-width:74px;text-align:right}
-.chg{font-size:12px;font-weight:500;min-width:52px;text-align:right}
+.grade .unit{font-size:12.5px;color:var(--ink3);font-weight:500}
+.grade .none{font-size:14px;font-weight:500;color:#8E7C68}
+.grade .r2{display:flex;align-items:center;gap:12px;margin-top:9px}
+.bar{flex:1;height:6px;background:#E4D9C4;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brown2);border-radius:3px}
+.grade.best .bar i{background:var(--brown)}
+.kg{font-size:12.5px;color:var(--ink3);min-width:74px;text-align:right;font-weight:500}
+.chg{font-size:12.5px;font-weight:700;min-width:52px;text-align:right}
 .up{color:var(--up)}
 .down{color:var(--down)}
 .flat{color:var(--ink3)}
-.chg em{font-style:normal;color:var(--ink3);font-weight:400;margin-left:3px}
+.chg em{font-style:normal;color:var(--ink3);font-weight:500;margin-left:3px}
 
-.cmp{margin-top:18px}
-.cmphead{font-size:12px;color:var(--ink3);padding-bottom:14px}
-.crow{padding:15px 0;border-top:1px solid var(--rule)}
+.cmp{margin-top:16px}
+.cmphead{font-size:13px;color:var(--ink3);padding-bottom:12px;font-weight:500}
+.crow{padding:14px 0;border-top:1px solid var(--rule)}
 .crow .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.crow .nm{font-size:15px;font-weight:500;color:var(--ink2)}
-.crow .now{font-size:21px;font-weight:600;color:var(--ink)}
-.crow .unit{font-size:12px;color:var(--ink3);font-weight:400}
-.crow .none{font-size:13.5px;font-weight:400;color:#B6A893}
+.crow .nm{font-size:15.5px;font-weight:600;color:var(--ink)}
+.crow .now{font-size:22px;font-weight:700;color:var(--ink)}
+.crow .unit{font-size:12.5px;color:var(--ink3);font-weight:500}
+.crow .none{font-size:14px;font-weight:500;color:#8E7C68}
 .crow .r2{display:flex;align-items:baseline;justify-content:space-between;
-  gap:10px;margin-top:6px;font-size:13px;color:var(--ink3)}
-.crow .r2 b{color:var(--ink2);font-weight:500}
-.crow .pct{font-size:14px;font-weight:600}
+  gap:10px;margin-top:6px;font-size:13.5px;color:var(--ink3);font-weight:500}
+.crow .r2 b{color:var(--ink2);font-weight:600}
+.crow .pct{font-size:15px;font-weight:700}
 
-.chart svg{display:block;width:100%;height:130px;margin-top:18px}
-.axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3);margin-top:10px}
+.chart svg{display:block;width:100%;height:130px;margin-top:16px}
+.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);
+  margin-top:9px;font-weight:500}
 
-.zone{font-size:11.5px;color:var(--ink3);font-weight:500;letter-spacing:.06em;
-  margin:26px 0 4px}
+.zone{font-size:12.5px;color:var(--brown);font-weight:700;letter-spacing:.04em;
+  margin:24px 0 2px;padding-bottom:6px;border-bottom:1.5px solid var(--line)}
 .site+.site{border-top:1px solid var(--rule)}
-.sitebtn{display:flex;width:100%;align-items:center;gap:14px;padding:16px 0;text-align:left}
-.sitebtn .nm{flex:1;font-size:15px;font-weight:500;color:var(--ink)}
+.sitebtn{display:flex;width:100%;align-items:center;gap:14px;padding:15px 0;text-align:left}
+.sitebtn:hover .nm{color:var(--brown)}
+.sitebtn .nm{flex:1;font-size:15.5px;font-weight:600;color:var(--ink)}
 .sitebtn .val{text-align:right;line-height:1.45}
-.sitebtn .val b{font-size:17px;font-weight:600;display:block;color:var(--ink)}
-.sitebtn .val small{font-size:11.5px;color:var(--ink3)}
-.caret{width:24px;height:24px;flex:none;border-radius:50%;
-  border:1px solid var(--line);color:var(--ink3);font-size:10px;
+.sitebtn .val b{font-size:18px;font-weight:700;display:block;color:var(--ink)}
+.sitebtn .val small{font-size:12px;color:var(--ink3);font-weight:500}
+.caret{width:26px;height:26px;flex:none;border-radius:50%;
+  border:1.5px solid var(--line);color:var(--ink2);font-size:10px;font-weight:700;
   display:flex;align-items:center;justify-content:center}
-.site.open .caret{background:var(--brown);border-color:var(--brown);color:#FFFDF8}
-.detail{padding:2px 0 16px}
-.drow{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;color:var(--ink2)}
-.drow b{color:var(--ink);font-weight:600}
-.drow .k{color:var(--ink3);font-size:12px;margin-left:10px}
+.site.open .caret{background:var(--brown);border-color:var(--brown);color:#FFFDF9}
+.detail{padding:2px 0 15px}
+.drow{display:flex;justify-content:space-between;font-size:14px;padding:7px 0;
+  color:var(--ink2);font-weight:500}
+.drow b{color:var(--ink);font-weight:700}
+.drow .k{color:var(--ink3);font-size:12.5px;margin-left:10px}
 
-.empty{padding:60px 24px;text-align:center;color:var(--ink3);font-size:15px}
-.foot{margin:40px 22px 0;padding:24px 0 54px;font-size:11.5px;color:var(--ink3);
-  line-height:2;border-top:1px solid var(--rule)}
-.foot a{color:var(--brown2)}
+.empty{padding:60px 24px;text-align:center;color:var(--ink2);font-size:15px;font-weight:500}
+.foot{margin:38px 22px 0;padding:24px 0 54px;font-size:12.5px;color:var(--ink3);
+  line-height:1.95;border-top:1.5px solid var(--rule);font-weight:400}
+.foot a{color:var(--brown);font-weight:600}
 
-.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.gtab{font-size:12.5px;padding:7px 13px;border-radius:999px;
-  border:1px solid var(--rule);color:var(--ink3);background:var(--card)}
-.gtab:hover{border-color:var(--line);color:var(--ink2)}
-.gtab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF8;font-weight:500}
-.verdict{background:var(--card);border:1px solid var(--rule);border-radius:10px;
-  padding:20px;margin-top:18px;font-size:15px;line-height:1.9;color:var(--ink2)}
-.verdict b{color:var(--ink);font-weight:600}
-.verdict .hi{color:var(--up);font-weight:600}
-.verdict .lo{color:var(--down);font-weight:600}
-.verdict .vol{color:var(--brown2);font-weight:600}
-.verdict .pick{color:var(--brown);font-weight:600;
-  border-bottom:2px solid var(--brown3);padding-bottom:1px}
-.verdict hr{border:none;border-top:1px solid var(--rule);margin:15px 0}
+.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}
+.gtab{font-size:13px;padding:7px 13px;border-radius:999px;font-weight:500;
+  border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
+.gtab:hover{border-color:var(--line);color:var(--brown)}
+.gtab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
+.verdict{background:var(--card);border:1.5px solid var(--rule);border-radius:10px;
+  padding:19px;margin-top:16px;font-size:15.5px;line-height:1.85;color:var(--ink2);font-weight:500}
+.verdict b{color:var(--ink);font-weight:700}
+.verdict .hi{color:var(--up);font-weight:700}
+.verdict .lo{color:var(--down);font-weight:700}
+.verdict .vol{color:var(--brown2);font-weight:700}
+.verdict .pick{color:var(--brown);font-weight:700;
+  border-bottom:2.5px solid var(--brown3);padding-bottom:1px}
+.verdict hr{border:none;border-top:1.5px solid var(--rule);margin:14px 0}
 
-.subhead{margin-top:32px;margin-bottom:4px;color:var(--ink3);
-  font-size:11.5px;font-weight:500;letter-spacing:.06em}
-.ybox{padding:16px 0}
+.subhead{margin-top:30px;margin-bottom:2px;color:var(--brown);
+  font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.ybox{padding:15px 0}
 .ybox+.ybox{border-top:1px solid var(--rule)}
-.ybox .yy{font-weight:600;font-size:15px;margin-bottom:10px;color:var(--ink)}
-.yline{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0}
-.yline .lbl{color:var(--ink3);flex:none}
+.ybox .yy{font-weight:700;font-size:16px;margin-bottom:9px;color:var(--ink)}
+.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:5px 0}
+.yline .lbl{color:var(--ink2);flex:none;font-weight:500}
 .yline .v{text-align:right}
-.yline .hi{color:var(--up);font-weight:600}
-.yline .lo{color:var(--down);font-weight:600}
-.yline .pk{color:var(--brown);font-weight:600}
-.yline .vl{color:var(--brown2);font-weight:600}
-.yline .who{color:var(--ink3);font-size:11.5px;display:block;margin-top:1px}
+.yline .hi{color:var(--up);font-weight:700}
+.yline .lo{color:var(--down);font-weight:700}
+.yline .pk{color:var(--brown);font-weight:700}
+.yline .vl{color:var(--brown2);font-weight:700}
+.yline .who{color:var(--ink3);font-size:12px;display:block;margin-top:1px;font-weight:500}
 
-.srow{display:flex;align-items:center;gap:11px;padding:7px 0;font-size:13px}
-.srow .sl{width:64px;flex:none;color:var(--ink2)}
-.srow .sb{flex:1;height:14px;background:#EDE5D6;border-radius:3px;overflow:hidden}
-.srow .sb i{display:block;height:100%;background:var(--brown3);border-radius:3px}
-.srow.max .sb i{background:var(--brown)}
-.srow.min .sb i{background:#E3D6BF}
-.srow.vmax .sb i{background:var(--brown2)}
-.srow.pick .sl{color:var(--brown);font-weight:600}
-.srow .sv{width:80px;flex:none;text-align:right;color:var(--ink3);font-size:12px}
+.srow{display:flex;align-items:center;gap:11px;padding:7px 0;font-size:13.5px}
+.srow .sl{width:64px;flex:none;color:var(--ink);font-weight:500}
+.srow .sb{flex:1;height:15px;background:#E4D9C4;border-radius:3px;overflow:hidden}
+.srow .sb i{display:block;height:100%;background:var(--brown2);border-radius:3px}
+.srow.max .sb i{background:var(--up)}
+.srow.min .sb i{background:var(--down)}
+.srow.vmax .sb i{background:var(--brown)}
+.srow.pick .sl{color:var(--brown);font-weight:700}
+.srow .sv{width:82px;flex:none;text-align:right;color:var(--ink2);font-size:12.5px;font-weight:500}
 
 @media (min-width: 900px){
   .wrap{max-width:1160px;padding:0 32px 40px}
-  .top{padding:44px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-  .brand{font-size:30px}
-  .brand small{font-size:13.5px;margin-top:8px}
+  .top{padding:42px 0 30px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .brand{font-size:31px}
+  .brand small{font-size:14px;margin-top:8px}
   .datebar{margin-top:0;width:320px;flex:none}
   .notice{margin:0}
-  .lead{padding:30px 0 22px;font-size:18px}
-  .lead .big{font-size:22px}
+  .lead{padding:28px 0 20px;font-size:18px}
+  .lead .big{font-size:23px}
   .stats{margin:0;padding:24px 0}
-  .stats dd{font-size:22px}
-  #cols{display:flex;gap:56px;align-items:flex-start;margin-top:6px}
+  .stats dd{font-size:23px}
+  #cols{display:flex;gap:52px;align-items:flex-start;margin-top:6px}
   #colA{flex:1 1 0;min-width:0}
   #colB{flex:1 1 0;min-width:0}
-  .sec{padding:36px 0 8px}
-  .sec h2{font-size:19px}
-  .foot{margin:48px 0 0;padding:26px 0 48px}
-  .yline{font-size:13.5px}
-  .srow{font-size:13.5px;padding:8px 0}
+  .sec{padding:34px 0 8px}
+  .sec h2{font-size:20px}
+  .foot{margin:46px 0 0;padding:26px 0 48px}
+  .yline{font-size:14px}
+  .srow{font-size:14px;padding:8px 0}
   .srow .sl{width:70px}
   .srow .sv{width:92px}
   .chart svg{height:160px}
@@ -439,11 +442,12 @@ function renderCheap(){
       '최고·최저 낙찰은 한 공판장에서 나온 값이며, 최저는 ' + MINKG + 'kg 이상 거래된 곳만 셉니다.</div>' +
       '<div class="subhead">시기별 평균 단가 · ' + years.length + '개 시즌</div>' +
       '<div style="margin-top:10px">' + priceRows + '</div>' +
-      '<div class="sub" style="margin-top:12px">막대가 진할수록 비싼 시기입니다. ' +
+      '<div class="sub" style="margin-top:11px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다. ' +
       '밑줄 친 시기가 사기 좋은 때입니다.</div>' +
       (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
         '<div style="margin-top:10px">' + volRows + '</div>' +
-        '<div class="sub" style="margin-top:12px">물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
+        '<div class="sub" style="margin-top:11px">진한 막대가 물량이 가장 많이 나오는 시기입니다. ' +
+        '물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
   });
 }
 
@@ -461,7 +465,7 @@ function compare(cur){
     var rows = GRADES.map(function(g){
       var a = priceOf(now, g), b = priceOf(old, g);
       if(!(a > 0) && !(b > 0)){
-        return '<div class="crow"><div class="r1"><span class="nm" style="color:#B6A893">' + g + '</span>' +
+        return '<div class="crow"><div class="r1"><span class="nm" style="color:#8E7C68">' + g + '</span>' +
           '<span class="none">양쪽 다 거래 없음</span></div></div>';
       }
       var pctHtml = '';
@@ -470,7 +474,7 @@ function compare(cur){
         var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
         pctHtml = '<span class="pct ' + dir + '">' + (pct > 0 ? '+' : '') + pct + '%</span>';
       } else {
-        pctHtml = '<span class="pct flat" style="font-size:12px;font-weight:400">비교 불가</span>';
+        pctHtml = '<span class="pct flat" style="font-size:12.5px;font-weight:500">비교 불가</span>';
       }
       return '<div class="crow"><div class="r1"><span class="nm">' + g + '</span>' +
         '<span class="now num">' + (a > 0 ? won(a) + '<span class="unit"> 원</span>'
@@ -509,11 +513,11 @@ function chart(cur){
     var idx = -1;
     for(var i=0;i<pts.length;i++) if(pts[i].d === cur) idx = i;
     var dot = idx >= 0
-      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="4.5" fill="#F7F3EB" stroke="#7A4A28" stroke-width="2" vector-effect="non-scaling-stroke"/>'
+      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="5" fill="#F7F3EB" stroke="#6B3C1B" stroke-width="2.5" vector-effect="non-scaling-stroke"/>'
       : '';
     el.innerHTML = '<svg viewBox="-4 -8 ' + (W+8) + ' ' + (H+16) + '" preserveAspectRatio="none">' +
-      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(165,129,84,.11)"/>' +
-      '<path d="' + line + '" fill="none" stroke="#7A4A28" stroke-width="1.8" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(140,98,54,.14)"/>' +
+      '<path d="' + line + '" fill="none" stroke="#6B3C1B" stroke-width="2.2" vector-effect="non-scaling-stroke"/>' +
       dot + '</svg>' +
       '<div class="axis num"><span>' + pts[0].d.slice(5).replace('-','.') + '</span>' +
       '<span>최저 ' + won(mn) + ' · 최고 ' + won(mx) + '</span>' +
@@ -587,7 +591,7 @@ function render(d){
       var pv = prev ? priceOf(prev, g) : 0;
       var zero = !(v.price > 0);
       return '<div class="grade ' + (k === bestIdx ? 'best' : '') + '">' +
-        '<div class="r1"><span class="nm"' + (zero ? ' style="color:#B6A893"' : '') + '>' + g + '</span>' +
+        '<div class="r1"><span class="nm"' + (zero ? ' style="color:#8E7C68"' : '') + '>' + g + '</span>' +
         '<span class="pr num">' +
         (zero ? '<span class="none">거래 없음</span>' : won(v.price) + '<span class="unit"> 원</span>') +
         '</span></div>' +
