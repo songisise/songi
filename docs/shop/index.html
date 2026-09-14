@@ -17,69 +17,73 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);line-height:1.6;
   font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:78px}
+  -webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:80px}
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.wrap{max-width:560px;margin:0 auto}
+.wrap{max-width:600px;margin:0 auto}
 a{color:var(--brown);font-weight:600}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
-/* 머리 사진 */
-.hero{position:relative;height:300px;overflow:hidden;background:#EDE5D6}
-.hero img{width:100%;height:100%;object-fit:cover;display:block}
-.hero .veil{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(20,12,6,.15) 0%,rgba(20,12,6,.72) 100%)}
-.hero .tx{position:absolute;left:0;right:0;bottom:26px;padding:0 24px;color:#FFFDF9}
-.hero .tx h1{font-size:29px;font-weight:700;letter-spacing:-.04em;line-height:1.25}
-.hero .tx p{font-size:13.5px;margin-top:9px;opacity:.9;font-weight:500}
+/* 머리 */
+.head{background:#2A1A0E;padding:26px 22px 0;text-align:center}
+.head h1{font-size:27px;font-weight:700;letter-spacing:-.04em;color:#FFFDF9}
+.head p{font-size:13.5px;margin-top:8px;color:#C9B396;font-weight:500;padding-bottom:22px}
+.heroimg{background:#2A1A0E;padding:0 0 4px}
+.heroimg img{display:block;width:100%;height:auto}
 
 /* 믿음 세 칸 */
 .trust{display:flex;background:var(--card);border-bottom:1.5px solid var(--rule)}
-.trust div{flex:1;padding:17px 8px;text-align:center}
-.trust div+div{border-left:1px solid var(--rule)}
-.trust .ic{font-size:19px}
-.trust .tt{font-size:12.5px;font-weight:600;margin-top:5px;color:var(--ink)}
-.trust .ss{font-size:11px;color:var(--ink3);margin-top:2px}
+.trust>*{flex:1;padding:20px 10px;text-align:center;text-decoration:none;color:inherit;display:block}
+.trust>*+*{border-left:1px solid var(--rule)}
+.trust .tt{font-size:14px;font-weight:700;color:var(--ink)}
+.trust .ss{font-size:11.5px;color:var(--ink3);margin-top:5px;font-weight:500}
+.trust a.go{background:#F2E8D6}
+.trust a.go .tt{color:var(--brown)}
+.trust a.go .ss{color:var(--brown2);font-weight:600}
 
-.sec{padding:36px 22px 12px}
+.sec{padding:38px 22px 12px}
 .sec h2{font-size:20px;font-weight:700;letter-spacing:-.035em}
 .sec .sub{font-size:13.5px;color:var(--ink3);margin-top:8px;line-height:1.75}
 
-/* 등급 고르기 */
-.gtabs{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.gtab{font-size:13px;padding:9px 14px;border-radius:999px;font-weight:500;
-  border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
-.gtab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
+.notice{margin:16px 0 0;padding:15px 17px;border-radius:10px;
+  background:#F0E4CC;border:1.5px solid #D8C39C;
+  font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
+.notice b{font-weight:700}
 
-/* 등급 카드 */
-.gcard{margin-top:18px;background:var(--card);border:1.5px solid var(--rule);
+/* 고르기 */
+.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tab{font-size:13px;padding:9px 14px;border-radius:999px;font-weight:500;
+  border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
+.tab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
+.tabs.w .tab{flex:1;text-align:center}
+
+/* 상품 카드 */
+.gcard{margin-top:16px;background:var(--card);border:1.5px solid var(--rule);
   border-radius:14px;overflow:hidden}
-.gimg{width:100%;height:220px;background:#EDE5D6;position:relative}
-.gimg img{width:100%;height:100%;object-fit:cover;display:block}
+.gimg{width:100%;background:#EDE5D6;position:relative;min-height:200px}
+.gimg img{width:100%;height:auto;display:block}
 .gimg .none{position:absolute;inset:0;display:flex;align-items:center;
   justify-content:center;color:var(--ink3);font-size:13px;font-weight:500}
 .gbody{padding:20px}
-.gname{font-size:19px;font-weight:700}
-.gdesc{font-size:13.5px;color:var(--ink3);margin-top:5px;line-height:1.7}
-.plist{margin-top:16px}
-.prow{display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:14px 0}
-.prow+.prow{border-top:1px solid var(--rule)}
-.prow .g{font-size:16.5px;font-weight:600}
-.prow .g small{display:block;font-size:11.5px;color:var(--ink3);font-weight:500;margin-top:2px}
-.prow .p{font-size:22px;font-weight:700;text-align:right}
-.prow .p small{display:block;font-size:11.5px;color:var(--ink3);font-weight:500;margin-top:2px}
-.prow.best{background:#F3EADA;margin:0 -20px;padding-left:20px;padding-right:20px}
-.prow.best .p{color:var(--brown)}
-.tag{display:inline-block;font-size:10.5px;font-weight:700;color:#FFFDF9;
-  background:var(--brown2);padding:2px 7px;border-radius:4px;margin-left:6px;
-  vertical-align:middle}
+.gname{font-size:20px;font-weight:700}
+.gname em{font-style:normal;color:var(--brown);margin-left:6px}
+.gdesc{font-size:13.5px;color:var(--ink3);margin-top:6px;line-height:1.7}
+.bigp{margin-top:16px;padding-top:16px;border-top:1.5px solid var(--rule)}
+.bigp .v{font-size:31px;font-weight:700;letter-spacing:-.03em}
+.bigp .per{font-size:12.5px;color:var(--ink3);font-weight:500;margin-top:3px}
+.other{margin-top:14px;font-size:13px;color:var(--ink3);line-height:1.9}
+.other b{color:var(--ink2);font-weight:600}
 
 .basis{margin-top:18px;padding:17px 18px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
   color:var(--ink2);line-height:1.85;font-weight:500}
 .basis b{color:var(--ink);font-weight:700}
 .basis a{border-bottom:1.5px solid var(--brown3)}
-.note{margin-top:16px;font-size:13.5px;color:var(--ink3);line-height:1.85}
+.note{margin-top:14px;font-size:13.5px;color:var(--ink3);line-height:1.85}
+
+.pic{margin-top:18px;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
+.pic img{display:block;width:100%;height:auto}
+.pic .cap{padding:13px 16px;font-size:12.5px;color:var(--ink3);
+  border-top:1.5px solid var(--rule);line-height:1.7;font-weight:500}
 
 .step{padding:16px 0;display:flex;gap:15px}
 .step+.step{border-top:1px solid var(--rule)}
@@ -95,13 +99,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .box .val{font-size:18px;font-weight:700;margin-top:4px}
 .box .val a{font-size:18px}
 
-/* 아래 고정 버튼 */
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
   border-top:1.5px solid var(--line);padding:11px 16px;z-index:20}
-.barin{max-width:560px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.barin{max-width:600px;margin:0 auto;display:flex;gap:10px;align-items:center}
 .barin .now{flex:1;line-height:1.3}
 .barin .now small{display:block;font-size:11.5px;color:var(--ink3);font-weight:500}
-.barin .now b{font-size:17px;font-weight:700}
+.barin .now b{font-size:18px;font-weight:700}
 .cta{padding:14px 22px;background:var(--brown);color:#FFFDF9;border-radius:9px;
   font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap}
 
@@ -121,47 +124,52 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-size:12.5px;color:var(--ink3);line-height:1.95}
 
 @media (min-width: 900px){
-  .wrap{max-width:860px}
-  .hero{height:400px}
-  .hero .tx h1{font-size:38px}
+  .wrap{max-width:840px}
+  .head{padding-top:34px}
+  .head h1{font-size:34px}
   .gcard{display:flex}
-  .gimg{width:44%;height:auto;min-height:320px;flex:none}
+  .gimg{width:48%;flex:none;min-height:300px}
+  .gimg img{height:100%;object-fit:cover}
   .gbody{flex:1;padding:26px}
-  .prow.best{margin:0 -26px;padding-left:26px;padding-right:26px}
-  .barin{max-width:860px}
+  .barin{max-width:840px}
 }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <img src="songi.jpg1.jpg" alt="강원도 자연산 송이">
-  <div class="veil"></div>
-  <div class="tx">
-    <h1>강원도 자연산 송이</h1>
-    <p>농업회사법인(주)강원오대산농산 · 산지 직송</p>
-  </div>
+<div class="head">
+  <h1>강원도 자연산 송이</h1>
+  <p>농업회사법인(주)강원오대산농산 · 산지 직송</p>
 </div>
+<div class="heroimg"><img src="songi.jpg1.jpg" alt="강원도 자연산 송이"></div>
 
 <div class="trust">
-  <div><div class="ic">📷</div><div class="tt">발송 전 사진</div><div class="ss">보고 취소 가능</div></div>
-  <div><div class="ic">🚚</div><div class="tt">당일 발송</div><div class="ss">오후 5시 이전</div></div>
-  <div><div class="ic">📊</div><div class="tt">공판가 공개</div><div class="ss">시세 그대로</div></div>
+  <div><div class="tt">발송 전 사진</div><div class="ss">보내기 전에 보여드립니다</div></div>
+  <div><div class="tt">당일 발송</div><div class="ss">오후 5시 이전 확정분</div></div>
+  <a class="go" href="../"><div class="tt">공판가 공개</div><div class="ss">오늘 시세 보기 →</div></a>
 </div>
 
 <div class="wrap">
 
   <section class="sec">
     <h2>오늘 판매가</h2>
-    <div class="gtabs" id="gtabs"></div>
+    <div id="noticeBox"></div>
+
+    <div class="tabs" id="gtabs"></div>
+    <div class="tabs w" id="wtabs" style="margin-top:8px"></div>
+
     <div class="gcard" id="gcard"></div>
 
     <div class="basis" id="basis"></div>
+    <div class="note">1kg으로 주문하실 때 100g당 값이 가장 낮습니다.</div>
+  </section>
 
-    <div class="note">
-      포장과 택배비는 무게와 상관없이 똑같이 듭니다.
-      그래서 양이 적을수록 100g당 값이 올라갑니다.
-      1kg으로 주문하실 때 100g당 값이 가장 낮습니다.
+  <section class="sec">
+    <h2>등급은 이렇게 나뉩니다</h2>
+    <div class="sub">산림조합 공판장에서 쓰는 기준 그대로입니다.</div>
+    <div class="pic">
+      <img src="grade-guide.jpg" alt="송이 등급 기준">
+      <div class="cap">길이와 갓이 펴진 정도로 등급이 나뉩니다. 등급이 낮아도 향과 맛은 같습니다.</div>
     </div>
   </section>
 
@@ -182,9 +190,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         <b>당일 발송</b>오후 5시 이전 확정된 주문은 그날 발송됩니다.</span></div>
     </div>
 
+    <div class="pic">
+      <img src="proof.jpg" alt="발송 전 보내드린 사진들">
+      <div class="cap">실제로 손님께 보내드린 사진들입니다. 주문하신 등급과 중량을 적어 함께 보내드립니다.</div>
+    </div>
+
     <div class="box">
       <div class="lbl">입금 계좌</div>
-      <div class="val">농협 351=1198-3253-13</div>
+      <div class="val">여기에 은행과 계좌번호를 적으세요</div>
       <div class="lbl" style="margin-top:14px">예금주</div>
       <div class="val">농업회사법인(주)강원오대산농산</div>
     </div>
@@ -192,6 +205,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="box" style="margin-top:14px">
       <div class="lbl">전화 문의</div>
       <div class="val"><a href="tel:16001591">1600-1591</a></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>받아보신 분들</h2>
+    <div class="sub">2020년 스마트스토어에 남겨주신 구매 후기입니다.</div>
+    <div class="pic">
+      <img src="review.jpg" alt="구매 후기">
     </div>
   </section>
 
@@ -224,124 +245,135 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 <div class="bar">
   <div class="barin">
-    <div class="now" id="barNow"><small>선택한 등급</small><b>—</b></div>
+    <div class="now" id="barNow"><small>선택한 상품</small><b>—</b></div>
     <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 작성</a>
   </div>
 </div>
 
 <script>
-/* ── 사장님이 고치실 수 있는 값 ── */
-var MYSITE = '강원 양양';      // 주로 낙찰받는 공판장. 바꾸시려면 여기만 고치세요.
-var FEE_RATE = 0.015;          // 공판 수수료 1.5%
-var PACK = 10000;              // 포장·아이스팩
-var SHIP = 5000;               // 택배비
-var MARGIN = {300: 40000, 500: 55000, 1000: 70000};   // 무게별 운영비
+/* ── 고치실 수 있는 값 ── */
+var MYSITE = '강원 양양';
+var FEE_RATE = 0.015;
+var PACK = 10000;
+var SHIP = 5000;
+var MARGIN = {300:40000, 500:55000, 1000:70000};
 
 var GRADES = [
-  {name:'1등품',      img:'grade1.jpg', desc:'갓이 피지 않은 최상품입니다. 향과 모양이 가장 좋습니다.'},
-  {name:'2등품',      img:'grade2.jpg', desc:'갓이 조금 벌어졌지만 향과 식감은 충분합니다.'},
-  {name:'생장정지품', img:'grade3.jpg', desc:'자라다 멈춘 것으로 단단하고 향이 진합니다.'},
-  {name:'개산품',     img:'grade4.jpg', desc:'갓이 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
-  {name:'등외품',     img:'grade5.jpg', desc:'모양이 고르지 않으나 맛은 같습니다. 가장 부담 없는 값입니다.'}
+  {key:'g1', name:'1등품',      desc:'길이 8cm 이상, 갓이 전혀 펴지지 않은 최상품입니다.'},
+  {key:'g2', name:'2등품',      desc:'길이 6~8cm, 갓이 3분의 1 이내로 펴진 것입니다.'},
+  {key:'g3', name:'생장정지품', desc:'길이 6cm 미만으로 자라다 멈춘 것입니다. 단단하고 향이 진합니다.'},
+  {key:'g4', name:'개산품',     desc:'갓이 3분의 1 이상 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
+  {key:'g5', name:'등외품',     desc:'모양이 고르지 않거나 파손된 것입니다. 향과 맛은 같습니다.'}
 ];
 var WEIGHTS = [
-  {g:300,  label:'300g',  note:'2~3인 가족'},
-  {g:500,  label:'500g',  note:'선물용'},
-  {g:1000, label:'1kg',   note:'가장 유리한 단위', best:true}
+  {g:300,  label:'300g', note:'2~3인 가족'},
+  {g:500,  label:'500g', note:'선물용'},
+  {g:1000, label:'1kg',  note:'가장 유리'}
 ];
 
-var pick = 0, prices = {}, baseDate = '', ok = false;
+var gi = 0, wi = 2, prices = {}, baseDate = '', state = 'load';
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
-
-/* 판매가 계산 */
 function calc(unit, g){
-  var songi = unit * (g / 1000);
-  return songi + songi * FEE_RATE + PACK + SHIP + MARGIN[g];
+  var s = unit * (g / 1000);
+  return s + s * FEE_RATE + PACK + SHIP + MARGIN[g];
 }
 
 function draw(){
-  var G = GRADES[pick];
+  var G = GRADES[gi], W = WEIGHTS[wi];
   var unit = prices[G.name] || 0;
-
-  var rows = WEIGHTS.map(function(w){
-    var p = unit > 0 ? calc(unit, w.g) : 0;
-    var per = p > 0 ? p / (w.g / 100) : 0;
-    return '<div class="prow ' + (w.best ? 'best' : '') + '">' +
-      '<span class="g">' + w.label +
-      (w.best ? '<span class="tag">가장 유리</span>' : '') +
-      '<small>' + w.note + '</small></span>' +
-      '<span class="p num">' + (p > 0 ? won(p) + '원' : '준비 중') +
-      (p > 0 ? '<small>100g당 ' + won(per) + '원</small>' : '') + '</span></div>';
-  }).join('');
+  var p = unit > 0 ? calc(unit, W.g) : 0;
+  var img = G.key + '-' + W.g + '.jpg';
 
   document.getElementById('gcard').innerHTML =
-    '<div class="gimg"><span class="none">' + G.name + ' 사진 준비 중</span>' +
-    '<img src="' + G.img + '" alt="' + G.name + '" ' +
-    'onerror="this.style.display=\'none\'"></div>' +
-    '<div class="gbody"><div class="gname">' + G.name + '</div>' +
+    '<div class="gimg"><span class="none">' + G.name + ' ' + W.label + ' 사진 준비 중</span>' +
+    '<img src="' + img + '" alt="' + G.name + ' ' + W.label + '" onerror="this.style.display=\'none\'"></div>' +
+    '<div class="gbody">' +
+    '<div class="gname">' + G.name + '<em>' + W.label + '</em></div>' +
     '<div class="gdesc">' + G.desc + '</div>' +
-    '<div class="plist">' + rows + '</div></div>';
+    '<div class="bigp"><div class="v num">' + (p > 0 ? won(p) + '원' : '준비 중') + '</div>' +
+    (p > 0 ? '<div class="per num">100g당 ' + won(p / (W.g / 100)) + '원</div>' : '') + '</div>' +
+    '<div class="other">' + WEIGHTS.map(function(w, i){
+      if(i === wi) return '';
+      var q = unit > 0 ? calc(unit, w.g) : 0;
+      return w.label + ' <b class="num">' + (q > 0 ? won(q) + '원' : '준비 중') + '</b>';
+    }).filter(function(s){ return s; }).join('<br>') + '</div></div>';
 
   var b = document.getElementById('basis');
-  if(ok && unit > 0){
-    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판 ' + G.name +
-      ' ' + won(unit) + '원</b> 기준입니다.<br>' +
-      '여기에 유통·포장·배송비가 포함된 값입니다.<br>' +
-      '<a href="../">오늘의 공판 시세 직접 확인하기</a>';
-  } else if(ok){
-    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판에 ' + G.name +
-      '은 나오지 않았습니다.</b><br>다른 등급을 확인해 주세요.<br>' +
-      '<a href="../">오늘의 공판 시세 직접 확인하기</a>';
+  if(state === 'ok' && unit > 0){
+    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판 ' + G.name + ' ' + won(unit) + '원</b> 기준입니다.<br>' +
+      '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
+  } else if(state === 'ok'){
+    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판에 ' + G.name + '은 나오지 않았습니다.</b><br>' +
+      '다른 등급을 확인해 주세요.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   } else {
-    b.innerHTML = '공판 자료를 불러오는 중입니다.<br>' +
-      '<a href="../">오늘의 공판 시세 직접 확인하기</a>';
+    b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   }
 
-  var p1 = unit > 0 ? calc(unit, 1000) : 0;
   document.getElementById('barNow').innerHTML =
-    '<small>' + G.name + ' 1kg</small><b class="num">' +
-    (p1 > 0 ? won(p1) + '원' : '준비 중') + '</b>';
+    '<small>' + G.name + ' ' + W.label + '</small><b class="num">' +
+    (p > 0 ? won(p) + '원' : '준비 중') + '</b>';
 }
 
 document.getElementById('gtabs').innerHTML = GRADES.map(function(G, i){
-  return '<button class="gtab ' + (i === 0 ? 'on' : '') + '" data-i="' + i + '">' + G.name + '</button>';
+  return '<button class="tab ' + (i === gi ? 'on' : '') + '" data-g="' + i + '">' + G.name + '</button>';
+}).join('');
+document.getElementById('wtabs').innerHTML = WEIGHTS.map(function(W, i){
+  return '<button class="tab ' + (i === wi ? 'on' : '') + '" data-w="' + i + '">' + W.label + '</button>';
 }).join('');
 
 document.addEventListener('click', function(e){
-  var t = e.target.closest ? e.target.closest('.gtab') : null;
+  if(!e.target.closest) return;
+  var t = e.target.closest('.tab');
   if(!t) return;
-  pick = Number(t.getAttribute('data-i'));
-  var tabs = document.querySelectorAll('.gtab');
-  for(var i = 0; i < tabs.length; i++) tabs[i].className = (i === pick) ? 'gtab on' : 'gtab';
+  if(t.hasAttribute('data-g')){
+    gi = Number(t.getAttribute('data-g'));
+    var a = document.querySelectorAll('#gtabs .tab');
+    for(var i = 0; i < a.length; i++) a[i].className = (i === gi) ? 'tab on' : 'tab';
+  } else {
+    wi = Number(t.getAttribute('data-w'));
+    var b = document.querySelectorAll('#wtabs .tab');
+    for(var j = 0; j < b.length; j++) b[j].className = (j === wi) ? 'tab on' : 'tab';
+  }
   draw();
 });
 
 draw();
 
-/* 어제 공판 자료 읽어오기 */
+/* 공판 자료 가져오기 — 내 공판장이 열린 가장 최근 날을 찾는다 */
 fetch('../data/index.json').then(function(r){ return r.json(); }).then(function(idx){
-  var d = idx.dates[0];
-  return fetch('../data/' + d + '.json').then(function(r){ return r.json(); })
-    .then(function(x){ return {d: d, x: x}; });
-}).then(function(res){
-  var target = null;
-  for(var i = 0; i < res.x.regions.length; i++){
-    if(res.x.regions[i].name === MYSITE) target = res.x.regions[i];
+  var list = idx.dates.slice(0, 40);
+  var step = 0;
+  function tryNext(){
+    if(step >= list.length){ state = 'ok'; draw(); return; }
+    var d = list[step++];
+    fetch('../data/' + d + '.json').then(function(r){ return r.json(); }).then(function(x){
+      var hit = null;
+      for(var i = 0; i < x.regions.length; i++){
+        if(x.regions[i].name === MYSITE) hit = x.regions[i];
+      }
+      var any = false;
+      if(hit){
+        for(var k in hit.grades){
+          if(hit.grades[k].price > 0){ prices[k] = hit.grades[k].price; any = true; }
+        }
+      }
+      if(any){
+        baseDate = Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
+        var gap = Math.floor((Date.now() - new Date(d)) / 86400000);
+        if(gap > 20){
+          document.getElementById('noticeBox').innerHTML =
+            '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>' + baseDate +
+            '</b> 공판 기준 참고가입니다. 공판이 열리면 그날 낙찰가에 맞춰 자동으로 바뀝니다.</div>';
+        }
+        state = 'ok';
+        draw();
+      } else {
+        tryNext();
+      }
+    }).catch(tryNext);
   }
-  if(!target){
-    for(var i = 0; i < res.x.regions.length; i++){
-      if(res.x.regions[i].name === '전체') target = res.x.regions[i];
-    }
-  }
-  if(target){
-    for(var k in target.grades){
-      if(target.grades[k].price > 0) prices[k] = target.grades[k].price;
-    }
-  }
-  baseDate = Number(res.d.slice(5,7)) + '월 ' + Number(res.d.slice(8,10)) + '일';
-  ok = true;
-  draw();
-}).catch(function(){ draw(); });
+  tryNext();
+}).catch(function(){ state = 'ok'; draw(); });
 </script>
 </body>
 </html>
