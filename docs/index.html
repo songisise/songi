@@ -3,347 +3,726 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>강원도 자연산 송이 | 농업회사법인(주)강원오대산농산</title>
-<meta name="description" content="강원도 자연산 송이를 산지에서 바로 보내드립니다. 그날 공판 시세를 함께 공개합니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="강원도 자연산 송이 | 강원오대산농산">
-<meta property="og:description" content="공판장 낙찰가를 그대로 공개합니다. 산지에서 당일 발송.">
-<meta property="og:image" content="https://songisise.github.io/songi/shop/songi.jpg1.jpg">
-<meta property="og:url" content="https://songisise.github.io/songi/shop/">
-<meta name="twitter:card" content="summary_large_image">
+<title>오늘의 송이 시세 | 전국 산지 공판가</title>
+<meta name="description" content="산림조합 산지 공판장의 송이 낙찰 단가를 등급별, 공판장별로 정리합니다. 연도별 최고가와 최저가, 물량이 쏟아지는 시기까지 한눈에 볼 수 있습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#F7F3EB; --card:#FFFDF9; --rule:#DDD2BF; --line:#C9BBA2;
   --ink:#241710; --ink2:#4A382A; --ink3:#6E5C4A;
   --brown:#6B3C1B; --brown2:#8C6236; --brown3:#B39668;
+  --up:#A8361F; --down:#2F5A78;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--paper);color:var(--ink);line-height:1.6;
   font-family:'IBM Plex Sans KR',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:82px}
+  font-weight:400;-webkit-font-smoothing:antialiased;font-size:16px}
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.wrap{max-width:620px;margin:0 auto}
-a{color:var(--brown);font-weight:600}
-.head{background:#2A1A0E;padding:26px 22px 0;text-align:center}
-.head h1{font-size:27px;font-weight:700;letter-spacing:-.04em;color:#FFFDF9}
-.head p{font-size:13.5px;margin-top:8px;color:#C9B396;font-weight:500;padding-bottom:22px}
-.heroimg{background:#2A1A0E}
-.heroimg img{display:block;width:100%;height:300px;object-fit:cover;object-position:center 60%}
-.golink{display:block;background:#F2E8D6;border-bottom:1.5px solid var(--rule);
-  padding:17px 22px;text-decoration:none;text-align:center}
-.golink b{font-size:15px;font-weight:700;color:var(--brown)}
-.golink span{display:block;font-size:12.5px;color:var(--brown2);margin-top:4px;font-weight:500}
-.sec{padding:36px 22px 12px}
-.sec h2{font-size:20px;font-weight:700;letter-spacing:-.035em}
-.sec .sub{font-size:13.5px;color:var(--ink3);margin-top:8px;line-height:1.75}
-.notice{margin:16px 0 0;padding:15px 17px;border-radius:10px;
+.wrap{max-width:520px;margin:0 auto;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button:focus-visible{outline:2px solid var(--brown);outline-offset:3px;border-radius:4px}
+
+.top{padding:32px 22px 24px}
+.brand{font-size:24px;font-weight:700;letter-spacing:-.035em;color:var(--ink)}
+.brand small{display:block;font-size:13px;color:var(--ink3);font-weight:500;
+  margin-top:6px;letter-spacing:0}
+.datebar{display:flex;align-items:center;margin-top:20px;
+  background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:4px}
+.datebar select{background:none;border:none;color:var(--ink);font-size:17px;
+  font-weight:700;text-align:center;flex:1;padding:8px 0;cursor:pointer}
+.nav{width:38px;height:36px;border-radius:7px;color:var(--ink2);font-size:19px;font-weight:600}
+.nav:hover:not(:disabled){background:#EFE7D8;color:var(--brown)}
+.nav:disabled{color:#BCAE9A;cursor:default}
+
+.notice{margin:0 22px;padding:13px 15px;border-radius:8px;
   background:#F0E4CC;border:1.5px solid #D8C39C;
-  font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
-.notice b{font-weight:700}
-#pcrow{margin-top:16px}
-#pcphoto{min-width:0}
-#pctable{min-width:0}
-.ptable{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
-.phead{display:flex;background:#F0E8D8;border-bottom:1.5px solid var(--rule)}
-.phead div{padding:12px 6px;font-size:12px;color:var(--ink3);font-weight:600;text-align:right}
-.phead div:first-child{flex:1.5;text-align:left;padding-left:15px}
-.phead div:last-child{padding-right:15px;color:var(--brown);font-weight:700}
-.phead div:not(:first-child){flex:1}
-.prow{display:flex;border-bottom:1px solid #EDE5D6}
-.prow:last-child{border-bottom:none}
-.prow .gn{flex:1.5;padding:15px;font-size:14.5px;font-weight:600;color:var(--ink)}
-.cell{flex:1;padding:15px 6px;text-align:right;cursor:pointer;font-size:14px;color:var(--ink2)}
-.cell:last-child{padding-right:15px;font-size:14.5px;font-weight:700;color:var(--brown)}
-.cell.on{background:var(--brown);color:#FFFDF9;font-weight:700}
-.shot{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
-.shot .im{height:200px;background:#EDE5D6;position:relative}
-.shot .im img{width:100%;height:100%;object-fit:cover;display:block}
-.shot .im .none{position:absolute;inset:0;display:flex;align-items:center;
-  justify-content:center;color:var(--ink3);font-size:13px;font-weight:500}
-.shot .tx{padding:17px 19px}
-.shot .t1{font-size:17px;font-weight:700;overflow:hidden}
-.shot .t1 em{font-style:normal;color:var(--brown);margin-left:7px}
-.shot .t1 b{float:right;font-weight:700}
-.shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7}
-.basis{margin-top:16px;padding:17px 18px;background:var(--card);
-  border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
-  color:var(--ink2);line-height:1.85;font-weight:500}
-.basis b{color:var(--ink);font-weight:700}
-.note{margin-top:13px;font-size:13px;color:var(--ink3);line-height:1.85}
-.pic{margin-top:18px;border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
-.pic img{display:block;width:100%;height:auto}
-.pic.small{max-width:440px;margin-left:auto;margin-right:auto}
-.pic .cap{padding:13px 16px;font-size:12.5px;color:var(--ink3);
-  border-top:1.5px solid var(--rule);line-height:1.7;font-weight:500}
-.step{padding:17px 0;display:flex;gap:15px}
-.step+.step{border-top:1px solid var(--rule)}
-.step .no{width:28px;height:28px;flex:none;border-radius:50%;
-  background:var(--brown);color:#FFFDF9;font-size:13.5px;font-weight:700;
+  font-size:13.5px;color:#5A4218;line-height:1.65;font-weight:500}
+
+.lead{padding:24px 22px 18px;font-size:16.5px;color:var(--ink2);line-height:1.8;font-weight:500}
+.lead b{color:var(--ink);font-weight:700}
+.lead .big{color:var(--brown);font-size:21px;font-weight:700}
+
+.stats{display:flex;margin:0 22px;padding:20px 0;
+  border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}
+.stats div{flex:1;text-align:center}
+.stats dt{font-size:12.5px;color:var(--ink3);font-weight:500}
+.stats dd{font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)}
+
+.sec{padding:34px 22px 8px}
+.sec h2{font-size:18px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.sec .sub{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7;font-weight:400}
+
+.grade{padding:15px 0}
+.grade+.grade{border-top:1px solid var(--rule)}
+.grade .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.grade .nm{font-size:15.5px;font-weight:600;color:var(--ink)}
+.grade .pr{font-size:22px;font-weight:700;color:var(--ink)}
+.grade.best .pr{color:var(--brown)}
+.grade .unit{font-size:12.5px;color:var(--ink3);font-weight:500}
+.grade .none{font-size:14px;font-weight:500;color:#8E7C68}
+.grade .r2{display:flex;align-items:center;gap:12px;margin-top:9px}
+.bar{flex:1;height:6px;background:#E4D9C4;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brown2);border-radius:3px}
+.grade.best .bar i{background:var(--brown)}
+.kg{font-size:12.5px;color:var(--ink3);min-width:74px;text-align:right;font-weight:500}
+.chg{font-size:12.5px;font-weight:700;min-width:52px;text-align:right}
+.up{color:var(--up)}
+.down{color:var(--down)}
+.flat{color:var(--ink3)}
+.chg em{font-style:normal;color:var(--ink3);font-weight:500;margin-left:3px}
+
+.cmp{margin-top:16px}
+.cmphead{font-size:13px;color:var(--ink3);padding-bottom:12px;font-weight:500}
+.crow{padding:14px 0;border-top:1px solid var(--rule)}
+.crow .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.crow .nm{font-size:15.5px;font-weight:600;color:var(--ink)}
+.crow .now{font-size:22px;font-weight:700;color:var(--ink)}
+.crow .unit{font-size:12.5px;color:var(--ink3);font-weight:500}
+.crow .none{font-size:14px;font-weight:500;color:#8E7C68}
+.crow .r2{display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;margin-top:6px;font-size:13.5px;color:var(--ink3);font-weight:500}
+.crow .r2 b{color:var(--ink2);font-weight:600}
+.crow .pct{font-size:15px;font-weight:700}
+
+.chart svg{display:block;width:100%;height:130px;margin-top:16px}
+.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);
+  margin-top:9px;font-weight:500}
+
+.zone{font-size:12.5px;color:var(--brown);font-weight:700;letter-spacing:.04em;
+  margin:24px 0 2px;padding-bottom:6px;border-bottom:1.5px solid var(--line)}
+.site+.site{border-top:1px solid var(--rule)}
+.sitebtn{display:flex;width:100%;align-items:center;gap:14px;padding:15px 0;text-align:left}
+.sitebtn:hover .nm{color:var(--brown)}
+.sitebtn .nm{flex:1;font-size:15.5px;font-weight:600;color:var(--ink)}
+.sitebtn .val{text-align:right;line-height:1.45}
+.sitebtn .val b{font-size:18px;font-weight:700;display:block;color:var(--ink)}
+.sitebtn .val small{font-size:12px;color:var(--ink3);font-weight:500}
+.caret{width:26px;height:26px;flex:none;border-radius:50%;
+  border:1.5px solid var(--line);color:var(--ink2);font-size:10px;font-weight:700;
   display:flex;align-items:center;justify-content:center}
-.step .tx{flex:1;font-size:14.5px;color:var(--ink2);line-height:1.75;font-weight:500}
-.step .tx b{color:var(--ink);font-weight:700;display:block;margin-bottom:4px;font-size:16px}
-.form{margin-top:11px;padding:15px 17px;background:#F2EDE2;
-  border-radius:9px;font-size:14px;line-height:2;color:var(--ink);font-weight:500}
-.box{margin-top:18px;padding:19px;background:var(--card);
-  border:1.5px solid var(--rule);border-radius:10px}
-.box .lbl{font-size:12.5px;color:var(--ink3);font-weight:600}
-.box .val{font-size:18px;font-weight:700;margin-top:4px}
-.box .val a{font-size:18px}
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
-  border-top:1.5px solid var(--line);padding:11px 16px;z-index:20}
-.barin{max-width:620px;margin:0 auto;display:flex;gap:9px}
-.btel{flex:1;padding:15px 10px;border:2px solid var(--brown);color:var(--brown);
-  border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
-.bord{flex:1.2;padding:15px 10px;background:var(--brown);color:#FFFDF9;
-  border-radius:9px;text-align:center;font-size:16px;font-weight:700;text-decoration:none}
-.info{margin:0 22px;padding:24px 0 8px;border-top:1.5px solid var(--rule)}
-.info h3{font-size:14px;font-weight:700;margin-bottom:12px}
-.irow{display:flex;gap:12px;font-size:13px;padding:5px 0;color:var(--ink2)}
-.irow .k{width:104px;flex:none;color:var(--ink3);font-weight:500}
-.irow .v{flex:1;font-weight:500}
-.rule{margin:0 22px;padding:24px 0;border-top:1.5px solid var(--rule);
-  font-size:13px;color:var(--ink2);line-height:1.9}
-.rule h3{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink)}
-.rule p{margin-bottom:12px}
-.rule b{color:var(--ink);font-weight:600}
-.foot{margin:0 22px;padding:24px 0 40px;border-top:1.5px solid var(--rule);
-  font-size:12.5px;color:var(--ink3);line-height:1.95}
+.site.open .caret{background:var(--brown);border-color:var(--brown);color:#FFFDF9}
+.detail{padding:2px 0 15px}
+.drow{display:flex;justify-content:space-between;font-size:14px;padding:7px 0;
+  color:var(--ink2);font-weight:500}
+.drow b{color:var(--ink);font-weight:700}
+.drow .k{color:var(--ink3);font-size:12.5px;margin-left:10px}
+
+.empty{padding:60px 24px;text-align:center;color:var(--ink2);font-size:15px;font-weight:500}
+.foot{margin:38px 22px 0;padding:24px 0 54px;font-size:12.5px;color:var(--ink3);
+  line-height:1.95;border-top:1.5px solid var(--rule);font-weight:400}
+.foot a{color:var(--brown);font-weight:600}
+
+.gtabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}
+.gtab{font-size:13px;padding:7px 13px;border-radius:999px;font-weight:500;
+  border:1.5px solid var(--rule);color:var(--ink2);background:var(--card)}
+.gtab:hover{border-color:var(--line);color:var(--brown)}
+.gtab.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
+.verdict{background:var(--card);border:1.5px solid var(--rule);border-radius:10px;
+  padding:19px;margin-top:16px;font-size:15.5px;line-height:1.85;color:var(--ink2);font-weight:500}
+.verdict b{color:var(--ink);font-weight:700}
+.verdict .hi{color:var(--up);font-weight:700}
+.verdict .lo{color:var(--down);font-weight:700}
+.verdict .vol{color:var(--brown2);font-weight:700}
+.verdict .pick{color:var(--brown);font-weight:700;
+  border-bottom:2.5px solid var(--brown3);padding-bottom:1px}
+.verdict hr{border:none;border-top:1.5px solid var(--rule);margin:14px 0}
+
+.subhead{margin-top:30px;margin-bottom:2px;color:var(--brown);
+  font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.ybox{padding:15px 0}
+.ybox+.ybox{border-top:1px solid var(--rule)}
+.ybox .yy{font-weight:700;font-size:16px;margin-bottom:9px;color:var(--ink)}
+.yline{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:5px 0}
+.yline .lbl{color:var(--ink2);flex:none;font-weight:500}
+.yline .v{text-align:right}
+.yline .hi{color:var(--up);font-weight:700}
+.yline .lo{color:var(--down);font-weight:700}
+.yline .pk{color:var(--brown);font-weight:700}
+.yline .vl{color:var(--brown2);font-weight:700}
+.yline .who{color:var(--ink3);font-size:12px;display:block;margin-top:1px;font-weight:500}
+
+.srow{display:flex;align-items:center;gap:11px;padding:7px 0;font-size:13.5px}
+.srow .sl{width:64px;flex:none;color:var(--ink);font-weight:500}
+.srow .sb{flex:1;height:15px;background:#E4D9C4;border-radius:3px;overflow:hidden}
+.srow .sb i{display:block;height:100%;background:var(--brown2);border-radius:3px}
+.srow.max .sb i{background:var(--up)}
+.srow.min .sb i{background:var(--down)}
+.srow.vmax .sb i{background:var(--brown)}
+.srow.pick .sl{color:var(--brown);font-weight:700}
+.srow .sv{width:82px;flex:none;text-align:right;color:var(--ink2);font-size:12.5px;font-weight:500}
+
 @media (min-width: 900px){
-  .wrap{max-width:1000px}
-  .head h1{font-size:34px}
-  .heroimg img{height:400px}
-  .sec{padding:44px 28px 12px}
-  #pcrow{display:flex;gap:26px;align-items:flex-start}
-  #pcphoto{flex:1}
-  #pctable{flex:1.15}
-  .shot .im{height:300px}
-  .barin{max-width:1000px}
+  .wrap{max-width:1160px;padding:0 32px 40px}
+  .top{padding:42px 0 30px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .brand{font-size:31px}
+  .brand small{font-size:14px;margin-top:8px}
+  .datebar{margin-top:0;width:320px;flex:none}
+  .notice{margin:0}
+  .lead{padding:28px 0 20px;font-size:18px}
+  .lead .big{font-size:23px}
+  .stats{margin:0;padding:24px 0}
+  .stats dd{font-size:23px}
+  #cols{display:flex;gap:52px;align-items:flex-start;margin-top:6px}
+  #colA{flex:1 1 0;min-width:0}
+  #colB{flex:1 1 0;min-width:0}
+  .sec{padding:34px 0 8px}
+  .sec h2{font-size:20px}
+  .foot{margin:46px 0 0;padding:26px 0 48px}
+  .yline{font-size:14px}
+  .srow{font-size:14px;padding:8px 0}
+  .srow .sl{width:70px}
+  .srow .sv{width:92px}
+  .chart svg{height:160px}
 }
-@media (max-width: 899px){ .shot{margin-bottom:16px} }
 </style>
 </head>
 <body>
-<div class="head">
-  <h1>강원도 자연산 송이</h1>
-  <p>농업회사법인(주)강원오대산농산 · 산지 직송</p>
-</div>
-<div class="heroimg"><img src="songi.jpg1.jpg" alt="강원도 자연산 송이"></div>
-<a class="golink" href="../">
-  <b>오늘 공판 시세 보기</b>
-  <span>전국 공판장 등급별 낙찰가를 매일 공개합니다 →</span>
-</a>
 <div class="wrap">
-  <section class="sec">
-    <h2>오늘 판매가</h2>
-    <div class="sub">값을 누르시면 그 상품 사진이 나옵니다. 포장비와 배송비가 모두 포함된 값입니다.</div>
-    <div id="noticeBox"></div>
-    <div id="pcrow">
-      <div id="pcphoto"><div class="shot" id="shot"></div></div>
-      <div id="pctable">
-        <div class="ptable">
-          <div class="phead"><div>등급</div><div>300g</div><div>500g</div><div>1kg</div></div>
-          <div id="prows"></div>
-        </div>
-        <div class="basis" id="basis"></div>
-      </div>
+  <header class="top">
+    <div class="brand">오늘의 송이 시세<small>전국 산지 공판장 등급별 낙찰 단가</small></div>
+    <div class="datebar">
+      <button class="nav" id="prev">&lsaquo;</button>
+      <select id="dateSel" class="num"></select>
+      <button class="nav" id="next">&rsaquo;</button>
     </div>
-    <div class="note">1kg으로 주문하실 때 100g당 값이 가장 낮습니다.</div>
-  </section>
-
-  <section class="sec">
-    <h2>등급은 이렇게 나뉩니다</h2>
-    <div class="sub">산림조합 공판장에서 쓰는 기준 그대로입니다.</div>
-    <div class="pic">
-      <img src="grade-guide.jpg.png" alt="송이 등급 기준">
-      <div class="cap">길이와 갓이 펴진 정도로 등급이 나뉩니다. 등급이 낮아도 향과 맛은 같습니다.</div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <h2>주문하는 방법</h2>
-    <div class="sub">주문서를 작성하시거나, 문자로 보내주셔도 됩니다.</div>
-    <div style="margin-top:14px">
-      <div class="step"><span class="no">1</span><span class="tx">
-        <b>주문</b>아래 주문서를 작성해 주세요. 문자가 편하시면 이대로 적어 010-7486-0526으로 보내주셔도 됩니다.
-        <div class="form">
-          주문하시는 분 성함 / 연락처<br>
-          받으시는 분 성함 / 연락처<br>
-          받으실 주소<br>
-          등급 / 수량
-        </div>
-      </span></div>
-      <div class="step"><span class="no">2</span><span class="tx">
-        <b>입금</b>위 판매가를 확인하시고 아래 계좌로 입금해 주세요.</span></div>
-      <div class="step"><span class="no">3</span><span class="tx">
-        <b>당일 발송</b>오후 2시 이전 입금분은 그날 발송됩니다.</span></div>
-    </div>
-
-    <div class="box">
-      <div class="lbl">입금 계좌</div>
-      <div class="val">농협 351-1198-3253-13</div>
-      <div class="lbl" style="margin-top:14px">예금주</div>
-      <div class="val">농업회사법인(주)강원오대산농산</div>
-    </div>
-
-    <div class="box" style="margin-top:14px">
-      <div class="lbl">전화 문의·주문</div>
-      <div class="val"><a href="tel:16001591">1600-1591</a></div>
-      <div class="lbl" style="margin-top:14px">문자 주문</div>
-      <div class="val"><a href="sms:01074860526">010-7486-0526</a></div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <h2>받아보신 분들</h2>
-    <div class="sub">지난 판매에서 남겨주신 후기입니다.</div>
-    <div class="pic small"><img src="review.jpg.png" alt="구매 후기"></div>
-  </section>
-
-  <div class="info">
-    <h3>판매자 정보</h3>
-    <div class="irow"><span class="k">상호</span><span class="v">농업회사법인 주식회사 강원오대산농산</span></div>
-    <div class="irow"><span class="k">대표자</span><span class="v">홍희영</span></div>
-    <div class="irow"><span class="k">사업장 주소</span><span class="v">강원특별자치도 강릉시 연곡면 진고개로 2716, 2층 202호</span></div>
-    <div class="irow"><span class="k">사업자등록번호</span><span class="v num">345-88-01666</span></div>
-    <div class="irow"><span class="k">통신판매업</span><span class="v num">제2020-강원강릉-0415호</span></div>
-    <div class="irow"><span class="k">전화</span><span class="v num">1600-1591</span></div>
-    <div class="irow"><span class="k">원산지</span><span class="v">국내산 (강원도 자연산)</span></div>
-  </div>
-
-  <div class="rule">
-    <h3>교환 및 환불 안내</h3>
-    <p><b>발송 전</b>에는 언제든 취소하실 수 있습니다. 연락 주시면 입금하신 금액을 전액 환불해 드립니다.</p>
-    <p><b>발송 후</b>에는 자연산 송이가 신선식품이라 단순 변심에 의한 교환·반품이 어렵습니다. 전자상거래법 제17조 2항에 따라 시간이 지나 다시 판매하기 어려운 상품에 해당합니다.</p>
-    <p>다만 <b>상품에 문제가 있는 경우</b>에는 전액 환불 또는 교환해 드립니다. 상한 것, 주문과 다른 등급이나 중량이 온 경우입니다. 수령 당일 사진과 함께 연락 주시면 확인 후 처리해 드립니다.</p>
-    <p>자연산 송이는 자란 환경에 따라 모양과 크기가 제각각입니다. 같은 등급이라도 생김새가 다를 수 있으며, 이는 상품 하자가 아닙니다.</p>
-  </div>
-
-  <div class="foot">
-    농업회사법인(주)강원오대산농산<br>
-    공판 시세는 산림조합중앙회 자료를 기준으로 합니다.<br>
-    <a href="../">오늘의 송이 시세 보기</a>
-  </div>
+  </header>
+  <div id="notice"></div>
+  <main id="main"><div class="empty">불러오는 중…</div></main>
+  <footer class="foot">
+    단가는 등급별 낙찰 평균 단가이며, 현지 판매가격이 아닙니다.<br>
+    자료 출처: 산림조합중앙회 송이 공판현황<br>
+    <a href="https://m.nfcf.or.kr/forest/user.tdf?a=user.songi.SongiApp&amp;c=1003&amp;mc=MOB_CST01" target="_blank" rel="noopener">원본 페이지 보기</a>
+  </footer>
 </div>
-
-<div class="bar">
-  <div class="barin">
-    <a class="btel" id="smsBtn" href="sms:01074860526">문자 주문</a>
-    <a class="bord" href="https://docs.google.com/forms/d/e/1FAIpQLSddvhBF6tqMSv1TvrKAZYbNtMtwP89oLXFeuq3KzlGLs2T22g/viewform" target="_blank" rel="noopener">주문서 남기기</a>
-  </div>
-</div>
-
 <script>
-var FEE_RATE = 0.015, PACK = 10000, SHIP = 5000;
-var MARGIN = {300:40000, 500:55000, 1000:70000};
-var GRADES = [
-  {key:'g1', name:'1등품',      desc:'길이 8cm 이상, 갓이 전혀 펴지지 않은 최상품입니다.'},
-  {key:'g2', name:'2등품',      desc:'길이 6~8cm, 갓이 3분의 1 이내로 펴진 것입니다.'},
-  {key:'g3', name:'생장정지품', desc:'길이 6cm 미만으로 자라다 멈춘 것입니다. 단단하고 향이 진합니다.'},
-  {key:'g4', name:'개산품',     desc:'갓이 3분의 1 이상 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
-  {key:'g5', name:'등외품',     desc:'모양이 고르지 않거나 파손된 것입니다. 향과 맛은 같습니다.'}
+var GRADES = ["1등품","2등품","생장정지품","개산품","등외품","혼합품"];
+var ZONES = [
+  ["강원권", ["강원"]],
+  ["경북권", ["경북","대구"]],
+  ["경남·전라권", ["경남","전남","전북","광주","부산","울산"]],
+  ["충청·경기권", ["충북","충남","경기","세종","대전","인천"]]
 ];
-var WEIGHTS = [300, 500, 1000], WLABEL = ['300g','500g','1kg'];
-var MYSITE = '강원 강릉', gi = 0, wi = 2, info = {}, state = 'load';
-
-var SMSBODY = '주문하시는 분 성함 / 연락처 :\n받으시는 분 성함 / 연락처 :\n받으실 주소 :\n등급 / 수량 :';
-document.getElementById('smsBtn').href =
-  (navigator.userAgent.match(/iPhone|iPad|Mac/) ? 'sms:01074860526&body=' : 'sms:01074860526?body=')
-  + encodeURIComponent(SMSBODY);
+var SPANS = [
+  ["9월 초순", 9, 1, 10], ["9월 중순", 9, 11, 20], ["9월 하순", 9, 21, 31],
+  ["10월 초순", 10, 1, 10], ["10월 중순", 10, 11, 20], ["10월 하순", 10, 21, 31],
+  ["11월 초순", 11, 1, 10], ["11월 중순", 11, 11, 30]
+];
+var MINKG = 1;
+var dates = [], cache = {}, opened = {}, pickGrade = '전체 평균', allLoaded = null;
 
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
-function calc(u, g){ var s = u * (g/1000); return s + s*FEE_RATE + PACK + SHIP + MARGIN[g]; }
-function dayText(d){ return d.slice(0,4)+'년 '+Number(d.slice(5,7))+'월 '+Number(d.slice(8,10))+'일'; }
-
-function drawRows(){
-  document.getElementById('prows').innerHTML = GRADES.map(function(G, i){
-    var rec = info[G.name], u = rec ? rec.price : 0;
-    return '<div class="prow"><span class="gn">'+G.name+'</span>' +
-      WEIGHTS.map(function(w, j){
-        var p = u > 0 ? calc(u, w) : 0;
-        return '<span class="cell num'+((i===gi&&j===wi)?' on':'')+'" data-g="'+i+'" data-w="'+j+'">' +
-          (p > 0 ? won(p) : (state === 'load' ? '…' : '준비 중')) + '</span>';
-      }).join('') + '</div>';
-  }).join('');
+function load(d){
+  if(cache[d]) return Promise.resolve(cache[d]);
+  return fetch('data/' + d + '.json').then(function(res){
+    if(!res.ok) throw new Error('없음');
+    return res.json();
+  }).then(function(j){ cache[d] = j; return j; });
 }
-function drawShot(){
-  var G = GRADES[gi], rec = info[G.name], u = rec ? rec.price : 0;
-  var p = u > 0 ? calc(u, WEIGHTS[wi]) : 0;
-  document.getElementById('shot').innerHTML =
-    '<div class="im"><span class="none">'+G.name+' '+WLABEL[wi]+' 사진 준비 중</span>' +
-    '<img src="'+G.key+'-'+WEIGHTS[wi]+'.jpg" alt="'+G.name+'" onerror="this.style.display=\'none\'"></div>' +
-    '<div class="tx"><div class="t1">'+G.name+'<em>'+WLABEL[wi]+'</em>' +
-    '<b class="num">'+(p>0?won(p)+'원':'준비 중')+'</b></div>' +
-    '<div class="t2">'+G.desc+'</div></div>';
-}
-function drawBasis(){
-  var G = GRADES[gi], rec = info[G.name], b = document.getElementById('basis');
-  if(rec){
-    b.innerHTML = '<b>'+dayText(rec.date)+' '+MYSITE+' 공판 '+G.name+' '+won(rec.price)+'원</b> 기준입니다.<br>' +
-      '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
-  } else if(state === 'ok'){
-    b.innerHTML = '<b>'+MYSITE+' 공판에서 '+G.name+' 자료를 찾지 못했습니다.</b><br>' +
-      '다른 등급을 확인해 주세요.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
-  } else {
-    b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
+function sum(r){
+  var kg = 0, amt = 0;
+  for(var i=0;i<GRADES.length;i++){
+    var v = r.grades[GRADES[i]];
+    if(v){ kg += v.kg; amt += v.kg * v.price; }
   }
+  return {kg: kg, amt: amt};
 }
-function draw(){ drawRows(); drawShot(); drawBasis(); }
+function allOf(x){
+  for(var i=0;i<x.regions.length;i++) if(x.regions[i].name === '전체') return x.regions[i];
+  return x.regions[0];
+}
+function priceOf(r, g){ return (r.grades[g] && r.grades[g].price) || 0; }
+function kgOf(r, g){
+  if(g === '전체 평균') return sum(r).kg;
+  return (r.grades[g] && r.grades[g].kg) || 0;
+}
+function topGrade(r){
+  for(var i=0;i<GRADES.length;i++) if(priceOf(r, GRADES[i]) > 0) return GRADES[i];
+  return null;
+}
+function valueOf(all, g){
+  if(g === '전체 평균'){
+    var t = sum(all);
+    return t.kg > 0 ? t.amt / t.kg : 0;
+  }
+  return priceOf(all, g);
+}
+function extremesOf(x, g){
+  var all = allOf(x);
+  var hi = null, lo = null;
+  for(var i=0;i<x.regions.length;i++){
+    var r = x.regions[i];
+    if(r === all) continue;
+    var v = valueOf(r, g), kg = kgOf(r, g);
+    if(!(v > 0) || !(kg > 0)) continue;
+    if(!hi || v > hi.v) hi = {v: v, kg: kg, who: r.name};
+    if(kg >= MINKG && (!lo || v < lo.v)) lo = {v: v, kg: kg, who: r.name};
+  }
+  return {hi: hi, lo: lo};
+}
+function delta(cur, prev, cls){
+  if(!prev || !cur) return '<span class="' + cls + ' flat">—</span>';
+  var diff = cur - prev, pct = diff / prev * 100;
+  var dir = diff > 0 ? 'up' : (diff < 0 ? 'down' : 'flat');
+  var mark = diff > 0 ? '▲' : (diff < 0 ? '▼' : '―');
+  return '<span class="' + cls + ' ' + dir + '">' + mark + ' ' + won(Math.abs(diff)) +
+    '<em>' + (pct > 0 ? '+' : '') + pct.toFixed(1) + '%</em></span>';
+}
+function zoneOf(name){
+  for(var i=0;i<ZONES.length;i++){
+    var keys = ZONES[i][1];
+    for(var k=0;k<keys.length;k++) if(name.indexOf(keys[k]) === 0) return ZONES[i][0];
+  }
+  return '기타';
+}
+function nearestInYear(cur, year){
+  var p = cur.split('-');
+  var target = new Date(year, Number(p[1]) - 1, Number(p[2]));
+  var best = null, gap = Infinity;
+  for(var i=0;i<dates.length;i++){
+    var s = dates[i];
+    if(s.slice(0,4) !== String(year)) continue;
+    var q = s.split('-');
+    var diff = Math.abs(new Date(Number(q[0]), Number(q[1]) - 1, Number(q[2])) - target);
+    if(diff < gap){ gap = diff; best = s; }
+  }
+  return gap <= 7 * 86400000 ? best : null;
+}
+function mdText(s){ return Number(s.slice(5,7)) + '월 ' + Number(s.slice(8,10)) + '일'; }
+
+function loadAll(){
+  if(allLoaded) return allLoaded;
+  allLoaded = Promise.all(dates.map(function(d){
+    return load(d).then(function(x){ return {d: d, x: x, all: allOf(x)}; })
+                  .catch(function(){ return null; });
+  })).then(function(a){ return a.filter(function(r){ return r; }); });
+  return allLoaded;
+}
+
+function renderCheap(){
+  var box = document.getElementById('cheapBox');
+  if(!box) return;
+  loadAll().then(function(rows){
+    var g = pickGrade;
+    var byYear = {};
+    rows.forEach(function(r){
+      var v = valueOf(r.all, g);
+      if(!(v > 0)) return;
+      var y = r.d.slice(0,4);
+      if(!byYear[y]) byYear[y] = [];
+      byYear[y].push({d: r.d, v: v, kg: kgOf(r.all, g), x: r.x});
+    });
+    var years = Object.keys(byYear).sort().reverse();
+    if(!years.length){
+      box.innerHTML = '<div class="sub" style="margin-top:16px">이 등급은 자료가 부족합니다.</div>';
+      return;
+    }
+
+    var yearHtml = years.map(function(y){
+      var arr = byYear[y];
+      var hi = arr[0], lo = arr[0], volDay = arr[0];
+      var pkHi = null, pkLo = null;
+      arr.forEach(function(p){
+        if(p.v > hi.v) hi = p;
+        if(p.v < lo.v) lo = p;
+        if(p.kg > volDay.kg) volDay = p;
+        var ex = extremesOf(p.x, g);
+        if(ex.hi && (!pkHi || ex.hi.v > pkHi.v)) pkHi = {v: ex.hi.v, kg: ex.hi.kg, who: ex.hi.who, d: p.d};
+        if(ex.lo && (!pkLo || ex.lo.v < pkLo.v)) pkLo = {v: ex.lo.v, kg: ex.lo.kg, who: ex.lo.who, d: p.d};
+      });
+      var out = '<div class="ybox"><div class="yy num">' + y + '년</div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최고</span><span class="v">' +
+        '<span class="hi num">' + won(hi.v) + '원</span><span class="who">' + mdText(hi.d) + '</span></span></div>' +
+        '<div class="yline"><span class="lbl">전국 평균 최저</span><span class="v">' +
+        '<span class="lo num">' + won(lo.v) + '원</span><span class="who">' + mdText(lo.d) + '</span></span></div>';
+      if(pkHi){
+        out += '<div class="yline"><span class="lbl">최고 낙찰 공판장</span><span class="v">' +
+          '<span class="pk num">' + won(pkHi.v) + '원</span><span class="who">' +
+          mdText(pkHi.d) + ' · ' + pkHi.who + ' · ' + pkHi.kg.toFixed(1) + 'kg</span></span></div>';
+      }
+      if(pkLo){
+        out += '<div class="yline"><span class="lbl">최저 낙찰 공판장</span><span class="v">' +
+          '<span class="lo num">' + won(pkLo.v) + '원</span><span class="who">' +
+          mdText(pkLo.d) + ' · ' + pkLo.who + ' · ' + pkLo.kg.toFixed(1) + 'kg</span></span></div>';
+      }
+      out += '<div class="yline"><span class="lbl">물량 최대일</span><span class="v">' +
+        '<span class="vl num">' + won(volDay.kg) + 'kg</span><span class="who">' +
+        mdText(volDay.d) + ' · ' + won(volDay.v) + '원</span></span></div></div>';
+      return out;
+    }).join('');
+
+    var bp = SPANS.map(function(){ return {s: 0, n: 0}; });
+    var bv = SPANS.map(function(){ return {s: 0, n: 0}; });
+    rows.forEach(function(r){
+      var v = valueOf(r.all, g), kg = kgOf(r.all, g);
+      var m = Number(r.d.slice(5,7)), dd = Number(r.d.slice(8,10));
+      for(var i=0;i<SPANS.length;i++){
+        if(m === SPANS[i][1] && dd >= SPANS[i][2] && dd <= SPANS[i][3]){
+          if(v > 0){ bp[i].s += v; bp[i].n++; }
+          if(kg > 0){ bv[i].s += kg; bv[i].n++; }
+          break;
+        }
+      }
+    });
+    var pAvg = bp.map(function(b){ return b.n ? b.s / b.n : 0; });
+    var vAvg = bv.map(function(b){ return b.n ? b.s / b.n : 0; });
+    var pLive = pAvg.filter(function(v){ return v > 0; });
+    var vLive = vAvg.filter(function(v){ return v > 0; });
+    if(!pLive.length){ box.innerHTML = yearHtml; return; }
+
+    var pMax = Math.max.apply(null, pLive), pMin = Math.min.apply(null, pLive);
+    var vMax = vLive.length ? Math.max.apply(null, vLive) : 0;
+    var hiIdx = -1, loIdx = -1, volIdx = -1;
+    for(var i=0;i<SPANS.length;i++){
+      if(pAvg[i] === pMax) hiIdx = i;
+      if(pAvg[i] === pMin) loIdx = i;
+      if(vMax && vAvg[i] === vMax) volIdx = i;
+    }
+
+    var sortedP = pLive.slice().sort(function(a,b){ return a - b; });
+    var midP = sortedP[Math.floor(sortedP.length / 2)];
+    var volCut = vMax * 0.3;
+    var picks = [];
+    for(var i=0;i<SPANS.length;i++){
+      if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP) picks.push(i);
+    }
+    var runs = [], cur = [];
+    for(var i=0;i<SPANS.length;i++){
+      if(picks.indexOf(i) >= 0){ cur.push(i); }
+      else { if(cur.length) runs.push(cur); cur = []; }
+    }
+    if(cur.length) runs.push(cur);
+    var bestRun = null;
+    runs.forEach(function(rn){ if(!bestRun || rn.length > bestRun.length) bestRun = rn; });
+
+    var priceRows = SPANS.map(function(sp, i){
+      var v = pAvg[i];
+      if(!(v > 0)) return '';
+      var cls = (i === hiIdx ? 'max' : (i === loIdx ? 'min' : ''));
+      if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
+      return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
+        '<span class="sb"><i style="width:' + (v / pMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sv num">' + won(v) + '원</span></div>';
+    }).join('');
+    var volRows = SPANS.map(function(sp, i){
+      var v = vAvg[i];
+      if(!(v > 0) || !vMax) return '';
+      var cls = (i === volIdx ? 'vmax' : '');
+      if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
+      return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
+        '<span class="sb"><i style="width:' + (v / vMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sv num">' + won(v) + 'kg</span></div>';
+    }).join('');
+
+    var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ' +
+      '<span class="hi">' + SPANS[hiIdx][0] + '</span>이 가장 비쌌습니다(' + won(pMax) + '원).';
+    if(loIdx >= 0){
+      var loThin = vAvg[loIdx] < volCut;
+      verdict += ' 가장 싼 시기는 <span class="lo">' + SPANS[loIdx][0] + '</span>(' + won(pMin) + '원)';
+      verdict += loThin
+        ? '이지만, 이때는 물량이 평균 ' + won(vAvg[loIdx]) + 'kg뿐이라 실제로 구하기는 어렵습니다.'
+        : '입니다.';
+    }
+    if(volIdx >= 0){
+      verdict += ' 물량은 <span class="vol">' + SPANS[volIdx][0] + '</span>에 가장 많이 쏟아집니다(' +
+        won(vMax) + 'kg).';
+    }
+    if(bestRun && bestRun.length){
+      var a = SPANS[bestRun[0]][0], b = SPANS[bestRun[bestRun.length-1]][0];
+      var label = (a === b) ? a : (a + '~' + b);
+      verdict += '<hr>값과 물량을 함께 보면 <span class="pick">' + label +
+        '</span>이 가장 사기 좋은 때입니다.';
+    }
+    verdict += '</div>';
+
+    box.innerHTML = verdict +
+      '<div class="subhead">연도별 기록</div>' + yearHtml +
+      '<div class="sub" style="margin-top:10px">전국 평균은 그날 전국 거래금액을 물량으로 나눈 값입니다. ' +
+      '최고·최저 낙찰은 한 공판장에서 나온 값이며, 최저는 ' + MINKG + 'kg 이상 거래된 곳만 셉니다.</div>' +
+      '<div class="subhead">시기별 평균 단가 · ' + years.length + '개 시즌</div>' +
+      '<div style="margin-top:10px">' + priceRows + '</div>' +
+      '<div class="sub" style="margin-top:11px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다. ' +
+      '밑줄 친 시기가 사기 좋은 때입니다.</div>' +
+      (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
+        '<div style="margin-top:10px">' + volRows + '</div>' +
+        '<div class="sub" style="margin-top:11px">진한 막대가 물량이 가장 많이 나오는 시기입니다. ' +
+        '물량이 몰리는 때에 값이 내려가는 흐름을 함께 보세요.</div>' : '');
+  });
+}
+
+function compare(cur){
+  var el = document.getElementById('cmpBox');
+  if(!el) return;
+  var year = Number(cur.slice(0,4));
+  var last = nearestInYear(cur, year - 1);
+  if(!last){
+    el.innerHTML = '<div class="sub" style="margin-top:14px">작년 같은 시기 자료가 아직 없습니다.</div>';
+    return;
+  }
+  Promise.all([load(cur), load(last)]).then(function(res){
+    var now = allOf(res[0]), old = allOf(res[1]);
+    var rows = GRADES.map(function(g){
+      var a = priceOf(now, g), b = priceOf(old, g);
+      if(!(a > 0) && !(b > 0)){
+        return '<div class="crow"><div class="r1"><span class="nm" style="color:#8E7C68">' + g + '</span>' +
+          '<span class="none">양쪽 다 거래 없음</span></div></div>';
+      }
+      var pctHtml = '';
+      if(a > 0 && b > 0){
+        var pct = Math.round((a - b) / b * 100);
+        var dir = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat');
+        pctHtml = '<span class="pct ' + dir + '">' + (pct > 0 ? '+' : '') + pct + '%</span>';
+      } else {
+        pctHtml = '<span class="pct flat" style="font-size:12.5px;font-weight:500">비교 불가</span>';
+      }
+      return '<div class="crow"><div class="r1"><span class="nm">' + g + '</span>' +
+        '<span class="now num">' + (a > 0 ? won(a) + '<span class="unit"> 원</span>'
+          : '<span class="none">거래 없음</span>') + '</span></div>' +
+        '<div class="r2"><span>작년 ' + (b > 0 ? '<b class="num">' + won(b) + '원</b>' : '거래 없음') + '</span>' +
+        pctHtml + '</div></div>';
+    }).join('');
+
+    el.innerHTML = '<div class="cmp"><div class="cmphead">' +
+      mdText(cur) + ' · 작년 같은 시기는 ' + mdText(last) + ' 공판</div>' + rows + '</div>' +
+      '<div class="sub" style="margin-top:12px">큰 숫자가 이 날, 아래가 작년 같은 무렵입니다.</div>';
+  }).catch(function(){
+    el.innerHTML = '<div class="sub" style="margin-top:14px">비교 자료를 불러오지 못했습니다.</div>';
+  });
+}
+
+function chart(cur){
+  var year = cur.slice(0,4);
+  var list = dates.filter(function(d){ return d.slice(0,4) === year; }).sort();
+  Promise.all(list.map(function(d){
+    return load(d).then(function(x){ return {d: d, v: priceOf(allOf(x), '1등품')}; })
+                  .catch(function(){ return null; });
+  })).then(function(arr){
+    var pts = arr.filter(function(p){ return p && p.v > 0; });
+    var el = document.getElementById('chartBox');
+    if(!el) return;
+    if(pts.length < 2){ el.innerHTML = '<div class="sub">그릴 자료가 아직 부족합니다.</div>'; return; }
+    var W = 440, H = 110;
+    var vs = pts.map(function(p){ return p.v; });
+    var mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs);
+    var X = function(i){ return i / (pts.length - 1) * W; };
+    var Y = function(v){ return H - (v - mn) / ((mx - mn) || 1) * H; };
+    var line = pts.map(function(p, i){
+      return (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(p.v).toFixed(1);
+    }).join(' ');
+    var idx = -1;
+    for(var i=0;i<pts.length;i++) if(pts[i].d === cur) idx = i;
+    var dot = idx >= 0
+      ? '<circle cx="' + X(idx) + '" cy="' + Y(pts[idx].v) + '" r="5" fill="#F7F3EB" stroke="#6B3C1B" stroke-width="2.5" vector-effect="non-scaling-stroke"/>'
+      : '';
+    el.innerHTML = '<svg viewBox="-4 -8 ' + (W+8) + ' ' + (H+16) + '" preserveAspectRatio="none">' +
+      '<path d="' + line + ' L' + W + ',' + (H+8) + ' L0,' + (H+8) + ' Z" fill="rgba(140,98,54,.14)"/>' +
+      '<path d="' + line + '" fill="none" stroke="#6B3C1B" stroke-width="2.2" vector-effect="non-scaling-stroke"/>' +
+      dot + '</svg>' +
+      '<div class="axis num"><span>' + pts[0].d.slice(5).replace('-','.') + '</span>' +
+      '<span>최저 ' + won(mn) + ' · 최고 ' + won(mx) + '</span>' +
+      '<span>' + pts[pts.length-1].d.slice(5).replace('-','.') + '</span></div>';
+  });
+}
+
+function season(cur){
+  var year = cur.slice(0,4);
+  var list = dates.filter(function(d){ return d.slice(0,4) === year; });
+  Promise.all(list.map(function(d){
+    return load(d).then(function(x){
+      var a = allOf(x);
+      return {d: d, kg: sum(a).kg, p: priceOf(a, '1등품')};
+    }).catch(function(){ return null; });
+  })).then(function(arr){
+    var best = 0, bestDay = '', totKg = 0, days = 0;
+    arr.forEach(function(r){
+      if(!r) return;
+      if(r.kg > 0) days++;
+      totKg += r.kg;
+      if(r.p > best){ best = r.p; bestDay = r.d; }
+    });
+    var el = document.getElementById('seasonBox');
+    if(!el) return;
+    el.innerHTML = '<dl class="stats num" style="margin:16px 0 0">' +
+      '<div><dt>1등품 최고가</dt><dd>' + (best ? won(best) : '-') + '</dd></div>' +
+      '<div><dt>누적 물량</dt><dd>' + won(totKg) + ' kg</dd></div>' +
+      '<div><dt>공판 일수</dt><dd>' + days + ' 일</dd></div></dl>' +
+      (best ? '<div class="sub" style="margin-top:12px">' + year + '년 1등품 최고가는 ' +
+        bestDay.slice(5).replace('-','월 ') + '일 ' + won(best) + '원이었습니다.</div>' : '');
+  });
+}
+
+function render(d){
+  var main = document.getElementById('main');
+  main.innerHTML = '<div class="empty">불러오는 중…</div>';
+  document.getElementById('dateSel').value = d;
+  var i = dates.indexOf(d);
+  document.getElementById('prev').disabled = i >= dates.length - 1;
+  document.getElementById('next').disabled = i <= 0;
+
+  var prevPromise = (i < dates.length - 1)
+    ? load(dates[i+1]).then(function(x){ return allOf(x); }).catch(function(){ return null; })
+    : Promise.resolve(null);
+
+  Promise.all([load(d), prevPromise]).then(function(res){
+    var data = res[0], prev = res[1];
+    var all = allOf(data);
+    var regions = data.regions.filter(function(r){ return r !== all && sum(r).kg > 0; });
+    var t = sum(all);
+    var kgs = GRADES.map(function(g){ return (all.grades[g] && all.grades[g].kg) || 0; });
+    var maxKg = Math.max.apply(null, kgs.concat([1]));
+    var bestName = topGrade(all);
+    var bestIdx = bestName ? GRADES.indexOf(bestName) : -1;
+    var bestPrice = bestName ? priceOf(all, bestName) : 0;
+    var md = d.slice(5).replace('-','월 ') + '일';
+
+    var grouped = {};
+    regions.forEach(function(r){
+      var z = zoneOf(r.name);
+      if(!grouped[z]) grouped[z] = [];
+      grouped[z].push(r);
+    });
+    var order = ZONES.map(function(z){ return z[0]; }).concat('기타')
+      .filter(function(z){ return grouped[z]; });
+
+    var gradeHtml = GRADES.map(function(g, k){
+      var v = all.grades[g];
+      if(!v) return '';
+      var pv = prev ? priceOf(prev, g) : 0;
+      var zero = !(v.price > 0);
+      return '<div class="grade ' + (k === bestIdx ? 'best' : '') + '">' +
+        '<div class="r1"><span class="nm"' + (zero ? ' style="color:#8E7C68"' : '') + '>' + g + '</span>' +
+        '<span class="pr num">' +
+        (zero ? '<span class="none">거래 없음</span>' : won(v.price) + '<span class="unit"> 원</span>') +
+        '</span></div>' +
+        '<div class="r2"><span class="bar"><i style="width:' + (v.kg / maxKg * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="kg num">' + v.kg.toFixed(1) + ' kg</span>' +
+        (zero ? '<span class="chg flat"></span>' : delta(v.price, pv, 'chg')) + '</div></div>';
+    }).join('');
+
+    var siteHtml = order.map(function(z){
+      var arr = grouped[z].slice().sort(function(a, b){
+        var ga = topGrade(a), gb = topGrade(b);
+        var ia = ga ? GRADES.indexOf(ga) : 99, ib = gb ? GRADES.indexOf(gb) : 99;
+        if(ia !== ib) return ia - ib;
+        return (gb ? priceOf(b, gb) : 0) - (ga ? priceOf(a, ga) : 0);
+      });
+      return '<div class="zone">' + z + '</div>' + arr.map(function(r){
+        var op = opened[r.name];
+        var rt = sum(r);
+        var top = topGrade(r);
+        var topKg = top ? (r.grades[top].kg || 0) : 0;
+        var detail = '';
+        if(op){
+          detail = '<div class="detail">' + GRADES.map(function(g){
+            var v = r.grades[g];
+            if(!v || !(v.kg > 0)) return '';
+            return '<div class="drow"><span>' + g + '</span><span><b class="num">' +
+              won(v.price) + '</b> 원<span class="k num">' + v.kg.toFixed(1) + ' kg</span></span></div>';
+          }).join('') + '</div>';
+        }
+        return '<div class="site ' + (op ? 'open' : '') + '">' +
+          '<button class="sitebtn" data-site="' + r.name + '">' +
+          '<span class="nm">' + r.name + '</span>' +
+          '<span class="val num"><b>' + (top ? won(priceOf(r, top)) : '-') + '</b>' +
+          '<small>' + (top ? top + ' ' + topKg.toFixed(1) + 'kg · 총 ' + rt.kg.toFixed(1) + 'kg'
+                           : '총 ' + rt.kg.toFixed(1) + 'kg') + '</small></span>' +
+          '<span class="caret">' + (op ? '▲' : '▼') + '</span></button>' + detail + '</div>';
+      }).join('');
+    }).join('');
+
+    var tabs = ['전체 평균'].concat(GRADES).map(function(g){
+      return '<button class="gtab ' + (g === pickGrade ? 'on' : '') + '" data-grade="' + g + '">' + g + '</button>';
+    }).join('');
+
+    var colA =
+      '<section class="sec"><h2>등급별 전국 낙찰단가</h2>' +
+      '<div class="sub">전국 공판장을 합산한 물량 가중평균입니다. 막대는 물량 비중, 오른쪽은 직전 공판일 대비 증감입니다.</div>' +
+      '<div style="margin-top:18px">' + gradeHtml + '</div></section>' +
+      '<section class="sec"><h2>공판장별 낙찰단가</h2>' +
+      '<div class="sub">지역권으로 묶었습니다. 큰 숫자는 그 공판장 최고 등급 단가입니다. 눌러서 등급별로 펼쳐 보세요.</div>' + siteHtml + '</section>' +
+      '<section class="sec"><h2>작년 이맘때와 비교</h2>' +
+      '<div class="sub">등급별로 작년 같은 무렵과 나란히 놓았습니다.</div>' +
+      '<div id="cmpBox"><div class="sub" style="margin-top:14px">불러오는 중…</div></div></section>';
+
+    var colB =
+      '<section class="sec"><h2>언제가 싸고 언제가 비쌀까</h2>' +
+      '<div class="sub">지난 시즌들을 모아 본 시기별 흐름입니다. 등급을 눌러 바꿔 보세요.</div>' +
+      '<div class="gtabs" id="gtabs">' + tabs + '</div>' +
+      '<div id="cheapBox"><div class="sub" style="margin-top:16px">집계 중…</div></div></section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 시즌 기록</h2>' +
+      '<div class="sub">그해 공판이 시작된 뒤 지금까지의 누계입니다.</div>' +
+      '<div id="seasonBox"><div class="sub" style="margin-top:14px">집계 중…</div></div></section>' +
+      '<section class="sec"><h2>' + d.slice(0,4) + '년 1등품 단가 추이</h2>' +
+      '<div class="chart" id="chartBox"><div class="sub">그리는 중…</div></div></section>';
+
+    main.innerHTML =
+      '<p class="lead">' + md + ' 공판에서 전국 <b>' + regions.length + '곳</b>이 열렸습니다. ' +
+      (bestName ? '가장 높은 등급은 <b>' + bestName + '</b>으로 <span class="big num">' +
+        won(bestPrice) + '</span>원이었습니다.' : '거래된 물량이 없습니다.') + '</p>' +
+      '<dl class="stats num">' +
+      '<div><dt>총 물량</dt><dd>' + t.kg.toFixed(1) + ' kg</dd></div>' +
+      '<div><dt>총 금액</dt><dd>' + won(t.amt / 10000) + ' 만원</dd></div>' +
+      '<div><dt>공판장</dt><dd>' + regions.length + ' 곳</dd></div></dl>' +
+      '<div id="cols"><div id="colA">' + colA + '</div><div id="colB">' + colB + '</div></div>';
+
+    renderCheap();
+    compare(d);
+    season(d);
+    chart(d);
+  }).catch(function(){
+    main.innerHTML = '<div class="empty">이 날은 공판 자료가 없습니다.</div>';
+  });
+}
 
 document.addEventListener('click', function(e){
-  var c = e.target.closest ? e.target.closest('.cell') : null;
-  if(!c) return;
-  gi = Number(c.getAttribute('data-g'));
-  wi = Number(c.getAttribute('data-w'));
-  draw();
-});
-draw();
-
-function scan(dates){
-  var pos = 0, CHUNK = 20;
-  function step(){
-    if(pos >= dates.length || Object.keys(info).length >= GRADES.length){
-      state = 'ok'; showNotice(); draw(); return;
+  if(!e.target.closest) return;
+  var g = e.target.closest('.gtab');
+  if(g){
+    pickGrade = g.getAttribute('data-grade');
+    var tabs = document.querySelectorAll('.gtab');
+    for(var i=0;i<tabs.length;i++){
+      if(tabs[i].getAttribute('data-grade') === pickGrade) tabs[i].className = 'gtab on';
+      else tabs[i].className = 'gtab';
     }
-    var part = dates.slice(pos, pos + CHUNK);
-    pos += CHUNK;
-    Promise.all(part.map(function(d){
-      return fetch('../data/'+d+'.json').then(function(r){ return r.json(); })
-        .then(function(x){ return {d:d, x:x}; }).catch(function(){ return null; });
-    })).then(function(list){
-      list.forEach(function(it){
-        if(!it) return;
-        var hit = null;
-        for(var i = 0; i < it.x.regions.length; i++){
-          if(it.x.regions[i].name === MYSITE) hit = it.x.regions[i];
-        }
-        if(!hit) return;
-        for(var k = 0; k < GRADES.length; k++){
-          var nm = GRADES[k].name, v = hit.grades[nm];
-          if(!v || !(v.price > 0)) continue;
-          if(!info[nm] || it.d > info[nm].date) info[nm] = {price:v.price, date:it.d};
-        }
-      });
-      draw(); step();
-    });
+    document.getElementById('cheapBox').innerHTML = '<div class="sub" style="margin-top:16px">집계 중…</div>';
+    renderCheap();
+    return;
   }
-  step();
-}
-function showNotice(){
-  var newest = '';
-  for(var k in info){ if(!newest || info[k].date > newest) newest = info[k].date; }
-  if(!newest) return;
-  if(Math.floor((Date.now() - new Date(newest)) / 86400000) > 20){
-    document.getElementById('noticeBox').innerHTML =
-      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>'+dayText(newest)+
-      '</b> 무렵 공판 기준 참고가입니다. 공판이 열리면 그날 낙찰가에 맞춰 자동으로 바뀝니다.</div>';
+  var b = e.target.closest('.sitebtn');
+  if(b){
+    var k = b.getAttribute('data-site');
+    if(opened[k]) delete opened[k]; else opened[k] = true;
+    render(document.getElementById('dateSel').value);
   }
-}
-fetch('site.txt').then(function(r){ return r.text(); }).then(function(t){
-  var s = t.trim(); if(s) MYSITE = s;
-}).catch(function(){}).then(function(){
-  return fetch('../data/index.json').then(function(r){ return r.json(); });
-}).then(function(idx){ scan(idx.dates); }).catch(function(){ state='ok'; draw(); });
+});
+
+fetch('data/index.json').then(function(res){ return res.json(); }).then(function(idx){
+  dates = idx.dates;
+  var latest = dates[0];
+  var gap = Math.floor((Date.now() - new Date(latest)) / 86400000);
+  if(gap > 20){
+    document.getElementById('notice').innerHTML =
+      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 지금 보시는 자료는 가장 최근 공판일인 <b>' +
+      latest.replace(/-/g, '. ') + '</b> 기준입니다. 공판이 열리면 매일 저녁 자동으로 갱신됩니다.</div>';
+  }
+  var sel = document.getElementById('dateSel');
+  sel.innerHTML = dates.map(function(d){
+    return '<option value="' + d + '">' + d.replace(/-/g, '. ') + '</option>';
+  }).join('');
+  sel.onchange = function(){ opened = {}; render(sel.value); };
+  document.getElementById('prev').onclick = function(){
+    var i = dates.indexOf(sel.value);
+    if(i < dates.length - 1){ opened = {}; render(dates[i+1]); }
+  };
+  document.getElementById('next').onclick = function(){
+    var i = dates.indexOf(sel.value);
+    if(i > 0){ opened = {}; render(dates[i-1]); }
+  };
+  render(dates[0]);
+}).catch(function(){
+  document.getElementById('main').innerHTML = '<div class="empty">자료를 불러오지 못했습니다.</div>';
+});
 </script>
 </body>
 </html>
