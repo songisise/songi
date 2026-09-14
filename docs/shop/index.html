@@ -56,6 +56,8 @@ a{color:var(--brown);font-weight:600}
 .cell{flex:1;padding:15px 6px;text-align:right;cursor:pointer;font-size:14px;color:var(--ink2)}
 .cell:last-child{padding-right:15px;font-size:14.5px;font-weight:700;color:var(--brown)}
 .cell.on{background:var(--brown);color:#FFFDF9;font-weight:700}
+.tip{margin-top:12px;padding:12px 15px;background:#F2E8D6;border-radius:8px;
+  font-size:14px;color:var(--brown);font-weight:600;text-align:center}
 .shot{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
 .shot .im{height:200px;background:#EDE5D6;position:relative}
 .shot .im img{width:100%;height:100%;object-fit:cover;display:block}
@@ -66,7 +68,7 @@ a{color:var(--brown);font-weight:600}
 .shot .t1 em{font-style:normal;color:var(--brown);margin-left:7px}
 .shot .t1 b{float:right;font-weight:700}
 .shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7}
-.basis{margin-top:16px;padding:17px 18px;background:var(--card);
+.basis{margin-top:12px;padding:17px 18px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
   color:var(--ink2);line-height:1.85;font-weight:500}
 .basis b{color:var(--ink);font-weight:700}
@@ -136,7 +138,7 @@ a{color:var(--brown);font-weight:600}
 <div class="wrap">
   <section class="sec">
     <h2>오늘 판매가</h2>
-    <div class="sub">값을 누르시면 그 상품 사진이 나옵니다. 포장비와 배송비가 모두 포함된 값입니다.</div>
+    <div class="sub">포장비와 배송비가 모두 포함된 값입니다.</div>
     <div id="noticeBox"></div>
     <div id="pcrow">
       <div id="pcphoto"><div class="shot" id="shot"></div></div>
@@ -145,6 +147,7 @@ a{color:var(--brown);font-weight:600}
           <div class="phead"><div>등급</div><div>300g</div><div>500g</div><div>1kg</div></div>
           <div id="prows"></div>
         </div>
+        <div class="tip">가격을 누르시면 그 상품 사진이 나옵니다</div>
         <div class="basis" id="basis"></div>
       </div>
     </div>
