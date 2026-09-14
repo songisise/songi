@@ -43,9 +43,17 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-size:13.5px;color:#5A4218;line-height:1.75;font-weight:500}
 .notice b{font-weight:700}
 
+.admin{margin:16px 0 0;padding:15px 17px;border-radius:10px;
+  background:#EDE7DC;border:1.5px dashed var(--line)}
+.admin .t{font-size:12px;color:var(--ink3);font-weight:600;margin-bottom:9px}
+.admin .bs{display:flex;flex-wrap:wrap;gap:6px}
+.admin button{font-size:12.5px;padding:7px 12px;border-radius:999px;
+  border:1.5px solid var(--rule);background:var(--card);color:var(--ink2);font-weight:500}
+.admin button.on{background:var(--brown);border-color:var(--brown);color:#FFFDF9;font-weight:600}
+.admin .m{font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.7}
+
 #pcrow{margin-top:16px}
 
-/* 가격표 */
 .ptable{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
 .phead{display:flex;background:#F0E8D8;border-bottom:1.5px solid var(--rule)}
 .phead div{padding:12px 6px;font-size:12px;color:var(--ink3);font-weight:600;text-align:right}
@@ -67,10 +75,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .shot .im .none{position:absolute;inset:0;display:flex;align-items:center;
   justify-content:center;color:var(--ink3);font-size:13px;font-weight:500}
 .shot .tx{padding:17px 19px}
-.shot .t1{font-size:17px;font-weight:700}
+.shot .t1{font-size:17px;font-weight:700;overflow:hidden}
 .shot .t1 em{font-style:normal;color:var(--brown);margin-left:7px}
 .shot .t1 b{float:right;font-weight:700}
-.shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7;clear:both}
+.shot .t2{font-size:13px;color:var(--ink3);margin-top:7px;line-height:1.7}
 
 .basis{margin-top:16px;padding:17px 18px;background:var(--card);
   border:1.5px solid var(--rule);border-radius:10px;font-size:14px;
@@ -155,6 +163,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <section class="sec">
     <h2>오늘 판매가</h2>
     <div class="sub">값을 누르시면 그 상품 사진이 나옵니다. 포장비와 배송비가 모두 포함된 값입니다.</div>
+    <div id="adminBox"></div>
     <div id="noticeBox"></div>
 
     <div id="pcrow">
@@ -262,11 +271,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 </div>
 
 <script>
-var MYSITE = '강원 양양';
 var FEE_RATE = 0.015;
 var PACK = 10000;
 var SHIP = 5000;
 var MARGIN = {300:40000, 500:55000, 1000:70000};
+var SITES = ['강원 강릉','강원 양양','강원 인제','강원 홍천','강원 고성','강원 삼척','강원 양구'];
 
 var GRADES = [
   {key:'g1', name:'1등품',      desc:'길이 8cm 이상, 갓이 전혀 펴지지 않은 최상품입니다.'},
@@ -278,16 +287,23 @@ var GRADES = [
 var WEIGHTS = [300, 500, 1000];
 var WLABEL = ['300g', '500g', '1kg'];
 
-var gi = 0, wi = 2, prices = {}, baseDate = '', state = 'load';
+var MYSITE = '강원 강릉';
+var gi = 0, wi = 2, info = {}, state = 'load', dates = [], cacheDay = {};
+var isAdmin = location.search.indexOf('admin') >= 0;
+
 function won(n){ return Math.round(n).toLocaleString('ko-KR'); }
 function calc(unit, g){
   var s = unit * (g / 1000);
   return s + s * FEE_RATE + PACK + SHIP + MARGIN[g];
 }
+function dayText(d){
+  return d.slice(0,4) + '년 ' + Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
+}
 
 function drawRows(){
   document.getElementById('prows').innerHTML = GRADES.map(function(G, i){
-    var unit = prices[G.name] || 0;
+    var rec = info[G.name];
+    var unit = rec ? rec.price : 0;
     return '<div class="prow"><span class="gn">' + G.name + '</span>' +
       WEIGHTS.map(function(w, j){
         var p = unit > 0 ? calc(unit, w) : 0;
@@ -300,7 +316,8 @@ function drawRows(){
 
 function drawShot(){
   var G = GRADES[gi];
-  var unit = prices[G.name] || 0;
+  var rec = info[G.name];
+  var unit = rec ? rec.price : 0;
   var p = unit > 0 ? calc(unit, WEIGHTS[wi]) : 0;
   var img = G.key + '-' + WEIGHTS[wi] + '.jpg';
   document.getElementById('shot').innerHTML =
@@ -313,13 +330,14 @@ function drawShot(){
 
 function drawBasis(){
   var G = GRADES[gi];
-  var unit = prices[G.name] || 0;
+  var rec = info[G.name];
   var b = document.getElementById('basis');
-  if(state === 'ok' && unit > 0){
-    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판 ' + G.name + ' ' + won(unit) + '원</b> 기준입니다.<br>' +
+  if(state === 'ok' && rec){
+    b.innerHTML = '<b>' + dayText(rec.date) + ' ' + MYSITE + ' 공판 ' + G.name +
+      ' ' + won(rec.price) + '원</b> 기준입니다.<br>' +
       '여기에 유통·포장·배송비가 포함된 값입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   } else if(state === 'ok'){
-    b.innerHTML = '<b>' + baseDate + ' ' + MYSITE + ' 공판에 ' + G.name + '은 나오지 않았습니다.</b><br>' +
+    b.innerHTML = '<b>' + MYSITE + ' 공판에서 ' + G.name + ' 최근 자료를 찾지 못했습니다.</b><br>' +
       '다른 등급을 확인해 주세요.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
   } else {
     b.innerHTML = '공판 자료를 불러오는 중입니다.<br><a href="../">오늘의 공판 시세 직접 확인하기</a>';
@@ -328,49 +346,96 @@ function drawBasis(){
 
 function draw(){ drawRows(); drawShot(); drawBasis(); }
 
+function drawAdmin(){
+  if(!isAdmin) return;
+  document.getElementById('adminBox').innerHTML =
+    '<div class="admin"><div class="t">공판장 미리보기 (손님에게는 보이지 않습니다)</div>' +
+    '<div class="bs">' + SITES.map(function(s){
+      return '<button data-site="' + s + '"' + (s === MYSITE ? ' class="on"' : '') + '>' +
+        s.replace('강원 ', '') + '</button>';
+    }).join('') + '</div>' +
+    '<div class="m">손님 화면까지 바꾸시려면 site.txt 파일의 공판장 이름을 고치세요.</div></div>';
+}
+
 document.addEventListener('click', function(e){
-  var c = e.target.closest ? e.target.closest('.cell') : null;
-  if(!c) return;
-  gi = Number(c.getAttribute('data-g'));
-  wi = Number(c.getAttribute('data-w'));
-  draw();
+  if(!e.target.closest) return;
+  var a = e.target.closest('.admin button');
+  if(a){
+    MYSITE = a.getAttribute('data-site');
+    drawAdmin();
+    loadPrices();
+    return;
+  }
+  var c = e.target.closest('.cell');
+  if(c){
+    gi = Number(c.getAttribute('data-g'));
+    wi = Number(c.getAttribute('data-w'));
+    draw();
+  }
 });
 
-draw();
-
-fetch('../data/index.json').then(function(r){ return r.json(); }).then(function(idx){
-  var list = idx.dates.slice(0, 40);
+/* 등급마다 각각 가장 최근 값을 찾는다 */
+function loadPrices(){
+  info = {};
+  state = 'load';
+  draw();
+  var need = GRADES.length;
   var step = 0;
+
   function tryNext(){
-    if(step >= list.length){ state = 'ok'; draw(); return; }
-    var d = list[step++];
-    fetch('../data/' + d + '.json').then(function(r){ return r.json(); }).then(function(x){
+    if(step >= dates.length || Object.keys(info).length >= need){
+      state = 'ok';
+      showNotice();
+      draw();
+      return;
+    }
+    var d = dates[step++];
+    var go = function(x){
       var hit = null;
       for(var i = 0; i < x.regions.length; i++){
         if(x.regions[i].name === MYSITE) hit = x.regions[i];
       }
-      var any = false;
       if(hit){
-        for(var k in hit.grades){
-          if(hit.grades[k].price > 0){ prices[k] = hit.grades[k].price; any = true; }
+        for(var k = 0; k < GRADES.length; k++){
+          var nm = GRADES[k].name;
+          if(info[nm]) continue;
+          var v = hit.grades[nm];
+          if(v && v.price > 0) info[nm] = {price: v.price, date: d};
         }
       }
-      if(any){
-        baseDate = d.slice(0,4) + '년 ' + Number(d.slice(5,7)) + '월 ' + Number(d.slice(8,10)) + '일';
-        var gap = Math.floor((Date.now() - new Date(d)) / 86400000);
-        if(gap > 20){
-          document.getElementById('noticeBox').innerHTML =
-            '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>' + baseDate +
-            '</b> 공판 기준 참고가입니다. 공판이 열리면 그날 낙찰가에 맞춰 자동으로 바뀝니다.</div>';
-        }
-        state = 'ok';
-        draw();
-      } else {
-        tryNext();
-      }
-    }).catch(tryNext);
+      tryNext();
+    };
+    if(cacheDay[d]) { go(cacheDay[d]); return; }
+    fetch('../data/' + d + '.json').then(function(r){ return r.json(); })
+      .then(function(x){ cacheDay[d] = x; go(x); })
+      .catch(tryNext);
   }
   tryNext();
+}
+
+function showNotice(){
+  var newest = '';
+  for(var k in info){ if(!newest || info[k].date > newest) newest = info[k].date; }
+  if(!newest) return;
+  var gap = Math.floor((Date.now() - new Date(newest)) / 86400000);
+  if(gap > 20){
+    document.getElementById('noticeBox').innerHTML =
+      '<div class="notice">올해 공판이 아직 시작되지 않았습니다. 아래는 <b>' + dayText(newest) +
+      '</b> 무렵 공판 기준 참고가입니다. 공판이 열리면 그날 낙찰가에 맞춰 자동으로 바뀝니다.</div>';
+  }
+}
+
+draw();
+
+fetch('site.txt').then(function(r){ return r.text(); }).then(function(t){
+  var s = t.trim();
+  if(s) MYSITE = s;
+}).catch(function(){}).then(function(){
+  drawAdmin();
+  return fetch('../data/index.json').then(function(r){ return r.json(); });
+}).then(function(idx){
+  dates = idx.dates.slice(0, 60);
+  loadPrices();
 }).catch(function(){ state = 'ok'; draw(); });
 </script>
 </body>
