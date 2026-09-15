@@ -143,7 +143,7 @@ a{color:var(--brown);font-weight:600}
       <div id="pcphoto"><div class="shot" id="shot"></div></div>
       <div id="pctable">
         <div class="ptable">
-          <div class="phead"><div>등급</div><div>300g</div><div>500g</div><div>1kg</div></div>
+          <div class="phead"><div>등급</div><div>1kg</div><div>500g</div><div>300g</div></div>
           <div id="prows"></div>
         </div>
         <div class="tip">가격을 누르시면 그 상품 사진이 나옵니다</div>
@@ -246,8 +246,8 @@ var GRADES = [
   {key:'g4', name:'개산품',     desc:'갓이 3분의 1 이상 펴진 것입니다. 찌개나 요리용으로 좋습니다.'},
   {key:'g5', name:'등외품',     desc:'모양이 고르지 않거나 파손된 것입니다. 향과 맛은 같습니다.'}
 ];
-var WEIGHTS = [300, 500, 1000], WLABEL = ['300g','500g','1kg'];
-var MYSITE = '강원 강릉', gi = 0, wi = 2, info = {}, state = 'load';
+var WEIGHTS = [1000, 500, 300], WLABEL = ['1kg','500g','300g'];
+var MYSITE = '강원 강릉', gi = 0, wi = 0, info = {}, state = 'load';
 
 var SMSBODY = '주문하시는 분 성함 / 연락처 :\n받으시는 분 성함 / 연락처 :\n받으실 주소 :\n등급 / 수량 :\n입금자명 :';
 document.getElementById('smsBtn').href =
