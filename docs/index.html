@@ -354,12 +354,13 @@ function renderCheap(){
 
     var bp = SPANS.map(function(){ return {s: 0, n: 0}; });
     var bv = SPANS.map(function(){ return {s: 0, n: 0}; });
+    var by = SPANS.map(function(){ return {}; });
     rows.forEach(function(r){
       var v = valueOf(r.all, g), kg = kgOf(r.all, g);
       var m = Number(r.d.slice(5,7)), dd = Number(r.d.slice(8,10));
       for(var i=0;i<SPANS.length;i++){
         if(m === SPANS[i][1] && dd >= SPANS[i][2] && dd <= SPANS[i][3]){
-          if(v > 0){ bp[i].s += v; bp[i].n++; }
+          if(v > 0){ bp[i].s += v; bp[i].n++; by[i][r.d.slice(0,4)] = 1; }
           if(kg > 0){ bv[i].s += kg; bv[i].n++; }
           break;
         }
@@ -383,9 +384,11 @@ function renderCheap(){
     var sortedP = pLive.slice().sort(function(a,b){ return a - b; });
     var midP = sortedP[Math.floor(sortedP.length / 2)];
     var volCut = vMax * 0.3;
+    var yrCnt = by.map(function(o){ return Object.keys(o).length; });
+    var minYr = Math.ceil(years.length / 2);
     var picks = [];
     for(var i=0;i<SPANS.length;i++){
-      if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP) picks.push(i);
+      if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP && yrCnt[i] >= minYr) picks.push(i);
     }
     var runs = [], cur = [];
     for(var i=0;i<SPANS.length;i++){
