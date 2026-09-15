@@ -171,7 +171,8 @@ a{color:var(--brown);font-weight:600}
           주문하시는 분 성함 / 연락처<br>
           받으시는 분 성함 / 연락처<br>
           받으실 주소<br>
-          등급 / 수량
+          등급 / 수량<br>
+          입금자명
         </div>
       </span></div>
       <div class="step"><span class="no">2</span><span class="tx">
@@ -248,7 +249,7 @@ var GRADES = [
 var WEIGHTS = [300, 500, 1000], WLABEL = ['300g','500g','1kg'];
 var MYSITE = '강원 강릉', gi = 0, wi = 2, info = {}, state = 'load';
 
-var SMSBODY = '주문하시는 분 성함 / 연락처 :\n받으시는 분 성함 / 연락처 :\n받으실 주소 :\n등급 / 수량 :';
+var SMSBODY = '주문하시는 분 성함 / 연락처 :\n받으시는 분 성함 / 연락처 :\n받으실 주소 :\n등급 / 수량 :\n입금자명 :';
 document.getElementById('smsBtn').href =
   (navigator.userAgent.match(/iPhone|iPad|Mac/) ? 'sms:01074860526&body=' : 'sms:01074860526?body=')
   + encodeURIComponent(SMSBODY);
