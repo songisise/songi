@@ -371,7 +371,7 @@ function renderCheap(){
     var pAvg = bp.map(function(b){ return b.n ? b.s / b.n : 0; });
     var vAvg = bv.map(function(b){ return b.n ? b.s / b.n : 0; });
     var yrCnt = by.map(function(o){ return Object.keys(o).length; });
-    var minYr = Math.ceil(years.length / 2);
+    var minYr = Math.ceil(years.length * 2 / 3);
     var solid = [];
     for(var i=0;i<SPANS.length;i++) solid.push(pAvg[i] > 0 && yrCnt[i] >= minYr);
 
@@ -435,9 +435,6 @@ function renderCheap(){
         '<span class="sv num">' + won(v) + 'kg</span></div>';
     }).join('');
 
-    var thinAny = false;
-    for(var i=0;i<SPANS.length;i++) if(pAvg[i] > 0 && !solid[i]) thinAny = true;
-
     var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ';
     if(hiIdx >= 0){
       verdict += '<span class="hi">' + SPANS[hiIdx][0] + '</span>이 가장 비쌌습니다(' + won(pMax) + '원).';
@@ -458,10 +455,6 @@ function renderCheap(){
       var label = (a === b) ? a : (a + '~' + b);
       verdict += '<hr>값과 물량을 함께 보면 <span class="pick">' + label +
         '</span>이 가장 사기 좋은 때입니다.';
-    }
-    if(thinAny){
-      verdict += '<hr><span style="font-size:13.5px;color:var(--ink3)">공판이 열린 해가 절반도 안 되는 시기는 ' +
-        '흐리게 표시했고, 위 판단에서는 빼고 계산했습니다. 시즌 시작일이 해마다 달라 자료가 적기 때문입니다.</span>';
     }
     verdict += '</div>';
 
@@ -752,5 +745,6 @@ fetch('data/index.json').then(function(res){ return res.json(); }).then(function
 }).catch(function(){
   document.getElementById('main').innerHTML = '<div class="empty">자료를 불러오지 못했습니다.</div>';
 });
-</script></body>
+</script>
+</body>
 </html>
