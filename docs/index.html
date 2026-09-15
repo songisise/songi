@@ -152,6 +152,8 @@ button:focus-visible{outline:2px solid var(--brown);outline-offset:3px;border-ra
 .srow.vmax .sb i{background:var(--brown)}
 .srow.pick .sl{color:var(--brown);font-weight:700}
 .srow .sv{width:82px;flex:none;text-align:right;color:var(--ink2);font-size:12.5px;font-weight:500}
+.srow.thin .sl,.srow.thin .sv{color:#9C8B76}
+.srow.thin .sb i{opacity:.45}
 
 @media (min-width: 900px){
   .wrap{max-width:1160px;padding:0 32px 40px}
@@ -368,27 +370,40 @@ function renderCheap(){
     });
     var pAvg = bp.map(function(b){ return b.n ? b.s / b.n : 0; });
     var vAvg = bv.map(function(b){ return b.n ? b.s / b.n : 0; });
-    var pLive = pAvg.filter(function(v){ return v > 0; });
-    var vLive = vAvg.filter(function(v){ return v > 0; });
-    if(!pLive.length){ box.innerHTML = yearHtml; return; }
+    var yrCnt = by.map(function(o){ return Object.keys(o).length; });
+    var minYr = Math.ceil(years.length / 2);
+    var solid = [];
+    for(var i=0;i<SPANS.length;i++) solid.push(pAvg[i] > 0 && yrCnt[i] >= minYr);
 
+    var pLive = [], vLive = [];
+    for(var i=0;i<SPANS.length;i++){
+      if(!solid[i]) continue;
+      if(pAvg[i] > 0) pLive.push(pAvg[i]);
+      if(vAvg[i] > 0) vLive.push(vAvg[i]);
+    }
+    var pAll = pAvg.filter(function(v){ return v > 0; });
+    var vAll = vAvg.filter(function(v){ return v > 0; });
+    if(!pAll.length){ box.innerHTML = yearHtml; return; }
+    if(!pLive.length){ pLive = pAll; vLive = vAll; for(var i=0;i<SPANS.length;i++) solid[i] = pAvg[i] > 0; }
+
+    var barMax = Math.max.apply(null, pAll);
+    var vBarMax = vAll.length ? Math.max.apply(null, vAll) : 0;
     var pMax = Math.max.apply(null, pLive), pMin = Math.min.apply(null, pLive);
     var vMax = vLive.length ? Math.max.apply(null, vLive) : 0;
     var hiIdx = -1, loIdx = -1, volIdx = -1;
     for(var i=0;i<SPANS.length;i++){
-      if(pAvg[i] === pMax) hiIdx = i;
-      if(pAvg[i] === pMin) loIdx = i;
-      if(vMax && vAvg[i] === vMax) volIdx = i;
+      if(!solid[i]) continue;
+      if(pAvg[i] === pMax && hiIdx < 0) hiIdx = i;
+      if(pAvg[i] === pMin && loIdx < 0) loIdx = i;
+      if(vMax && vAvg[i] === vMax && volIdx < 0) volIdx = i;
     }
 
     var sortedP = pLive.slice().sort(function(a,b){ return a - b; });
     var midP = sortedP[Math.floor(sortedP.length / 2)];
     var volCut = vMax * 0.3;
-    var yrCnt = by.map(function(o){ return Object.keys(o).length; });
-    var minYr = Math.ceil(years.length / 2);
     var picks = [];
     for(var i=0;i<SPANS.length;i++){
-      if(pAvg[i] > 0 && vAvg[i] >= volCut && pAvg[i] <= midP && yrCnt[i] >= minYr) picks.push(i);
+      if(solid[i] && vAvg[i] >= volCut && pAvg[i] <= midP) picks.push(i);
     }
     var runs = [], cur = [];
     for(var i=0;i<SPANS.length;i++){
@@ -403,23 +418,30 @@ function renderCheap(){
       var v = pAvg[i];
       if(!(v > 0)) return '';
       var cls = (i === hiIdx ? 'max' : (i === loIdx ? 'min' : ''));
+      if(!solid[i]) cls += ' thin';
       if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
       return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
-        '<span class="sb"><i style="width:' + (v / pMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sb"><i style="width:' + (v / barMax * 100).toFixed(1) + '%"></i></span>' +
         '<span class="sv num">' + won(v) + '원</span></div>';
     }).join('');
     var volRows = SPANS.map(function(sp, i){
       var v = vAvg[i];
-      if(!(v > 0) || !vMax) return '';
+      if(!(v > 0) || !vBarMax) return '';
       var cls = (i === volIdx ? 'vmax' : '');
+      if(!solid[i]) cls += ' thin';
       if(bestRun && bestRun.indexOf(i) >= 0) cls += ' pick';
       return '<div class="srow ' + cls + '"><span class="sl">' + sp[0] + '</span>' +
-        '<span class="sb"><i style="width:' + (v / vMax * 100).toFixed(1) + '%"></i></span>' +
+        '<span class="sb"><i style="width:' + (v / vBarMax * 100).toFixed(1) + '%"></i></span>' +
         '<span class="sv num">' + won(v) + 'kg</span></div>';
     }).join('');
 
-    var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ' +
-      '<span class="hi">' + SPANS[hiIdx][0] + '</span>이 가장 비쌌습니다(' + won(pMax) + '원).';
+    var thinAny = false;
+    for(var i=0;i<SPANS.length;i++) if(pAvg[i] > 0 && !solid[i]) thinAny = true;
+
+    var verdict = '<div class="verdict">지난 ' + years.length + '개 시즌 <b>' + g + '</b> 기준으로, ';
+    if(hiIdx >= 0){
+      verdict += '<span class="hi">' + SPANS[hiIdx][0] + '</span>이 가장 비쌌습니다(' + won(pMax) + '원).';
+    }
     if(loIdx >= 0){
       var loThin = vAvg[loIdx] < volCut;
       verdict += ' 가장 싼 시기는 <span class="lo">' + SPANS[loIdx][0] + '</span>(' + won(pMin) + '원)';
@@ -437,6 +459,10 @@ function renderCheap(){
       verdict += '<hr>값과 물량을 함께 보면 <span class="pick">' + label +
         '</span>이 가장 사기 좋은 때입니다.';
     }
+    if(thinAny){
+      verdict += '<hr><span style="font-size:13.5px;color:var(--ink3)">공판이 열린 해가 절반도 안 되는 시기는 ' +
+        '흐리게 표시했고, 위 판단에서는 빼고 계산했습니다. 시즌 시작일이 해마다 달라 자료가 적기 때문입니다.</span>';
+    }
     verdict += '</div>';
 
     box.innerHTML = verdict +
@@ -446,7 +472,7 @@ function renderCheap(){
       '<div class="subhead">시기별 평균 단가 · ' + years.length + '개 시즌</div>' +
       '<div style="margin-top:10px">' + priceRows + '</div>' +
       '<div class="sub" style="margin-top:11px">붉은 막대가 가장 비싼 시기, 푸른 막대가 가장 싼 시기입니다. ' +
-      '밑줄 친 시기가 사기 좋은 때입니다.</div>' +
+      '밑줄 친 시기가 사기 좋은 때이고, 흐린 시기는 자료가 적어 계산에서 뺐습니다.</div>' +
       (volRows ? '<div class="subhead">시기별 평균 물량</div>' +
         '<div style="margin-top:10px">' + volRows + '</div>' +
         '<div class="sub" style="margin-top:11px">진한 막대가 물량이 가장 많이 나오는 시기입니다. ' +
@@ -726,6 +752,5 @@ fetch('data/index.json').then(function(res){ return res.json(); }).then(function
 }).catch(function(){
   document.getElementById('main').innerHTML = '<div class="empty">자료를 불러오지 못했습니다.</div>';
 });
-</script>
-</body>
+</script></body>
 </html>
