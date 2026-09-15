@@ -2,7 +2,7 @@ name: 송이 시세 수집
 
 on:
   schedule:
-    - cron: "0 10 * * *"   # 매일 한국시간 저녁 7시
+    - cron: "45 8 * * *"     - cron: "45 9 * * *"     - cron: "0 11 * * *"
   workflow_dispatch:        # 버튼으로 직접 실행할 때 사용
 
 permissions:
