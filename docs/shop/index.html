@@ -60,7 +60,7 @@ a{color:var(--brown);font-weight:600}
   font-size:14px;color:var(--brown);font-weight:600;text-align:center}
 .shot{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
 .shot .im{height:200px;background:#EDE5D6;position:relative}
-.shot .im img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .im img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:2}
 .shot .im .none{position:absolute;inset:0;display:flex;align-items:center;
   justify-content:center;color:var(--ink3);font-size:13px;font-weight:500}
 .shot .tx{padding:17px 19px}
@@ -274,7 +274,7 @@ function drawShot(){
   var p = u > 0 ? calc(u, WEIGHTS[wi]) : 0;
   document.getElementById('shot').innerHTML =
     '<div class="im"><span class="none">'+G.name+' '+WLABEL[wi]+' 사진 준비 중</span>' +
-    '<img src="'+G.key+'-'+WEIGHTS[wi]+'.jpg" alt="'+G.name+'" onerror="this.style.display=\'none\'"></div>' +
+    '<img src="'+G.key+'-'+WEIGHTS[wi]+'.jpg" alt="'+G.name+'" onload="this.previousSibling.style.display=\'none\'" onerror="this.style.display=\'none\'"></div>' +
     '<div class="tx"><div class="t1">'+G.name+'<em>'+WLABEL[wi]+'</em>' +
     '<b class="num">'+(p>0?won(p)+'원':'준비 중')+'</b></div>' +
     '<div class="t2">'+G.desc+'</div></div>';
